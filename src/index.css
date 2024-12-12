@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  transition: 0.3s ease;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+/* body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+} */
+
+.custom-placeholder::placeholder {
+  font-size: 1.125rem; /* This is equivalent to Tailwind's text-lg */
+  transition: font-size 0.5s ease; /* Apply the transition here */
+}
+
+.custom-placeholder:focus::placeholder {
+  font-size: 0.875rem; /* This is equivalent to Tailwind's text-sm */
+}
+.button-effect:hover {
+  transition-duration: 5000ms;
+}
+.centered-title {
+  margin-left: 55px;
+}
+.title-color {
+  color: gray;
+}
+.row-even {
+  background-color: #f9fafb; /* Light gray */
+}
+
+.row-odd {
+  background-color: #fff; /* White */
+}
+
+/* Style the header cells */
+.custom-table .ant-table-thead > tr > th {
+  background-color: white;
+  color: #333;
+}
+.custom-table .ant-table {
+  border: none;
+}
+
+.custom-table .ant-table-thead > tr > th,
+.custom-table .ant-table-tbody > tr > td {
+  border: none;
+};
+
+/* For WebKit browsers (Chrome, Safari, etc.) */
+::-webkit-scrollbar {
+  width: 12px; /* Adjust the width of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: white; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+  border: 3px solid transparent; /* Optional: adds space around the scrollbar thumb */
+  background-clip: padding-box; /* Ensures the border does not affect the thumb width */
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.2); /* Optional: change track color */
+  border-radius: 10px; /* Rounded corners for the scrollbar track */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: white rgba(255, 255, 255, 0.2); /* Thumb color and track color */
+};
+
+/* Scope the scrollbar styles to the .notification-panel class */
+.notification-panel::-webkit-scrollbar {
+  width: 12px;
+}
+
+.notification-panel::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+.notification-panel::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+/* For Firefox */
+.notification-panel {
+  scrollbar-width: thin;
+  scrollbar-color: white rgba(255, 255, 255, 0.2);
+}
+
+
