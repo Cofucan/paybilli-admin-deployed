@@ -1,4 +1,4 @@
-import avatar from "../../../assets/Avatar.svg";
+import avatar from "../../../assets/avatar.svg";
 import Cythia from "../../../assets/Cythia.svg";
 import Ibrahim from "../../../assets/ibrahim.svg";
 import Oke from "../../../assets/Oke.svg";

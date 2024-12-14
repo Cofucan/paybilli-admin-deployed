@@ -1,6 +1,6 @@
 import { useState } from "react";
-import checkbox1 from "../assets/checkbox1.svg";
-import checkbox2 from "../assets/checkbox2.svg";
+import checkbox1 from "../assets/Checkbox1.svg";
+import checkbox2 from "../assets/Checkbox2.svg";
 
 const SubInviteUsermModal = ({ onClick }) => {
   const [selectedRole, setSelectedRole] = useState("Member");

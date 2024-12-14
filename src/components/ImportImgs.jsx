@@ -6,17 +6,17 @@ import HomeGray from "../assets/HomeGray.svg";
 import User from "../assets/user.svg";
 import UserWhite from "../assets/UserWhite.svg";
 import Event from "../assets/event.svg";
-import EventWhite from "../assets/eventWhite.svg";
+import EventWhite from "../assets/eventwhite.svg";
 import Escrow from "../assets/escrow.svg";
-import EscrowWhite from "../assets/escrowWhite.svg";
+import EscrowWhite from "../assets/escrowwhite.svg";
 import Wallet from "../assets/wallet.svg";
-import WalletWhite from "../assets/walletWhite.svg";
+import WalletWhite from "../assets/WalletWhite.svg";
 import Transaction from "../assets/transaction.svg";
 import TransactionWhite from "../assets/transactionWhite.svg";
 import Withdraw from "../assets/withdraw.svg";
 import WithdrawWhite from "../assets/withdrawWhite.svg";
 import Revenue from "../assets/revenue.svg";
-import RevenueWhite from "../assets/revenueWhite.svg";
+import RevenueWhite from "../assets/revenuewhite.svg";
 import Setting from "../assets/setting.svg";
 import SettingsWhite from "../assets/SettingWhite.svg";
 import Notification from "../assets/notification.svg";
@@ -25,11 +25,11 @@ import AdminWhite from "../assets/adminWhite.svg";
 import Support from "../assets/support.svg";
 import SupportWhite from "../assets/supportWhite.svg";
 import Audit from "../assets/audit.svg";
-import AuditWhite from "../assets/auditWhite.svg";
+import AuditWhite from "../assets/auditwhite.svg";
 import Logout from "../assets/logout.svg";
 
 //IMPORTED FOR DASHBOARD
-import Balance from "../assets/balance.svg";
+import Balance from "../assets/Balance.svg";
 import Incoming from "../assets/icoming.svg";
 import Outcoming from "../assets/outcoming.svg";
 import Eventbet from "../assets/eventbet.svg";
@@ -44,7 +44,7 @@ import TotalWallet from "../assets/TotalWallet.svg";
 import ActiveWallet from "../assets/ActiveWallet.svg";
 import FrozenWallet from "../assets/FrozenWallet.svg";
 import DeletedWallet from "../assets/DeletedWallet.svg";
-import Verified from "../assets/verified.svg";
+import Verified from "../assets/Verified.svg";
 
 //Withdrawals Imgaes
 import WithdrawalGrey from "../assets/WithdrawalGrey.svg";

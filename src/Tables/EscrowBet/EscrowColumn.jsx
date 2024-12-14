@@ -1,5 +1,5 @@
 import { HiOutlineDotsVertical } from "react-icons/hi";
-import info from "../../assets/info Circle.svg";
+import info from "../../assets/Info Circle.svg";
 import EscrowActionDropdown from "../../Tables/EscrowBet/EscrowActionDropdown";
 
 const statusClasses = {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BetDetails from "../assets/BetDetails.svg";
-import freeze from "../assets/freeze.svg";
+import freeze from "../assets/Freeze.svg";
 import verifyCheck from "../assets/Verified.svg";
 import erase from "../assets/icon.svg";
 import { NavLink, useNavigate } from "react-router-dom";

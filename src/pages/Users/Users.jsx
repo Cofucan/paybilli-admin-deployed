@@ -4,7 +4,7 @@ import UsersGreen from "../../assets/UsersGreen.svg";
 import UsersPurple from "../../assets/UsersBlack.svg";
 import UsersGold from "../../assets/UsersGold.svg";
 import outline from "../../assets/outline.svg";
-import SendOutline from "../../assets/sendOutline.svg";
+import SendOutline from "../../assets/SendOutline.svg";
 import UsersRed from "../../assets/UsersRed.svg";
 import ArrowDownBlue from "../../assets/ArrowDownBlue.svg";
 import add from "../../assets/add.svg";

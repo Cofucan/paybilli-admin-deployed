@@ -1,5 +1,5 @@
 import React from "react";
-import success from "../assets/successMark.svg";
+import success from "../assets/SuccessMark.svg";
 
 const FreezeSuccessModal = ({ToggleFreezeWalletClose}) => {
   return (

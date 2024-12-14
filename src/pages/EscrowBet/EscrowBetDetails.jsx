@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import info from "../../assets/info Circle.svg";
+import info from "../../assets/Info Circle.svg";
 import Footer from "../../components/Footer";
 
 const EscrowBetDetails = () => {
