@@ -27,7 +27,7 @@ const FlagWithdrawalModal = ({ CloseFlagModal }) => {
           {/* Cancel Button */}
           <button
             onClick={CloseFlagModal}
-            className="px-6 py-3 border border-[#3faae0] text-[#3faae0] rounded-md"
+            className="px-6 py-3 border border-light-blue-500 text-light-blue-500 rounded-md"
           >
             Cancel
           </button>

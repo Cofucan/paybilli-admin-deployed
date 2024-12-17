@@ -41,7 +41,7 @@ const ProfileForm = () => {
             </div>
 
             {/* Upload button */}
-            <label className="text-[#3faae0] font-semibold cursor-pointer">
+            <label className="text-light-blue-500 font-semibold cursor-pointer">
               <input
                 type="file"
                 className="hidden"
@@ -54,7 +54,7 @@ const ProfileForm = () => {
           {/* View User Button */}
           <button
             onClick={() => navigate("/admin/UserProfile")}
-            className="flex items-center text-white bg-[#3faae0] px-6 py-3 rounded-lg hover:shadow-md"
+            className="flex items-center text-white bg-light-blue-500 px-6 py-3 rounded-lg hover:shadow-md"
           >
             <FaEye className="mr-2" />
             View User
@@ -71,7 +71,7 @@ const ProfileForm = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter username"
-              className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-[#3faae0]"
+              className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500"
             />
           </div>
 
@@ -81,7 +81,7 @@ const ProfileForm = () => {
             <select
               value={accountStatus}
               onChange={(e) => setAccountStatus(e.target.value)}
-              className="w-full px-4 py-2 text-gray-400 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-none focus:ring-2 focus:ring-[#3faae0]"
+              className="w-full px-4 py-2 text-gray-400 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500"
             >
               <option className="text-sm">Active</option>
               <option className="text-sm">Inactive</option>
@@ -96,7 +96,7 @@ const ProfileForm = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter email address"
-              className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-[#3faae0]"
+              className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500"
             />
           </div>
 
@@ -106,7 +106,7 @@ const ProfileForm = () => {
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-200 text-gray-400 text-sm rounded-lg focus:outline-none focus:border-none focus:ring-2 focus:ring-[#3faae0]"
+              className="w-full px-4 py-3 border-2 border-gray-200 text-gray-400 text-sm rounded-lg focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500"
             >
               <option className="text-sm">Member</option>
               <option className="text-sm">Admin</option>
@@ -122,7 +122,7 @@ const ProfileForm = () => {
           </button>
 
           {/* Save Changes Button */}
-          <button className="bg-[#3faae0] text-sm text-white px-10 py-3 rounded-lg hover:shadow-md">
+          <button className="bg-light-blue-500 text-sm text-white px-10 py-3 rounded-lg hover:shadow-md">
             Save Changes
           </button>
         </div>

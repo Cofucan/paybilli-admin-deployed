@@ -37,7 +37,10 @@ const RevenueActionDropdown = () => {
         {/* Edit Revenue */}
         <div className="flex items-center gap-2">
           <img src={images.Pen} alt="Edit" />
-          <button onClick={() => navigate("/admin/revenue-form")} className="text-gray-600 text-sm font-medium hover:text-gray-800 transition-colors">
+          <button
+            onClick={() => navigate("/admin/revenue-form")}
+            className="text-gray-600 text-sm font-medium hover:text-gray-800 transition-colors"
+          >
             Edit Revenue
           </button>
         </div>
@@ -70,7 +73,7 @@ const RevenueActionDropdown = () => {
             <button
               key="cancel"
               onClick={handleRefundCancel}
-              className="px-4 py-2 border border-[#3faae0] text-[#3faae0] rounded-md"
+              className="px-4 py-2 border border-light-blue-500 text-light-blue-500 rounded-md"
             >
               Cancel
             </button>
@@ -81,7 +84,7 @@ const RevenueActionDropdown = () => {
                 console.log("User refunded");
                 setIsRefundModalVisible(false);
               }}
-              className="px-4 py-2 bg-[#3faae0] text-white rounded-md"
+              className="px-4 py-2 bg-light-blue-500 text-white rounded-md"
             >
               Refund User
             </button>

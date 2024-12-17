@@ -38,7 +38,7 @@ const DateRangePicker = () => {
         />
       </div>
       <div className="pt-3 flex justify-end items-center mx-9">
-        <button className="bg-[#3faae0] px-4 py-1 text-white hover:shadow-lg rounded-lg">
+        <button className="bg-light-blue-500 px-4 py-1 text-white hover:shadow-lg rounded-lg">
           Apply
         </button>
       </div>

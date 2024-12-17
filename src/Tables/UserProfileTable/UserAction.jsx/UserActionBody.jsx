@@ -85,11 +85,11 @@ const UserActionBody = () => {
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
-         <FaArrowLeft className="text-xs" />
-         Previous
+          <FaArrowLeft className="text-xs" />
+          Previous
         </Button>
 
-        <span className="text-[#3faae0]">
+        <span className="text-light-blue-500">
           Page {currentPage} of {Math.ceil(filteredUsers.length / pageSize)}
         </span>
 

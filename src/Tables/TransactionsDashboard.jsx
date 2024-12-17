@@ -152,7 +152,7 @@ const columns = [
     key: "action",
     render: () => (
       <Space size="middle">
-        <HiOutlineDotsVertical className="w-5 h-5"/>
+        <HiOutlineDotsVertical className="w-5 h-5" />
       </Space>
     ),
   },
@@ -178,7 +178,7 @@ const TransactionsDashboard = () => {
         />
       </div>
       <div className="flex justify-end p-5">
-        <button className="px-4 py-1 text-xl border border-gray-100 text-[#3faae0] rounded-xl">
+        <button className="px-4 py-1 text-xl border border-gray-100 text-light-blue-500 rounded-xl">
           See All
         </button>
       </div>

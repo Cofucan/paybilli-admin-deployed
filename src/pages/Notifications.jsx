@@ -19,7 +19,7 @@ const Notifications = () => {
           </h1>
           <NavLink
             to={"/admin/notificationSetting"}
-            className="bg-[#3faae0] hover:text-white text-white py-2 px-3 smd:py-3 smd:px-6 rounded-lg"
+            className="bg-light-blue-500 hover:text-white text-white py-2 px-3 smd:py-3 smd:px-6 rounded-lg"
           >
             Notification Settings
           </NavLink>

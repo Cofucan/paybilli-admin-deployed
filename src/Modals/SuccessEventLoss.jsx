@@ -3,7 +3,7 @@ import Success from "../assets/SuccessMark.svg";
 import { useNavigate } from "react-router-dom";
 
 const SuccessEventLoss = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-20">
       <div className="bg-white w-full max-w-sm p-6 rounded-lg shadow-lg text-center">
@@ -14,12 +14,12 @@ const SuccessEventLoss = () => {
 
         {/* Success Message */}
         <h2 className="text-xl font-semibold text-black mb-4">
-         The User has been confirmed to have lost the bet
+          The User has been confirmed to have lost the bet
         </h2>
 
         {/* Continue Button */}
         <button
-          className="mt-6 px-6 py-3 w-full bg-[#3faae0] text-white rounded-lg hover:shadow-md"
+          className="mt-6 px-6 py-3 w-full bg-light-blue-500 text-white rounded-lg hover:shadow-md"
           onClick={() => navigate("/admin/event")}
         >
           Continue

@@ -17,7 +17,7 @@ const SuccessBetClose = () => {
 
         {/* Continue Button */}
         <button
-          className="mt-6 px-6 py-3 w-full bg-[#3faae0] text-white rounded-lg hover:shadow-md"
+          className="mt-6 px-6 py-3 w-full bg-light-blue-500 text-white rounded-lg hover:shadow-md"
           onClick={() => {
             // console.log("Navigating to /admin/event...");
             navigate("/admin/event-created");

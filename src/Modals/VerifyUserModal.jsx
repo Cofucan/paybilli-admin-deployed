@@ -18,7 +18,7 @@ const VerifyUserModal = () => {
             Cancel
           </button>
           <button
-            className="px-4 py-2 bg-[#3faae0] text-white rounded-lg hover:shadow-md"
+            className="px-4 py-2 bg-light-blue-500 text-white rounded-lg hover:shadow-md"
             //   onClick={handleVerify}
           >
             Verify Users

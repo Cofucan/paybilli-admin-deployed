@@ -32,7 +32,7 @@ const Settings = () => {
         <div className="mx-8 lg:hidden mb-10">
           <button
             onClick={ToggleModalVisible}
-            className="bg-[#3faae0] text-white rounded-md px-14 py-4 text-sm font-[400]"
+            className="bg-light-blue-500 text-white rounded-md px-14 py-4 text-sm font-[400]"
           >
             Edit Profile
           </button>
@@ -97,7 +97,10 @@ const Settings = () => {
                   >
                     Change Password
                   </button>
-                  <button onClick={() => navigate("/admin/setting-activitylogs")} className="smd:text-2xl lg:text-lg text-gray-500">
+                  <button
+                    onClick={() => navigate("/admin/setting-activitylogs")}
+                    className="smd:text-2xl lg:text-lg text-gray-500"
+                  >
                     View Activity Logs
                   </button>
                 </div>
@@ -108,7 +111,7 @@ const Settings = () => {
           <div className="lg:mx-10 xl:mx-8 xxl:mx-14 lg:-mt-[29rem] hidden lg:block">
             <button
               onClick={ToggleModalVisible}
-              className="bg-[#3faae0]  text-white rounded-md px-14 py-4 text-sm font-[400]"
+              className="bg-light-blue-500  text-white rounded-md px-14 py-4 text-sm font-[400]"
             >
               Edit Profile
             </button>
@@ -175,7 +178,7 @@ const Settings = () => {
                     <button className="py-3 px-3 border-2 border-gray-200 rounded-lg font-medium">
                       Cancel
                     </button>
-                    <button className="bg-[#3faae0] px-3 py-3 text-white rounded-lg">
+                    <button className="bg-light-blue-500 px-3 py-3 text-white rounded-lg">
                       Update Profile
                     </button>
                   </div>
@@ -212,7 +215,7 @@ const Settings = () => {
                         type={passwordVisible ? "text" : "password"}
                         name="password"
                         placeholder="*******"
-                        className="border-2 border-[#CBD5E1] py-3 rounded-lg text-gray-500 focus:placeholder:text-sm custom-placeholder
+                        className="border-2 border-light-grey-500 py-3 rounded-lg text-gray-500 focus:placeholder:text-sm custom-placeholder
                  focus:ring-blue-300 focus:border-blue-400      w-full "
                       />
                       {passwordVisible ? (
@@ -234,7 +237,7 @@ const Settings = () => {
                       <input
                         type={passwordVisible ? "text" : "password"}
                         name="password"
-                        className="border-2 border-[#CBD5E1] py-3 rounded-lg 
+                        className="border-2 border-light-grey-500 py-3 rounded-lg 
                  focus:ring-blue-300 focus:border-blue-400 w-full "
                       />
                       {passwordVisible ? (
@@ -258,7 +261,7 @@ const Settings = () => {
                       <input
                         type={passwordVisible ? "text" : "password"}
                         name="password"
-                        className="border-2 border-[#CBD5E1] py-3 rounded-lg placeholder:text-xl text-gray-500 
+                        className="border-2 border-light-grey-500 py-3 rounded-lg placeholder:text-xl text-gray-500 
                  focus:ring-blue-300 focus:border-blue-400 w-full "
                       />
                       {passwordVisible ? (
@@ -279,7 +282,7 @@ const Settings = () => {
                       {" "}
                       Cancel
                     </button>
-                    <button className=" px-3 py-3 flex justify-center rounded-lg text-white bg-[#3FAAE0] hover:bg-[#3bbeff] hover:duration-700">
+                    <button className=" px-3 py-3 flex justify-center rounded-lg text-white bg-light-blue-500 hover:bg-light-blue hover:duration-700">
                       Update Password
                     </button>
                   </div>

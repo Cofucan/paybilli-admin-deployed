@@ -8,7 +8,7 @@ const DeclineWithdrawal = ({ declineWithdrawalClose }) => {
   const openIsSuccessDecline = () => {
     setIsSuccessDecline(true);
   };
- 
+
   return (
     <div className="fixed inset-0  flex items-center justify-center bg-black bg-opacity-20">
       <div className="bg-[#fafafa] w-[650px] p-6 rounded-lg shadow-lg">
@@ -27,7 +27,7 @@ const DeclineWithdrawal = ({ declineWithdrawalClose }) => {
           {/* Cancel Button */}
           <button
             onClick={declineWithdrawalClose}
-            className="px-6 py-3 border border-[#3faae0] text-[#3faae0] rounded-md"
+            className="px-6 py-3 border border-light-blue-500 text-light-blue-500 rounded-md"
           >
             Cancel
           </button>

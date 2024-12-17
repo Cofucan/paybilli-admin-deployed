@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 const EditRevenueForm = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     revenueSource: "",
     revenueAmount: "",
@@ -32,7 +32,12 @@ const EditRevenueForm = () => {
         onSubmit={handleSubmit}
         className="w-[60%] mx-5 p-6 rounded shadow-sm"
       >
-        <button onClick={() => navigate("/admin/revenue")} className="text-2xl font-bold my-4">Edit Revenue</button>
+        <button
+          onClick={() => navigate("/admin/revenue")}
+          className="text-2xl font-bold my-4"
+        >
+          Edit Revenue
+        </button>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           {/* Revenue Source */}
@@ -48,7 +53,7 @@ const EditRevenueForm = () => {
               name="revenueSource"
               value={formState.revenueSource}
               onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-[#3faae0] focus:border-[#3faae0]"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500"
             >
               <option value="" className="">
                 Select
@@ -73,7 +78,7 @@ const EditRevenueForm = () => {
               name="revenueAmount"
               value={formState.revenueAmount}
               onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-[#3faae0] focus:border-[#3faae0]"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500"
             />
           </div>
 
@@ -91,7 +96,7 @@ const EditRevenueForm = () => {
               name="transactionDate"
               value={formState.transactionDate}
               onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-[#3faae0] focus:border-[#3faae0]"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500"
             />
           </div>
 
@@ -108,7 +113,7 @@ const EditRevenueForm = () => {
               name="paymentMethod"
               value={formState.paymentMethod}
               onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-[#3faae0] focus:border-[#3faae0]"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500"
             >
               <option value="crypto">Crypto</option>
               <option value="bank">Niara</option>
@@ -129,7 +134,7 @@ const EditRevenueForm = () => {
               name="transactionId"
               value={formState.transactionId}
               onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-[#3faae0] focus:border-[#3faae0]"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500"
             />
           </div>
 
@@ -147,7 +152,7 @@ const EditRevenueForm = () => {
               name="feeDeducted"
               value={formState.feeDeducted}
               onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-[#3faae0] focus:border-[#3faae0]"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500"
             />
           </div>
 
@@ -164,7 +169,7 @@ const EditRevenueForm = () => {
               name="status"
               value={formState.status}
               onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-[#3faae0] focus:border-[#3faae0]"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500"
             >
               <option value="Confirmed">Confirmed</option>
               <option value="Pending">Pending</option>
@@ -186,7 +191,7 @@ const EditRevenueForm = () => {
               name="user"
               value={formState.user}
               onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-[#3faae0] focus:border-[#3faae0]"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500"
               placeholder="@"
             />
           </div>
@@ -205,7 +210,7 @@ const EditRevenueForm = () => {
             name="notes"
             value={formState.notes}
             onChange={handleInputChange}
-            className="mt-1 block w-full h-32 border-gray-300 rounded-md shadow-sm focus:ring-[#3faae0] focus:border-[#3faae0]"
+            className="mt-1 block w-full h-32 border-gray-300 rounded-md shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500"
             placeholder="Write notes here..."
           ></textarea>
         </div>
@@ -214,7 +219,7 @@ const EditRevenueForm = () => {
         <div className="flex justify-end items-end">
           <button
             type="submit"
-            className="bg-[#3faae0] text-white py-3 px-5 rounded-md hover:bg-[#3faae0]"
+            className="bg-light-blue-500 text-white py-3 px-5 rounded-md hover:bg-light-blue-500"
           >
             Save Details
           </button>

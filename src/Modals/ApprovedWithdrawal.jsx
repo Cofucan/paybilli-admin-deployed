@@ -10,7 +10,7 @@ const ApprovedWithdrawal = ({ approvedWithdrawalClose }) => {
   };
   return (
     <div className="fixed inset-0  flex items-center justify-center bg-black bg-opacity-20">
-      <div className="bg-[#F5F7FA] w-[650px] p-6 rounded-lg shadow-lg">
+      <div className="bg-light-grey w-[650px] p-6 rounded-lg shadow-lg">
         {/* Modal Header */}
         <h2 className="text-lg font-semibold text-gray-800 mb-2">
           Approved Withdrawal?
@@ -26,7 +26,7 @@ const ApprovedWithdrawal = ({ approvedWithdrawalClose }) => {
           {/* Cancel Button */}
           <button
             onClick={approvedWithdrawalClose}
-            className="px-6 py-3 border border-[#3faae0] text-[#3faae0] rounded-md"
+            className="px-6 py-3 border border-light-blue-500 text-light-blue-500 rounded-md"
           >
             Cancel
           </button>
@@ -34,7 +34,7 @@ const ApprovedWithdrawal = ({ approvedWithdrawalClose }) => {
           {/* Close Bet Button */}
           <button
             onClick={openSuccessApprovedWithdrawal}
-            className="px-6 py-3 bg-[#3faae0] text-white rounded-md hover:shadow-md transition-all"
+            className="px-6 py-3 bg-light-blue-500 text-white rounded-md hover:shadow-md transition-all"
           >
             Approved
           </button>

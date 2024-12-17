@@ -84,13 +84,14 @@ const UserProfile = () => {
               <div className="w-[95%] pt-8 flex justify-between items-center">
                 <button
                   onClick={ModalOpen}
-                  className="flex items-center gap-2 bg-white border-2 border-[#3faae0] text-[#3faae0] font-medium px-3 py-2 rounded-md"
+                  className="flex items-center gap-2 bg-white border-2 border-light-blue-500 text-light-blue-500 font-medium px-3 py-2 rounded-md"
                 >
                   <img src={Eye} alt="Eye" />
                   View Wallet
                 </button>
-                <button onClick={() => navigate("/admin/UserEdit")}
-                  className="flex items-center gap-2 hover:text-white text-white border-2 border-[#3faae0] bg-[#3faae0] font-medium px-5 py-2 rounded-md"
+                <button
+                  onClick={() => navigate("/admin/UserEdit")}
+                  className="flex items-center gap-2 hover:text-white text-white border-2 border-light-blue-500 bg-light-blue-500 font-medium px-5 py-2 rounded-md"
                 >
                   <img src={Pen} alt="Eye" />
                   Edit User
@@ -99,9 +100,7 @@ const UserProfile = () => {
             </div>
           </div>
 
-          {isWalletBalanceOpen && (
-            <WalletBalanceModal />
-          )}
+          {isWalletBalanceOpen && <WalletBalanceModal />}
         </div>
 
         <div className="">

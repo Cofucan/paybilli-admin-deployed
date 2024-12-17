@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import ImportImgs from "./ImportImgs";
 import { NavLink } from "react-router-dom";
 
@@ -14,7 +13,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "bg-[#3faae0] text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 hover:text-white"
+                ? "bg-light-blue-500 text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 hover:text-white"
                 : "text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to="dashboard"
@@ -35,7 +34,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive || window.location.pathname.startsWith("/admin/User")
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
+                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
                 : "text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to="/admin/user"
@@ -62,7 +61,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive || window.location.pathname.startsWith("/admin/event")
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
+                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
                 : "text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to="/admin/event"
@@ -89,7 +88,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive || window.location.pathname.startsWith("/admin/escrow")
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
+                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
                 : "text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to={"/admin/escrow"}
@@ -115,7 +114,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
+                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
                 : " text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to={"/admin/wallet"}
@@ -136,7 +135,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
+                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
                 : " text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to={"/admin/transaction"}
@@ -161,7 +160,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
+                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
                 : " text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to={"/admin/withdrawal"}
@@ -187,7 +186,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive || window.location.pathname.startsWith("/admin/revenue")
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
+                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
                 : "text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to={"/admin/revenue"}
@@ -214,7 +213,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive || window.location.pathname.startsWith("/admin/setting")
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
+                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
                 : " text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to={"/admin/setting"}
@@ -240,7 +239,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
+                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
                 : " text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to={"/admin/notification"}
@@ -265,7 +264,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
+                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
                 : " text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to={"/admin/support"}
@@ -287,7 +286,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive || window.location.pathname.startsWith("/admin/Support")
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
+                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
                 : " text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to={"/admin/Support"}
@@ -313,7 +312,7 @@ const Sidebar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
+                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
                 : " text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
             }
             to={"/admin/administrator"}
@@ -333,7 +332,7 @@ const Sidebar = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
+              ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
               : " text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
           }
           to={"/admin/audit-trial"}

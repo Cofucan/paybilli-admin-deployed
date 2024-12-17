@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import DeleteSuccessWallet from "./DeleteSuccessWallet";
 
-const DeleteWalletModal = ({CloseDeleteModal}) => {
-    const [openSuccessModal, setOpenSuccessModal] = useState(false);
+const DeleteWalletModal = ({ CloseDeleteModal }) => {
+  const [openSuccessModal, setOpenSuccessModal] = useState(false);
 
-    //DeleteSuccessModal Open
-    const ToggleSuccessModalOpen = () => {
-        setOpenSuccessModal(true);
-    }
+  //DeleteSuccessModal Open
+  const ToggleSuccessModalOpen = () => {
+    setOpenSuccessModal(true);
+  };
 
   return (
     <div className="fixed inset-0  flex items-center justify-center bg-black bg-opacity-20">
@@ -27,7 +27,7 @@ const DeleteWalletModal = ({CloseDeleteModal}) => {
           {/* Cancel Button */}
           <button
             onClick={CloseDeleteModal}
-            className="px-6 py-3 border border-[#3faae0] text-[#3faae0] rounded-md"
+            className="px-6 py-3 border border-light-blue-500 text-light-blue-500 rounded-md"
           >
             Cancel
           </button>
@@ -43,7 +43,7 @@ const DeleteWalletModal = ({CloseDeleteModal}) => {
       </div>
 
       {openSuccessModal && (
-        <DeleteSuccessWallet CloseDeleteModal={CloseDeleteModal}/>
+        <DeleteSuccessWallet CloseDeleteModal={CloseDeleteModal} />
       )}
     </div>
   );

@@ -1,7 +1,12 @@
 import React from "react";
 import SuccessEventModal from "./SuccessEventModal";
 
-const EventModal = ({ onClose, onCreate, isSuccessModal, setIsSuccessModal }) => {
+const EventModal = ({
+  onClose,
+  onCreate,
+  isSuccessModal,
+  setIsSuccessModal,
+}) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center ">
       <div className="bg-[#F9FAFB] w-[650px] p-6 rounded-lg shadow-lg">
@@ -20,7 +25,7 @@ const EventModal = ({ onClose, onCreate, isSuccessModal, setIsSuccessModal }) =>
           {/* Cancel Button */}
           <button
             onClick={onClose}
-            className="px-6 py-2 border border-[#3faae0] text-[#3faae0] rounded-lg"
+            className="px-6 py-2 border border-light-blue-500 text-light-blue-500 rounded-lg"
           >
             Cancel
           </button>
@@ -29,7 +34,7 @@ const EventModal = ({ onClose, onCreate, isSuccessModal, setIsSuccessModal }) =>
           <button
             onClick={onCreate}
             on
-            className="px-6 py-2 bg-[#3faae0] text-white rounded-lg hover:bg-[#349cc8] transition-all"
+            className="px-6 py-2 bg-light-blue-500 text-white rounded-lg hover:bg-[#349cc8] transition-all"
           >
             Create Event
           </button>

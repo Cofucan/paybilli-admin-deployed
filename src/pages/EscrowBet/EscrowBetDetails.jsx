@@ -103,7 +103,7 @@ const EscrowBetDetails = () => {
       <div className="flex justify-end px-24 mt-8">
         <button
           // onClick={openWinModal} // Uncomment if you want to handle the modal opening
-          className="bg-[#3faae0] text-white py-6 px-14 rounded-lg transition hover:shadow-lg"
+          className="bg-light-blue-500 text-white py-6 px-14 rounded-lg transition hover:shadow-lg"
         >
           Choose Winner
         </button>

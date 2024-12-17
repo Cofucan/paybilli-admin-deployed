@@ -1,7 +1,7 @@
 import React from "react";
 import success from "../assets/SuccessMark.svg";
 
-const DeleteSuccessWallet = ({CloseDeleteModal}) => {
+const DeleteSuccessWallet = ({ CloseDeleteModal }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-20">
       <div className="bg-white w-full max-w-sm p-6 rounded-lg shadow-lg text-center">
@@ -17,7 +17,7 @@ const DeleteSuccessWallet = ({CloseDeleteModal}) => {
 
         {/* Continue Button */}
         <button
-          className="mt-6 px-6 py-3 w-full bg-[#3faae0] text-white rounded-lg hover:shadow-md"
+          className="mt-6 px-6 py-3 w-full bg-light-blue-500 text-white rounded-lg hover:shadow-md"
           onClick={CloseDeleteModal}
         >
           Continue

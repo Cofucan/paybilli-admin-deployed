@@ -43,7 +43,10 @@ const CreateNewEvent = () => {
     <section className="relative w-full">
       <div className="lg:w-full">
         <div className="w-[95%] mx-auto mt-14 smd:mt-14 lg:mt-8 xl:mt-4">
-          <button onClick={() => navigate("/admin/event")} className="flex items-center gap-2 text-[34px] py-10 xl:py-5 text-[#1D1D1D] leading-[28px] font-semibold">
+          <button
+            onClick={() => navigate("/admin/event")}
+            className="flex items-center gap-2 text-[34px] py-10 xl:py-5 text-[#1D1D1D] leading-[28px] font-semibold"
+          >
             <FaArrowLeftLong className="text-2xl text-black hover:text-black" />
             Create New Event
           </button>
@@ -62,7 +65,7 @@ const CreateNewEvent = () => {
                 value={betName}
                 onChange={(e) => setBetName(e.target.value)}
                 placeholder="Enter Event Name"
-                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-[#3faae0]"
+                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500"
               />
             </div>
 
@@ -72,7 +75,7 @@ const CreateNewEvent = () => {
               <select
                 value={betType}
                 onChange={(e) => setBetType(e.target.value)}
-                className="w-full px-4 py-2 text-gray-400 border-2 border-gray-200 rounded-lg  focus:outline-none focus:border-none focus:ring-2 focus:ring-[#3faae0]"
+                className="w-full px-4 py-2 text-gray-400 border-2 border-gray-200 rounded-lg  focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500"
               >
                 <option className="text-sm">Debate</option>
                 <option className="text-sm">Inactive</option>
@@ -85,7 +88,7 @@ const CreateNewEvent = () => {
               <select
                 value={betCategory}
                 onChange={(e) => setBetCategory(e.target.value)}
-                className="w-full px-4 py-2 text-gray-400 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-none focus:ring-2 focus:ring-[#3faae0]"
+                className="w-full px-4 py-2 text-gray-400 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500"
               >
                 <option className="text-sm">Sports</option>
                 <option className="text-sm">Politics</option>
@@ -100,7 +103,7 @@ const CreateNewEvent = () => {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="Write amount here"
-                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-[#3faae0]"
+                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500"
               />
             </div>
 
@@ -110,7 +113,7 @@ const CreateNewEvent = () => {
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
-                className="w-full px-4 py-2 border-2 border-gray-200 text-gray-400 text-sm rounded-lg focus:outline-none focus:border-none focus:ring-2 focus:ring-[#3faae0]"
+                className="w-full px-4 py-2 border-2 border-gray-200 text-gray-400 text-sm rounded-lg focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500"
               >
                 <option className="text-sm">Crypto</option>
                 <option className="text-sm">Naira</option>
@@ -124,7 +127,7 @@ const CreateNewEvent = () => {
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
-                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-[#3faae0]"
+                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500"
               />
             </div>
 
@@ -135,7 +138,7 @@ const CreateNewEvent = () => {
                 value={winningCondition}
                 onChange={(e) => setWinningCondition(e.target.value)}
                 placeholder="Write bet condition here"
-                className="w-full px-4 pt-2 pb-20 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-[#3faae0]"
+                className="w-full px-4 pt-2 pb-20 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500"
               ></textarea>
             </div>
 
@@ -146,7 +149,7 @@ const CreateNewEvent = () => {
                 value={refundCondition}
                 onChange={(e) => setRefundCondition(e.target.value)}
                 placeholder="Write condition for refund here"
-                className="w-full px-4 pt-2 pb-20 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-[#3faae0]"
+                className="w-full px-4 pt-2 pb-20 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500"
               ></textarea>
             </div>
           </div>
@@ -155,7 +158,7 @@ const CreateNewEvent = () => {
           <div className="flex justify-end w-[80%]">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-[#3faae0] text-sm text-white px-10 py-3 rounded-lg hover:shadow-md"
+              className="bg-light-blue-500 text-sm text-white px-10 py-3 rounded-lg hover:shadow-md"
             >
               Save Event
             </button>

@@ -32,7 +32,7 @@ const ConfirmEventWin = () => {
           {/* Cancel Button */}
           <button
             onClick={() => navigate("/admin/event-created")}
-            className="px-6 py-3 border border-[#3faae0] text-[#3faae0] rounded-md"
+            className="px-6 py-3 border border-light-blue-500 text-light-blue-500 rounded-md"
           >
             Cancel
           </button>
@@ -40,7 +40,7 @@ const ConfirmEventWin = () => {
           {/* Confirm Win Button */}
           <button
             onClick={openSucessEventWinModal}
-            className="px-6 py-3 bg-[#3faae0] text-white rounded-md hover:bg-[#4fc1fa] transition-all"
+            className="px-6 py-3 bg-light-blue-500 text-white rounded-md hover:bg-[#4fc1fa] transition-all"
           >
             Confirm Win
           </button>

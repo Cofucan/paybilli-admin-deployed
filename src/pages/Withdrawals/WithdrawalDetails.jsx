@@ -4,7 +4,7 @@ import ApprovedWithdrawal from "../../Modals/ApprovedWithdrawal";
 import { useLocation } from "react-router-dom";
 
 const WithdrawalDetails = () => {
-    const location = useLocation();
+  const location = useLocation();
   const { approvedWithdrawalClose } = location.state || {};
   const [isApprovedModalOpen, setIsApprovedModalOpen] = useState(false);
 
@@ -71,13 +71,13 @@ const WithdrawalDetails = () => {
       <div className="flex justify-end gap-4 px-24 mt-8">
         <button
           //   onClick={openLossModal}
-          className="bg-transparent border border-[#3faae0] text-[#3faae0] py-4 px-6 rounded-lg transition"
+          className="bg-transparent border border-light-blue-500 text-light-blue-500 py-4 px-6 rounded-lg transition"
         >
           Decline
         </button>
         <button
           onClick={OpenApprovedModal}
-          className="bg-[#3faae0] text-white py-4 px-12 rounded-lg transition hover:shadow-lg"
+          className="bg-light-blue-500 text-white py-4 px-12 rounded-lg transition hover:shadow-lg"
         >
           Approved
         </button>

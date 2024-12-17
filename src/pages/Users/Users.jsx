@@ -221,7 +221,7 @@ const Users = () => {
                       <img src={outline} alt="outline-copyLink" />
                       <p className="text-[#4cb8ed] text-xs">Copy invite link</p>
                     </div>
-                    <button className="flex items-center gap-1 bg-[#3faae0] px-4 py-2 text-white rounded-lg">
+                    <button className="flex items-center gap-1 bg-light-blue-500 px-4 py-2 text-white rounded-lg">
                       Send
                       <img src={SendOutline} alt="SendOutline" />
                     </button>

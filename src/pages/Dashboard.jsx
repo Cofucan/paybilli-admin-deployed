@@ -51,7 +51,7 @@ const Dashboard = () => {
             <button
               onClick={() => handleCurrencyChange("Naira")}
               className={`px-2 py-1 rounded ${
-                currency === "Naira" ? "bg-[#3faae0] text-white" : ""
+                currency === "Naira" ? "bg-light-blue-500 text-white" : ""
               }`}
             >
               Naira
@@ -59,7 +59,7 @@ const Dashboard = () => {
             <button
               onClick={() => handleCurrencyChange("Crypto")}
               className={`px-2 py-1 rounded ${
-                currency === "Crypto" ? "bg-[#3faae0] text-white" : ""
+                currency === "Crypto" ? "bg-light-blue-500 text-white" : ""
               }`}
             >
               Crypto

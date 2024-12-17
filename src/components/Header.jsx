@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.svg";
 import { CiSearch } from "react-icons/ci";
-import { FiMenu } from "react-icons/fi"; 
+import { FiMenu } from "react-icons/fi";
 import MessageIcon from "../assets/MessageIcon.jpg";
 import Bell from "../assets/Bell.jpg";
 import Settings from "../assets/Settings.svg";
@@ -12,7 +12,7 @@ import Sidebar from "./Sidebar";
 import { NavLink } from "react-router-dom";
 import Notification from "../Modals/Notification";
 import Messages from "../Modals/Messages";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -24,7 +24,7 @@ const Header = () => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-  
+
   const toggleNotificationOpen = () => {
     setToggleNotification(!toggleNotification);
     setIsModalToggle(false);
@@ -43,7 +43,7 @@ const Header = () => {
       <div className="bg-white border-b-2 border-gray-200 w-full h-[10vh] flex justify-between items-center px-4 md:px-10  relative">
         <div className="flex items-center gap-4">
           <button onClick={toggleSidebar} className="xl:hidden text-2xl">
-            <FiMenu className="border border-[#3faae0] w-7 h- rounded-sm text-[#000]" />
+            <FiMenu className="border border-light-blue-500 w-7 h- rounded-sm text-[#000]" />
           </button>
           <img src={logo} alt="logo" className="w-24 md:w-36" />
         </div>
@@ -62,21 +62,21 @@ const Header = () => {
             <img
               src={MessageIcon}
               alt="Message"
-              className="border p-2 bg-[#F5F7FA] rounded-xl w-full h-full object-cover"
+              className="border p-2 bg-light-grey rounded-xl w-full h-full object-cover"
             />
           </button>
           <button onClick={toggleNotificationOpen} className="cursor-pointer">
             <img
               src={Bell}
               alt="Bell"
-              className="border p-2 bg-[#F5F7FA] rounded-xl w-full h-full object-cover"
+              className="border p-2 bg-light-grey rounded-xl w-full h-full object-cover"
             />
           </button>
           <NavLink to={"/admin/setting"} className="cursor-pointer">
             <img
               src={Settings}
               alt="Settings"
-              className="border p-2 bg-[#F5F7FA] rounded-xl w-full h-full object-cover"
+              className="border p-2 bg-light-grey rounded-xl w-full h-full object-cover"
             />
           </NavLink>
           <button onClick={toggleProfileDropdown} className="flex items-center">
@@ -96,7 +96,9 @@ const Header = () => {
                 alt="#"
                 className="text-slate-900 object-cover"
               />
-              <button onClick={() => navigate("/")} className="text-slate-900">Logout</button>
+              <button onClick={() => navigate("/")} className="text-slate-900">
+                Logout
+              </button>
             </div>
           </div>
         )}

@@ -29,8 +29,8 @@ const WalletBalanceModal = () => {
               <h3 className="text-2xl font-bold">NGN 230,000</h3>
             </div>
             {/* Decorative graphic */}
-            <div className="absolute top-0 right-0  w-10 h-10 bg-[#3faae0] rounded-bl-full"></div>
-            <div className="absolute bottom-0 left-0  w-10 h-10 bg-[#3faae0] rounded-tr-full"></div>
+            <div className="absolute top-0 right-0  w-10 h-10 bg-light-blue-500 rounded-bl-full"></div>
+            <div className="absolute bottom-0 left-0  w-10 h-10 bg-light-blue-500 rounded-tr-full"></div>
           </div>
 
           {/* Crypto Balance */}
@@ -40,8 +40,8 @@ const WalletBalanceModal = () => {
               <h3 className="text-2xl font-bold">$5,000.40</h3>
             </div>
             {/* Decorative graphic */}
-            <div className="absolute top-0 right-0  w-10 h-10 bg-[#3faae0] rounded-bl-full"></div>
-            <div className="absolute bottom-0 left-0  w-10 h-10 bg-[#3faae0] rounded-tr-full"></div>
+            <div className="absolute top-0 right-0  w-10 h-10 bg-light-blue-500 rounded-bl-full"></div>
+            <div className="absolute bottom-0 left-0  w-10 h-10 bg-light-blue-500 rounded-tr-full"></div>
           </div>
         </div>
       </div>

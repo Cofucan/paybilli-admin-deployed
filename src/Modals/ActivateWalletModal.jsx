@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import ActivateSuccessModal from "./ActivateSuccessModal";
 
-const ActivateWalletModal = ({CloseActivateWallet }) => {
-    const [activateSuccessWallet, setActivateSuccessWallet] = useState(false);
+const ActivateWalletModal = ({ CloseActivateWallet }) => {
+  const [activateSuccessWallet, setActivateSuccessWallet] = useState(false);
 
-    const ToggleSuccessModalOpen = () => {
-        setActivateSuccessWallet(true);
-    }
+  const ToggleSuccessModalOpen = () => {
+    setActivateSuccessWallet(true);
+  };
 
   return (
     <div className="fixed inset-0  flex items-center justify-center bg-black bg-opacity-20">
@@ -26,7 +26,7 @@ const ActivateWalletModal = ({CloseActivateWallet }) => {
           {/* Cancel Button */}
           <button
             onClick={CloseActivateWallet}
-            className="px-6 py-3 border border-[#3faae0] text-[#3faae0] rounded-md"
+            className="px-6 py-3 border border-light-blue-500 text-light-blue-500 rounded-md"
           >
             Cancel
           </button>
@@ -42,7 +42,7 @@ const ActivateWalletModal = ({CloseActivateWallet }) => {
       </div>
 
       {activateSuccessWallet && (
-        <ActivateSuccessModal  CloseActivateWallet={CloseActivateWallet}/>
+        <ActivateSuccessModal CloseActivateWallet={CloseActivateWallet} />
       )}
     </div>
   );
