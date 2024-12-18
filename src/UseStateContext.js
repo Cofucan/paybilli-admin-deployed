@@ -1,15 +1,17 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from 'react'
 
-const UseStateContext = createContext();
+const UseStateContext = createContext()
 
-export const useNotification = () => useContext(UseStateContext);
+export const useNotification = () => useContext(UseStateContext)
 
 export const UserNotification = ({ children }) => {
-  const [isModalNotification, setIsModalNotification] = useState(false);
+  const [isModalNotification, setIsModalNotification] = useState(false)
 
   return (
-    <UseStateContext.Provider value={{ isModalNotification, setIsModalNotification }}>
+    <UseStateContext.Provider
+      value={{ isModalNotification, setIsModalNotification }}
+    >
       {children}
     </UseStateContext.Provider>
-  );
-};
+  )
+}

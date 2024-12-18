@@ -1,6 +1,5 @@
-import React from "react";
-import SupportHeader from "./SupportHeader";
-import SupportTableHeader from "../../Tables/SupportTable/SupportTableHeader";
+import SupportHeader from './SupportHeader'
+import SupportTableHeader from '../../Tables/SupportTable/SupportTableHeader'
 
 const Supports = () => {
   return (
@@ -8,7 +7,7 @@ const Supports = () => {
       <SupportHeader />
       <SupportTableHeader />
     </div>
-  );
-};
+  )
+}
 
-export default Supports;
+export default Supports

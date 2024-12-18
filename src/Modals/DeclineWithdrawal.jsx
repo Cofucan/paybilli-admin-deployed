@@ -1,33 +1,33 @@
-import { useScroll } from "framer-motion";
-import React, { useState } from "react";
-import SuccessDecline from "./SuccessDecline";
+import { useScroll } from 'framer-motion'
+import { useState } from 'react'
+import SuccessDecline from './SuccessDecline'
 
 const DeclineWithdrawal = ({ declineWithdrawalClose }) => {
-  const [isSuccessDecline, setIsSuccessDecline] = useState(false);
+  const [isSuccessDecline, setIsSuccessDecline] = useState(false)
 
   const openIsSuccessDecline = () => {
-    setIsSuccessDecline(true);
-  };
- 
+    setIsSuccessDecline(true)
+  }
+
   return (
-    <div className="fixed inset-0  flex items-center justify-center bg-black bg-opacity-20">
-      <div className="bg-[#fafafa] w-[650px] p-6 rounded-lg shadow-lg">
+    <div className='fixed inset-0  flex items-center justify-center bg-black bg-opacity-20'>
+      <div className='bg-[#fafafa] w-[650px] p-6 rounded-lg shadow-lg'>
         {/* Modal Header */}
-        <h2 className="text-lg font-semibold text-gray-800 mb-2">
+        <h2 className='text-lg font-semibold text-gray-800 mb-2'>
           Decline Withdrawal?
         </h2>
 
         {/* Modal Body */}
-        <p className="text-sm text-gray-500 mb-6">
+        <p className='text-sm text-gray-500 mb-6'>
           Are you certain you want to decline this withdrawal?
         </p>
 
         {/* Buttons Section */}
-        <div className="flex justify-end gap-4">
+        <div className='flex justify-end gap-4'>
           {/* Cancel Button */}
           <button
             onClick={declineWithdrawalClose}
-            className="px-6 py-3 border border-[#3faae0] text-[#3faae0] rounded-md"
+            className='px-6 py-3 border border-light-blue-500 text-light-blue-500 rounded-md'
           >
             Cancel
           </button>
@@ -35,7 +35,7 @@ const DeclineWithdrawal = ({ declineWithdrawalClose }) => {
           {/* Close Bet Button */}
           <button
             onClick={openIsSuccessDecline}
-            className="px-6 py-3 bg-red-600 text-white rounded-md hover:shadow-md transition-all"
+            className='px-6 py-3 bg-red-600 text-white rounded-md hover:shadow-md transition-all'
           >
             Decline
           </button>
@@ -45,7 +45,7 @@ const DeclineWithdrawal = ({ declineWithdrawalClose }) => {
         <SuccessDecline declineWithdrawalClose={declineWithdrawalClose} />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default DeclineWithdrawal;
+export default DeclineWithdrawal

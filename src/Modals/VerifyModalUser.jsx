@@ -4,7 +4,7 @@
 //       // Add your verification logic here (e.g., API call to verify user)
 //       onClose(); // Close the modal after verification
 //     };
-  
+
 //     return (
 //       <div className="fixed inset-0 z-10 flex items-center justify-center bg-gray-800 bg-opacity-50">
 //         <div className="bg-white w-full max-w-xl p-6 rounded-lg shadow-lg">
@@ -32,6 +32,5 @@
 //       </div>
 //     );
 //   };
-  
+
 //   export default VerifyModalUser;
-  

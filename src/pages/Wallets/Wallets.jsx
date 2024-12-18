@@ -1,5 +1,4 @@
-import React from "react";
-import WalletHeader from "./WalletHeader";
+import WalletHeader from './WalletHeader'
 
 const Wallets = () => {
   return (
@@ -8,7 +7,7 @@ const Wallets = () => {
         <WalletHeader />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Wallets;
+export default Wallets

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -72,7 +72,7 @@ a:hover {
 .custom-table .ant-table-thead > tr > th,
 .custom-table .ant-table-tbody > tr > td {
   border: none;
-};
+}
 
 /* For WebKit browsers (Chrome, Safari, etc.) */
 ::-webkit-scrollbar {
@@ -95,7 +95,7 @@ a:hover {
 * {
   scrollbar-width: thin;
   scrollbar-color: white rgba(255, 255, 255, 0.2); /* Thumb color and track color */
-};
+}
 
 /* Scope the scrollbar styles to the .notification-panel class */
 .notification-panel::-webkit-scrollbar {
@@ -119,5 +119,3 @@ a:hover {
   scrollbar-width: thin;
   scrollbar-color: white rgba(255, 255, 255, 0.2);
 }
-
-
