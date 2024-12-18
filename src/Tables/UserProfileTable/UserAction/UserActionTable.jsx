@@ -1,6 +1,5 @@
 import Filter from '../../../assets/Filter.svg'
 import { CiSearch } from 'react-icons/ci'
-import UserTransactionTable from '../UserTransactionTable'
 
 import UserActionBody from './UserActionBody'
 

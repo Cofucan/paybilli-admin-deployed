@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button, Table } from 'antd'
 import { columns } from './UserActionColumn' // Your columns definition
-import userActionData from '../../UserProfileTable/UserAction.jsx/UserActionData'
+import userActionData from './/UserActionData'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
 const UserActionBody = () => {
