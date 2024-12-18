@@ -12,7 +12,6 @@ import Sidebar from './Sidebar'
 import { NavLink } from 'react-router-dom'
 import Notification from '../Modals/Notification'
 import Messages from '../Modals/Messages'
-import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
 
 const Header = () => {

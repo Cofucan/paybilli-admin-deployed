@@ -38,9 +38,9 @@ import LoggedInAuthenticator from './layout/LoggedInAuthenticator.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      <Route path={'reset-password'} element={<ResetPassword />} />
       <Route path={'/'} element={<LoggedOutAuthenticator />}>
         <Route path={'login'} element={<AdminLogin />} />
-        <Route path={'reset-password'} element={<ResetPassword />} />
       </Route>
       <Route index element={<Navigate to={'/admin/dashboard'} />} />
       <Route path='/admin' element={<LoggedInAuthenticator />}>

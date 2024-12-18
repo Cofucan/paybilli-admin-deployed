@@ -2,24 +2,34 @@ import ResetVerificationEmail from './ResetVerificationEmail.jsx'
 import ResetOtpCode from './ResetOtpCode.jsx'
 import ResetNewLogin from './ResetNewLogin.jsx'
 import ResetVerificationSuccess from './ResetVerificationSuccess.jsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext.jsx'
 
 const ResetPassword = () => {
-  const [phase, setPhase] = useState(1)
+  const [page, setPage] = useState(1)
   const [email, setEmail] = useState('')
+  const { authData } = useAuth()
+  const navigate = useNavigate()
 
-  const navigate = () => {
-    setPhase(x => x + 1)
+  useEffect(() => {
+    if (authData)
+      navigate('/', { replace: true })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const nextPage = () => {
+    setPage(x => x + 1)
   }
 
   return (
     <>
-      {phase === 1 && (
-        <ResetVerificationEmail navigate={navigate} setEmail={setEmail} />
+      {page === 1 && (
+        <ResetVerificationEmail navigate={nextPage} setEmail={setEmail} />
       )}
-      {phase === 2 && <ResetOtpCode navigate={navigate} email={email} />}
-      {phase === 3 && <ResetNewLogin navigate={navigate} />}
-      {phase === 4 && <ResetVerificationSuccess />}
+      {page === 2 && <ResetOtpCode navigate={nextPage} email={email} />}
+      {page === 3 && <ResetNewLogin navigate={nextPage} />}
+      {page === 4 && <ResetVerificationSuccess />}
     </>
   )
 }
