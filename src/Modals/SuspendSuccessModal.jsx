@@ -1,29 +1,29 @@
-import Success from "../assets/SuccessMark.svg";
+import Success from '../assets/SuccessMark.svg'
 
 const SuspendSuccessModal = ({ onClose }) => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-20">
-      <div className="bg-white w-full max-w-sm p-6 rounded-lg shadow-lg text-center">
+    <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-20'>
+      <div className='bg-white w-full max-w-sm p-6 rounded-lg shadow-lg text-center'>
         {/* Green Checkmark Icon */}
-        <div className="flex justify-center items-center pb-5">
-          <img src={Success} alt="successMark" className="" />
+        <div className='flex justify-center items-center pb-5'>
+          <img src={Success} alt='successMark' className='' />
         </div>
 
         {/* Success Message */}
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">
+        <h2 className='text-lg font-semibold text-gray-800 mb-4'>
           All the selected users have been suspended
         </h2>
 
         {/* Continue Button */}
         <button
-          className="mt-6 px-6 py-3 w-full bg-light-blue-500 text-white rounded-lg hover:shadow-md"
+          className='mt-6 px-6 py-3 w-full bg-light-blue-500 text-white rounded-lg hover:shadow-md'
           onClick={onClose}
         >
           Continue
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SuspendSuccessModal;
+export default SuspendSuccessModal

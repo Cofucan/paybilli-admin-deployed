@@ -1,7 +1,3 @@
-import { Button } from "antd";
-import { HiOutlineDotsVertical } from "react-icons/hi";
-import { userActionImages } from "./UserActionImages";
-
 // const statusClasses = {
 //   Verified: {
 //     dot: "bg-green-600",
@@ -23,21 +19,21 @@ import { userActionImages } from "./UserActionImages";
 
 export const columns = () => [
   {
-    title: "S/N",  // Serial Number column
-    dataIndex: "num",
-    key: "num",
+    title: 'S/N', // Serial Number column
+    dataIndex: 'num',
+    key: 'num',
   },
   {
-    title: "Action",
-    dataIndex: "action",
-    key: "action",
+    title: 'Action',
+    dataIndex: 'action',
+    key: 'action',
   },
   {
-    title: "Date And Time",  // Date and time of the record
-    dataIndex: "date",
-    key: "date",
+    title: 'Date And Time', // Date and time of the record
+    dataIndex: 'date',
+    key: 'date',
   },
-  
+
   // {
   //   title: "Status",  // Status label
   //   dataIndex: "status",
@@ -50,6 +46,4 @@ export const columns = () => [
   //     </div>
   //   ),
   // },
- 
-];
-
+]

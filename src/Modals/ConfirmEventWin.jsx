@@ -1,38 +1,38 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import SuccessEventWin from "./SuccessEventWin";
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import SuccessEventWin from './SuccessEventWin'
 
 const ConfirmEventWin = () => {
-  const navigate = useNavigate();
-  const [isSucessEventWin, setIsSuccessEventWin] = useState(false);
+  const navigate = useNavigate()
+  const [isSucessEventWin, setIsSuccessEventWin] = useState(false)
 
   const openSucessEventWinModal = () => {
-    setIsSuccessEventWin(true);
-  };
+    setIsSuccessEventWin(true)
+  }
 
   //   const closeSucessEventLossModal = () => {
   //     setIsSuccessEventWin(false);
   //   };
 
   return (
-    <div className="fixed inset-0  flex items-center justify-center ">
-      <div className="bg-[#fafafa] w-[650px] p-6 rounded-lg shadow-lg">
+    <div className='fixed inset-0  flex items-center justify-center '>
+      <div className='bg-[#fafafa] w-[650px] p-6 rounded-lg shadow-lg'>
         {/* Modal Header */}
-        <h2 className="text-lg font-semibold text-gray-800 mb-2">
+        <h2 className='text-lg font-semibold text-gray-800 mb-2'>
           Confirm Win?
         </h2>
 
         {/* Modal Body */}
-        <p className="text-sm text-gray-500 mb-6">
+        <p className='text-sm text-gray-500 mb-6'>
           Are you certain this user won this bet?
         </p>
 
         {/* Buttons Section */}
-        <div className="flex justify-end gap-4">
+        <div className='flex justify-end gap-4'>
           {/* Cancel Button */}
           <button
-            onClick={() => navigate("/admin/event-created")}
-            className="px-6 py-3 border border-light-blue-500 text-light-blue-500 rounded-md"
+            onClick={() => navigate('/admin/event-created')}
+            className='px-6 py-3 border border-light-blue-500 text-light-blue-500 rounded-md'
           >
             Cancel
           </button>
@@ -40,7 +40,7 @@ const ConfirmEventWin = () => {
           {/* Confirm Win Button */}
           <button
             onClick={openSucessEventWinModal}
-            className="px-6 py-3 bg-light-blue-500 text-white rounded-md hover:bg-[#4fc1fa] transition-all"
+            className='px-6 py-3 bg-light-blue-500 text-white rounded-md hover:bg-[#4fc1fa] transition-all'
           >
             Confirm Win
           </button>
@@ -49,7 +49,7 @@ const ConfirmEventWin = () => {
 
       {isSucessEventWin && <SuccessEventWin />}
     </div>
-  );
-};
+  )
+}
 
-export default ConfirmEventWin;
+export default ConfirmEventWin

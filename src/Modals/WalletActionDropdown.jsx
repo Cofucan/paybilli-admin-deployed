@@ -1,49 +1,50 @@
-import React, { useState } from "react";
-import BetDetails from "../assets/BetDetails.svg";
-import freeze from "../assets/Freeze.svg";
-import verifyCheck from "../assets/Verified.svg";
-import erase from "../assets/icon.svg";
-import { NavLink, useNavigate } from "react-router-dom";
-import FreezeWalletModal from "./FreezeWalletModal";
-import ActivateWalletModal from "./ActivateWalletModal";
-import DeleteWalletModal from "./DeleteWalletModal";
+import { useState } from 'react'
+import BetDetails from '../assets/BetDetails.svg'
+import freeze from '../assets/Freeze.svg'
+import verifyCheck from '../assets/Verified.svg'
+import erase from '../assets/icon.svg'
+import { NavLink } from 'react-router-dom'
+import FreezeWalletModal from './FreezeWalletModal'
+import ActivateWalletModal from './ActivateWalletModal'
+import DeleteWalletModal from './DeleteWalletModal'
 
 const WalletActionDropdown = () => {
-  const [openFreezeWallet, setOpenFreezeWallet] = useState(false);
-  const [activateWallet, setActivateWallet] = useState(false);
-  const [deleteWallet, setDeleteWallet] = useState(false);
+  const [openFreezeWallet, setOpenFreezeWallet] = useState(false)
+  const [activateWallet, setActivateWallet] = useState(false)
+  const [deleteWallet, setDeleteWallet] = useState(false)
 
-  //freezewallet open
+  // TODO: Freezewallet open
   const ToggleFreezeWalletOpen = () => {
-    setOpenFreezeWallet(true);
-  };
+    setOpenFreezeWallet(true)
+  }
   //freezewallet close
   const ToggleFreezeWalletClose = () => {
-    setOpenFreezeWallet(false);
-  };
+    setOpenFreezeWallet(false)
+  }
   //activate wallet start
   const OpenActivateWallet = () => {
-    setActivateWallet(true);
-  };
+    setActivateWallet(true)
+  }
   const CloseActivateWallet = () => {
-    setActivateWallet(false);
-  };
+    setActivateWallet(false)
+  }
 
   //Delete Wallet Start
   const OpenDeleteModal = () => {
-    setDeleteWallet(true);
-  };
+    setDeleteWallet(true)
+  }
   const CloseDeleteModal = () => {
-    setDeleteWallet(false);
-  };
+    setDeleteWallet(false)
+  }
 
   return (
     <section>
-      <div className="flex flex-col gap-3 border bg-white border-gray-300 rounded-md w-[10vw] h-full px-3 py-2 shadow-md">
+      <div
+        className="flex flex-col gap-3 border bg-white border-gray-300 rounded-md w-[10vw] h-full px-3 py-2 shadow-md">
         <div className="flex items-center gap-2">
           <img src={BetDetails} alt="eyes" />
           <NavLink
-            to={"/admin/UserProfile"}
+            to={'/admin/UserProfile'}
             className="text-gray-600 text-sm font-medium hover:text-gray-600"
           >
             View User
@@ -93,7 +94,7 @@ const WalletActionDropdown = () => {
         <DeleteWalletModal CloseDeleteModal={CloseDeleteModal} />
       )}
     </section>
-  );
-};
+  )
+}
 
-export default WalletActionDropdown;
+export default WalletActionDropdown

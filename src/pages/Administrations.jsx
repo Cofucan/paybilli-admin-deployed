@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Administrators = () => {
   return (
     <div>
@@ -8,4 +6,4 @@ const Administrators = () => {
   )
 }
 
-export default Administrators;
+export default Administrators

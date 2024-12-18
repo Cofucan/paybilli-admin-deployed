@@ -1,11 +1,11 @@
-import {Navigate, Outlet} from "react-router-dom";
-import {useAuth} from "../context/AuthContext.jsx";
+import { Navigate, Outlet } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext.jsx'
 
 const LoggedOutAuthenticator = () => {
-    const {authData} = useAuth()
+  const { authData } = useAuth()
 
-    if (authData) return <Navigate to={"/"} replace/>
+  if (authData) return <Navigate to={'/'} replace />
 
-    return (<Outlet/>)
+  return <Outlet />
 }
 export default LoggedOutAuthenticator

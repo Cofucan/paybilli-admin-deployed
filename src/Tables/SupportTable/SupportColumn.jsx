@@ -1,59 +1,58 @@
-import { HiOutlineDotsVertical } from "react-icons/hi";
-import WithdrawalActionDropdown from "../../Modals/WithdrawalActionDropdown";
-import SupportActionDropdown from "../../Modals/SupportActionDropdown";
+import { HiOutlineDotsVertical } from 'react-icons/hi'
+import SupportActionDropdown from '../../Modals/SupportActionDropdown'
 
 const statusClasses = {
   Open: {
-    dot: "bg-green-600",
-    label: "bg-green-100 text-green-600",
+    dot: 'bg-green-600',
+    label: 'bg-green-100 text-green-600',
   },
   Pending: {
-    dot: "bg-yellow-600",
-    label: "bg-yellow-100 text-yellow-600",
+    dot: 'bg-yellow-600',
+    label: 'bg-yellow-100 text-yellow-600',
   },
   Closed: {
-    dot: "bg-red-600",
-    label: "bg-red-100 text-red-600",
+    dot: 'bg-red-600',
+    label: 'bg-red-100 text-red-600',
   },
-};
+}
 
 export const columns = (ToggleActionDropdown, isActionDropdown) => [
   {
-    title: "S/N",
+    title: 'S/N',
     render: (_, __, index) => index + 1,
   },
   {
-    title: "Ticket ID",
-    dataIndex: "ticketId",
-    key: "ticketId",
+    title: 'Ticket ID',
+    dataIndex: 'ticketId',
+    key: 'ticketId',
   },
   {
-    title: "User",
-    dataIndex: "user",
-    key: "user",
+    title: 'User',
+    dataIndex: 'user',
+    key: 'user',
   },
   {
-    title: "Issue Type",
-    dataIndex: "issueType",
-    key: "issueType",
+    title: 'Issue Type',
+    dataIndex: 'issueType',
+    key: 'issueType',
   },
   {
-    title: "Date Created",
-    dataIndex: "dateCreated",
-    key: "dateCreated",
+    title: 'Date Created',
+    dataIndex: 'dateCreated',
+    key: 'dateCreated',
   },
   {
-    title: "Assigned Admin",
-    dataIndex: "assignedAdmin",
-    key: "assignedAdmin",
+    title: 'Assigned Admin',
+    dataIndex: 'assignedAdmin',
+    key: 'assignedAdmin',
   },
 
   {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
-    render: (status) => (
-      <div className="flex items-center">
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+    render: status => (
+      <div className='flex items-center'>
         <span
           className={`w-2 h-2 rounded-full mr-2 ${statusClasses[status].dot}`}
         />
@@ -66,22 +65,22 @@ export const columns = (ToggleActionDropdown, isActionDropdown) => [
     ),
   },
   {
-    title: "Action",
-    key: "action",
+    title: 'Action',
+    key: 'action',
     render: (text, record) => (
       <>
         <button
           onClick={() => ToggleActionDropdown(record.key)}
-          className="text-gray-400 hover:text-gray-600 text-xl"
+          className='text-gray-400 hover:text-gray-600 text-xl'
         >
           <HiOutlineDotsVertical />
         </button>
         {isActionDropdown[record.key] && ( // Check if the dropdown for this row is open
-          <div className="absolute right-0 z-20">
+          <div className='absolute right-0 z-20'>
             <SupportActionDropdown />
           </div>
         )}
       </>
     ),
   },
-];
+]
