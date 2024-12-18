@@ -74,6 +74,11 @@ import CommissionRevenue from "../assets/CommissionRevenue.svg";
 import Refund from "../assets/Refund.svg";
 import DeleteIcon from "../assets/DeleteRed.svg";
 import DownloadIcon from "../assets/downloadDown.svg";
+import WhitePen from "../assets/PenWhite.svg";
+import addGrey from "../assets/addGrey.svg";
+import adminPurple from "../assets/adminPurple.svg";
+import imgUser from "../assets/imgUser.svg";
+
 
 
 const ImportImgs = () => {
@@ -141,6 +146,10 @@ const ImportImgs = () => {
     Verified,
     DownloadIcon,
     DeleteIcon,
+    WhitePen,
+    addGrey,
+    adminPurple,
+    imgUser,
   };
 
   return images;

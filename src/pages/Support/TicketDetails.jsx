@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import ImportImgs from "../../components/ImportImgs";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import AssignTicketModal from "../../Modals/SupportModals/AssignTicketModal";
 
 const TicketDetails = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const images = ImportImgs();
+  const [assignticketModal, setAssignticketModal] = useState();
+
+  const toggleAssignTicketModal = () => {
+    setAssignticketModal(!assignticketModal);
+  };
+
+
   return (
     <div className="p-6 bg-gray-100 w-[70%] mx-5">
       {/* Back Arrow and Title */}
       <div className="flex items-center mb-6">
-        <button onClick={() => navigate("/admin/Support")} className="text-3xl font-semibold text-black flex items-center">
+        <button
+          onClick={() => navigate("/admin/Support")}
+          className="text-3xl font-semibold text-black flex items-center"
+        >
           <span className="mr-2">
             <FaArrowLeftLong />
           </span>{" "}
@@ -90,10 +101,14 @@ const TicketDetails = () => {
         <button className="text-[#4cb8ed] px-7 py-5 rounded-md border border-[#4cb8ed]">
           Live Chat
         </button>
-        <button className="bg-[#4cb8ed] text-white px-7 py-4 rounded-md hover:bg-blue-600">
+        <button onClick={toggleAssignTicketModal} className="bg-[#4cb8ed] text-white px-7 py-4 rounded-md hover:bg-[#3da9df] transition">
           Assign Ticket
         </button>
       </div>
+
+      {assignticketModal && (
+        <AssignTicketModal />
+      )}
     </div>
   );
 };

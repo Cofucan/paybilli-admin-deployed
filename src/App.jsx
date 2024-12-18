@@ -20,8 +20,6 @@ import Withdrawals from "./pages/Withdrawals/Withdrawals";
 import Revenue from "./pages/Revenue/Revenue";
 import Notifications from "./pages/Notifications";
 import Supports from "./pages/Support/Supports";
-import Administrators from "./pages/Administrations";
-
 import NotificationSetting from "./pages/NotificationSetting";
 import UserProfile from "./pages/Users/UserProfile";
 import EditUser from "./pages/Users/EditUser";
@@ -32,6 +30,9 @@ import WithdrawalDetails from "./pages/Withdrawals/WithdrawalDetails";
 import EditRevenueForm from "./pages/Revenue/EditRevenueForm";
 import AuditTrail from "./pages/AuditTrail/AuditTrail";
 import TicketDetails from "./pages/Support/TicketDetails";
+import Administrators from "./pages/Administration/Administrations";
+import CreateNewRole from "./pages/Administration/CreateNewRole";
+import ManageRole from "./pages/Administration/ManageRole";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -60,6 +61,8 @@ const router = createBrowserRouter(
         <Route path="Support" element={<Supports />} />
         <Route path="Support-ticketDetails" element={<TicketDetails />} />
         <Route path="administrator" element={<Administrators />} />
+        <Route path="administrator-role" element={<CreateNewRole />} />
+        <Route path="administrator-ManageRole" element={<ManageRole />} />
         <Route path="setting-activitylogs" element={<ActivityLogs />} />
         <Route path="audit-trial" element={<AuditTrail/>} />
       </Route>

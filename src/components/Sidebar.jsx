@@ -261,28 +261,7 @@ const Sidebar = () => {
             )}
           </NavLink>
         </div>
-        {/* <div className="-mb-4">
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
-                : " text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
-            }
-            to={"/admin/support"}
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={getImage(isActive, images.SupportWhite, images.Support)} // Get image source based on isActive
-                  alt="Home Icon"
-                  className="h-5 w-5"
-                />
-                Supports
-              </>
-            )}
-          </NavLink>
-        </div> */}
-
+  
         <div className="-mb-4">
           <NavLink
             className={({ isActive }) =>
@@ -309,7 +288,7 @@ const Sidebar = () => {
             )}
           </NavLink>
         </div>
-        <div className="-mb-4">
+        {/* <div className="-mb-4">
           <NavLink
             className={({ isActive }) =>
               isActive
@@ -323,6 +302,33 @@ const Sidebar = () => {
                 <img
                   src={getImage(isActive, images.AdminWhite, images.Admin)} // Get image source based on isActive
                   alt="Home Icon"
+                  className="h-5 w-5"
+                />
+                Administrators
+              </>
+            )}
+          </NavLink>
+        </div> */}
+
+<div className="-mb-4">
+          <NavLink
+            className={({ isActive }) =>
+              isActive || window.location.pathname.startsWith("/admin/administrator")
+                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
+                : "text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
+            }
+            to={"/admin/administrator"}
+          >
+            {({ isActive }) => (
+              <>
+                <img
+                  src={
+                    isActive ||
+                    window.location.pathname.startsWith("/admin/administrator")
+                      ? images.AdminWhite
+                      : images.Admin
+                  } // Ensure EventWhite is used for all event pages
+                  alt="Event Icon"
                   className="h-5 w-5"
                 />
                 Administrators

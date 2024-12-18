@@ -1,6 +1,6 @@
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import WithdrawalActionDropdown from "../../Modals/WithdrawalActionDropdown";
-import SupportActionDropdown from "../../Modals/SupportActionDropdown";
+import SupportActionDropdown from "../../Modals/SupportModals/SupportActionDropdown";
 
 const statusClasses = {
   Open: {
