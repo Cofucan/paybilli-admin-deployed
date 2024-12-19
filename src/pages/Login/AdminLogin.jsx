@@ -17,9 +17,9 @@ const AdminLogin = () => {
     })
     login(await response.json())
     // TODO:  Work Here
-    const origin = location.state?.from?.pathname || '/admin'
+    const origin = location.state?.from?.pathname || '/admin/dashboard'
     navigate(origin)
-  }
+  };
 
   return (
     <div className='bg-light-white'>

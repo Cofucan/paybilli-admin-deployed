@@ -19,7 +19,7 @@ import Withdrawals from './pages/Withdrawals/Withdrawals'
 import Revenue from './pages/Revenue/Revenue'
 import Notifications from './pages/Notifications'
 import Supports from './pages/Support/Supports'
-import Administrators from './pages/Administrations'
+
 
 import NotificationSetting from './pages/NotificationSetting'
 import UserProfile from './pages/Users/UserProfile'
@@ -34,6 +34,7 @@ import TicketDetails from './pages/Support/TicketDetails'
 import ResetPassword from './pages/ResetPassword/ResetPassword.jsx'
 import LoggedOutAuthenticator from './layout/LoggedOutAuthenticator.jsx'
 import LoggedInAuthenticator from './layout/LoggedInAuthenticator.jsx'
+import Administrators from './pages/Administration/Administrations.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -64,7 +65,7 @@ const router = createBrowserRouter(
         <Route path='notificationSetting' element={<NotificationSetting />} />
         <Route path='Support' element={<Supports />} />
         <Route path='Support-ticketDetails' element={<TicketDetails />} />
-        <Route path='administrator' element={<Administrators />} />
+      
         <Route path='setting-activitylogs' element={<ActivityLogs />} />
         <Route path='audit-trial' element={<AuditTrail />} />
       </Route>
