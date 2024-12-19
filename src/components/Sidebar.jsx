@@ -1,393 +1,149 @@
+import { useAuth } from '../context/AuthContext'
 import ImportImgs from './ImportImgs'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
-  const images = ImportImgs()
+  const images = ImportImgs() // Import images
+  const location = useLocation()
+  const navigate = useNavigate() // For redirection after logout
+  const { logout } = useAuth() // Get the logout function from useAuth
+
+  // Sidebar items
+  const sidebarItems = [
+    {
+      label: 'Dashboard',
+      to: 'dashboard',
+      activeImage: images.Home,
+      inactiveImage: images.HomeGray,
+    },
+    {
+      label: 'Users',
+      to: '/admin/user',
+      activeImage: images.UserWhite,
+      inactiveImage: images.User,
+      startsWith: '/admin/user',
+    },
+    {
+      label: 'Events',
+      to: '/admin/event',
+      activeImage: images.EventWhite,
+      inactiveImage: images.Event,
+      startsWith: '/admin/event',
+    },
+    {
+      label: 'Escrow Bets',
+      to: '/admin/escrow',
+      activeImage: images.EscrowWhite,
+      inactiveImage: images.Escrow,
+      startsWith: '/admin/escrow',
+    },
+    {
+      label: 'Wallets',
+      to: '/admin/wallet',
+      activeImage: images.WalletWhite,
+      inactiveImage: images.Wallet,
+    },
+    {
+      label: 'Transactions',
+      to: '/admin/transaction',
+      activeImage: images.TransactionWhite,
+      inactiveImage: images.Transaction,
+    },
+    {
+      label: 'Withdrawals',
+      to: '/admin/withdrawal',
+      activeImage: images.WithdrawWhite,
+      inactiveImage: images.Withdraw,
+    },
+    {
+      label: 'Revenue',
+      to: '/admin/revenue',
+      activeImage: images.RevenueWhite,
+      inactiveImage: images.Revenue,
+      startsWith: '/admin/revenue',
+    },
+    {
+      label: 'Settings',
+      to: '/admin/setting',
+      activeImage: images.SettingsWhite,
+      inactiveImage: images.Setting,
+      startsWith: '/admin/setting',
+    },
+    {
+      label: 'Notifications',
+      to: '/admin/notification',
+      activeImage: images.Notification,
+      inactiveImage: images.Notification,
+    },
+    {
+      label: 'Support',
+      to: '/admin/support',
+      activeImage: images.SupportWhite,
+      inactiveImage: images.Support,
+    },
+    {
+      label: 'Administrator',
+      to: '/admin/administrator',
+      activeImage: images.AdminWhite,
+      inactiveImage: images.Admin,
+    },
+    {
+      label: 'Audit Trail',
+      to: '/admin/audit',
+      activeImage: images.AuditWhite,
+      inactiveImage: images.Audit,
+    },
+  ]
+
+  // Function to determine active state and image
   const getImage = (isActive, activeImage, inactiveImage) =>
     isActive ? activeImage : inactiveImage
 
+  // Handle the logout functionality
+  const handleLogout = () => {
+    logout() 
+    navigate('/login') 
+  }
+
   return (
     <section className='bg-[#fff] h-full w-[250px] lg:w-[320px] border-r'>
-      <div className='flex flex-col h-full max-md:items-stretch w-full '>
-        <div className='-mb-4'>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? 'bg-light-blue-500 text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 hover:text-white'
-                : 'text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-            }
-            to='dashboard'
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={getImage(isActive, images.Home, images.HomeGray)} // Get image source based on isActive
-                  alt='Home Icon'
-                  className='h-5 w-5'
-                />
-                Dashboard
-              </>
-            )}
-          </NavLink>
-        </div>
-        <div className='-mb-4'>
-          <NavLink
-            className={({ isActive }) =>
-              isActive || window.location.pathname.startsWith('/admin/User')
-                ? 'bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-                : 'text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-            }
-            to='/admin/user'
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={
-                    isActive ||
-                    window.location.pathname.startsWith('/admin/User')
-                      ? images.UserWhite
-                      : images.User
-                  } // Switch image based on active state
-                  alt='User Icon'
-                  className='h-5 w-5'
-                />
-                Users
-              </>
-            )}
-          </NavLink>
-        </div>
+      <div className='flex flex-col h-full w-full'>
+        {sidebarItems.map(
+          ({ label, to, activeImage, inactiveImage, startsWith }, index) => {
+            const isCurrentPage =
+              location.pathname === to ||
+              (startsWith && location.pathname.startsWith(startsWith))
 
-        <div className='-mb-4'>
-          <NavLink
-            className={({ isActive }) =>
-              isActive || window.location.pathname.startsWith('/admin/event')
-                ? 'bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-                : 'text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-            }
-            to='/admin/event'
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={
-                    isActive ||
-                    window.location.pathname.startsWith('/admin/event')
-                      ? images.EventWhite
-                      : images.Event
-                  } // Ensure EventWhite is used for all event pages
-                  alt='Event Icon'
-                  className='h-5 w-5'
-                />
-                Events
-              </>
-            )}
-          </NavLink>
-        </div>
-
-        <div className='-mb-4'>
-          <NavLink
-            className={({ isActive }) =>
-              isActive || window.location.pathname.startsWith('/admin/escrow')
-                ? 'bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-                : 'text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-            }
-            to={'/admin/escrow'}
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={
-                    isActive ||
-                    window.location.pathname.startsWith('/admin/escrow')
-                      ? images.EscrowWhite
-                      : images.Escrow
-                  } // Ensure EventWhite is used for all event pages
-                  alt='Event Icon'
-                  className='h-5 w-5'
-                />
-                Escrow Bets
-              </>
-            )}
-          </NavLink>
-        </div>
-        <div className='-mb-4'>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? 'bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 '
-                : ' text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-            }
-            to={'/admin/wallet'}
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={getImage(isActive, images.WalletWhite, images.Wallet)} // Get image source based on isActive
-                  alt='Home Icon'
-                  className='h-5 w-5'
-                />
-                Wallets
-              </>
-            )}
-          </NavLink>
-        </div>
-        <div className='-mb-4'>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? 'bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 '
-                : ' text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-            }
-            to={'/admin/transaction'}
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={getImage(
-                    isActive,
-                    images.TransactionWhite,
-                    images.Transaction,
-                  )} // Get image source based on isActive
-                  alt='Home Icon'
-                  className='h-5 w-5'
-                />
-                Transactions
-              </>
-            )}
-          </NavLink>
-        </div>
-        <div className='-mb-4'>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? 'bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 '
-                : ' text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-            }
-            to={'/admin/withdrawal'}
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={getImage(
-                    isActive,
-                    images.WithdrawWhite,
-                    images.Withdraw,
-                  )} // Get image source based on isActive
-                  alt='Home Icon'
-                  className='h-5 w-5'
-                />
-                Withdrawals
-              </>
-            )}
-          </NavLink>
-        </div>
-
-        <div className='-mb-4'>
-          <NavLink
-            className={({ isActive }) =>
-              isActive || window.location.pathname.startsWith('/admin/revenue')
-                ? 'bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-                : 'text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-            }
-            to={'/admin/revenue'}
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={
-                    isActive ||
-                    window.location.pathname.startsWith('/admin/revenue')
-                      ? images.RevenueWhite
-                      : images.Revenue
-                  } // Ensure EventWhite is used for all event pages
-                  alt='Event Icon'
-                  className='h-5 w-5'
-                />
-                Revenue
-              </>
-            )}
-          </NavLink>
-        </div>
-
-        <div className='-mb-4'>
-          <NavLink
-            className={({ isActive }) =>
-              isActive || window.location.pathname.startsWith('/admin/setting')
-                ? 'bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 '
-                : ' text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-            }
-            to={'/admin/setting'}
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={
-                    isActive ||
-                    window.location.pathname.startsWith('/admin/setting')
-                      ? images.SettingsWhite
-                      : images.Setting
+            return (
+              <div key={index} className='-mb-4'>
+                <NavLink
+                  className={({ isActive }) =>
+                    isCurrentPage || isActive
+                      ? 'bg-light-blue-500 text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 hover:text-white'
+                      : 'text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
                   }
-                  alt='Home Icon'
-                  className='h-5 w-5'
-                />
-                Settings
-              </>
-            )}
-          </NavLink>
-        </div>
-        <div className='-mb-4'>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? 'bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 '
-                : ' text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-            }
-            to={'/admin/notification'}
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={getImage(
-                    isActive,
-                    images.Notification,
-                    images.Notification,
-                  )} // Get image source based on isActive
-                  alt='Home Icon'
-                  className='h-5 w-5'
-                />
-                Notifications
-              </>
-            )}
-          </NavLink>
-        </div>
-  
-        <div className="-mb-4">
-        {/* <div className="-mb-4">
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 "
-                : " text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
-            }
-            to={"/admin/support"}
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={getImage(isActive, images.SupportWhite, images.Support)} // Get image source based on isActive
-                  alt="Home Icon"
-                  className="h-5 w-5"
-                />
-                Supports
-              </>
-            )}
-          </NavLink>
-        </div> */}
-
-        <div className='-mb-4'>
-          <NavLink
-            className={({ isActive }) =>
-              isActive || window.location.pathname.startsWith('/admin/Support')
-                ? 'bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 '
-                : ' text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-            }
-            to={'/admin/Support'}
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={
-                    isActive ||
-                    window.location.pathname.startsWith('/admin/Support')
-                      ? images.SupportWhite
-                      : images.Support
-                  }
-                  alt='Home Icon'
-                  className='h-5 w-5'
-                />
-                Supports
-              </>
-            )}
-          </NavLink>
-        </div>
-        {/* <div className="-mb-4">
-        <div className='-mb-4'>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? 'bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 '
-                : ' text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-            }
-            to={'/admin/administrator'}
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={getImage(isActive, images.AdminWhite, images.Admin)} // Get image source based on isActive
-                  alt='Home Icon'
-                  className='h-5 w-5'
-                />
-                Administrators
-              </>
-            )}
-          </NavLink>
-        </div> */}
-
-<div className="-mb-4">
-          <NavLink
-            className={({ isActive }) =>
-              isActive || window.location.pathname.startsWith("/admin/administrator")
-                ? "bg-[#3faae0] text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
-                : "text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2"
-            }
-            to={"/admin/administrator"}
-          >
-            {({ isActive }) => (
-              <>
-                <img
-                  src={
-                    isActive ||
-                    window.location.pathname.startsWith("/admin/administrator")
-                      ? images.AdminWhite
-                      : images.Admin
-                  } // Ensure EventWhite is used for all event pages
-                  alt="Event Icon"
-                  className="h-5 w-5"
-                />
-                Administrators
-              </>
-            )}
-          </NavLink>
-        </div>
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? 'bg-light-blue-500 text-white hover:text-white flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2 '
-              : ' text-slate-800 hover:text-slate-800 flex items-center rounded-md p-4 mx-4 mt-5 text-lg font-[400] gap-2'
-          }
-          to={'/admin/audit-trial'}
-        >
-          {({ isActive }) => (
-            <>
-              <img
-                src={getImage(isActive, images.AuditWhite, images.Audit)} // Get image source based on isActive
-                alt='Home Icon'
-                className='h-5 w-5'
-              />
-              Audit Trial
-            </>
-          )}
-        </NavLink>
-
-        <div className='flex items-center text-black rounded-md p-4 mx-4 my-28'>
-          <img src={images.Logout} alt='#' className='h-5 w-5' />
-          <NavLink className='ml-2 text-lg font-[400] text-slate-800'>
-            Logout
-          </NavLink>
-        </div>
-
-        {/* <div>Dashboard</div>
-        <div>Dashboard</div> */}
+                  to={to}
+                >
+                  <img
+                    src={isCurrentPage ? activeImage : inactiveImage}
+                    alt={`${label} Icon`}
+                    className='h-5 w-5'
+                  />
+                  {label}
+                </NavLink>
+              </div>
+            )
+          },
+        )}
+      </div>
+      <div
+        className='flex items-center text-black rounded-md p-4 mx-4 cursor-pointer'
+        onClick={handleLogout} 
+      >
+        <img src={images.Logout} alt='#' className='h-5 w-5' />
+        <span className='ml-2 text-lg font-[400] text-slate-800'>
+          Logout
+        </span>
       </div>
     </section>
   )
