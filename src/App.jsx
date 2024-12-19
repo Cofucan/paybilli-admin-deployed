@@ -34,6 +34,7 @@ import TicketDetails from './pages/Support/TicketDetails'
 import ResetPassword from './pages/ResetPassword/ResetPassword.jsx'
 import LoggedOutAuthenticator from './layout/LoggedOutAuthenticator.jsx'
 import LoggedInAuthenticator from './layout/LoggedInAuthenticator.jsx'
+import Administrators from './pages/Administration/Administrations.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(

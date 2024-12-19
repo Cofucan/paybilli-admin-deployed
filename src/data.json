@@ -1,0 +1,167 @@
+{
+    "count": 5,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 1,
+            "creator": {
+                "username": "User583485",
+                "name": "User5 Last5"
+            },
+            "participants": [
+                {
+                    "participant": {
+                        "username": "User583485",
+                        "name": "User5 Last5"
+                    },
+                    "condition": "Something will happen",
+                    "is_creator": true,
+                    "winner": false,
+                    "joined_at": "2024-12-15T23:04:40.018906Z"
+                }
+            ],
+            "bet_type": "Weather",
+            "event_type": "Weather",
+            "currency": "ngn",
+            "event_name": "Sample Event",
+            "is_system": false,
+            "due_date": "2024-04-30",
+            "refund_condition": "If it doesn't rain",
+            "amount": "100.00",
+            "status": "pending",
+            "event_id": "764CA8067F",
+            "created_at": "2024-12-15T23:04:39.996823Z"
+        },
+        {
+            "id": 5,
+            "creator": {
+                "username": "User583485",
+                "name": "User5 Last5"
+            },
+            "participants": [
+                {
+                    "participant": {
+                        "username": "User583485",
+                        "name": "User5 Last5"
+                    },
+                    "condition": "It will rain today",
+                    "is_creator": true,
+                    "winner": false,
+                    "joined_at": "2024-12-16T07:27:47.395939Z"
+                }
+            ],
+            "bet_type": "Weather",
+            "event_type": "Weather",
+            "currency": "ngn",
+            "event_name": "Sample Event",
+            "is_system": false,
+            "due_date": "2024-04-30",
+            "refund_condition": "If it doesn't rain",
+            "amount": "100.00",
+            "status": "pending",
+            "event_id": "3A06FBDB88",
+            "created_at": "2024-12-16T07:27:47.394126Z"
+        },
+        {
+            "id": 7,
+            "creator": {
+                "username": "User583485",
+                "name": "User5 Last5"
+            },
+            "participants": [
+                {
+                    "participant": {
+                        "username": "User583485",
+                        "name": "User5 Last5"
+                    },
+                    "condition": "It will rain today",
+                    "is_creator": true,
+                    "winner": false,
+                    "joined_at": "2024-12-16T09:59:04.764212Z"
+                }
+            ],
+            "bet_type": "Weather",
+            "event_type": "Weather",
+            "currency": "ngn",
+            "event_name": "Sample Event",
+            "is_system": false,
+            "due_date": "2024-04-30",
+            "refund_condition": "If it doesn't rain",
+            "amount": "100.00",
+            "status": "pending",
+            "event_id": "AD7DF04F6F",
+            "created_at": "2024-12-16T09:59:04.759663Z"
+        },
+        {
+            "id": 8,
+            "creator": {
+                "username": "User583485",
+                "name": "User5 Last5"
+            },
+            "participants": [
+                {
+                    "participant": {
+                        "username": "User583485",
+                        "name": "User5 Last5"
+                    },
+                    "condition": "It will rain today",
+                    "is_creator": true,
+                    "winner": false,
+                    "joined_at": "2024-12-17T01:40:59.450716Z"
+                },
+                {
+                    "participant": {
+                        "username": "User333265",
+                        "name": "User3 Last3"
+                    },
+                    "condition": "Something will happen",
+                    "is_creator": false,
+                    "winner": false,
+                    "joined_at": "2024-12-17T22:48:49.197583Z"
+                }
+            ],
+            "bet_type": "Weather",
+            "event_type": "Weather",
+            "currency": "ngn",
+            "event_name": "Sample Event",
+            "is_system": false,
+            "due_date": "2024-04-30",
+            "refund_condition": "If it doesn't rain",
+            "amount": "100.00",
+            "status": "pending",
+            "event_id": "441890F8AC",
+            "created_at": "2024-12-17T01:40:59.429835Z"
+        },
+        {
+            "id": 9,
+            "creator": {
+                "username": "User333265",
+                "name": "User3 Last3"
+            },
+            "participants": [
+                {
+                    "participant": {
+                        "username": "User333265",
+                        "name": "User3 Last3"
+                    },
+                    "condition": "It will rain today",
+                    "is_creator": true,
+                    "winner": false,
+                    "joined_at": "2024-12-18T09:26:07.811502Z"
+                }
+            ],
+            "bet_type": "Weather",
+            "event_type": "Weather",
+            "currency": "ngn",
+            "event_name": "Monday night raw",
+            "is_system": false,
+            "due_date": "2024-04-30",
+            "refund_condition": "If it doesn't rain",
+            "amount": "100.00",
+            "status": "pending",
+            "event_id": "6FEBC815AF",
+            "created_at": "2024-12-18T09:26:07.800675Z"
+        }
+    ]
+}
