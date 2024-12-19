@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { createContext, useContext, useState } from 'react'
+import { customFetch } from '../utils/constants'
 
 const AuthContext = createContext(null)
 const STORAGE_AUTH = 'auth'
@@ -13,18 +14,29 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [authData, setAuthData] = useState(getUserData())
 
+  function setAuthentication(token) {
+    console.log(token);
+    if (token) {
+      // @ts-expect-error Header is not Type Safe
+      customFetch.defaultOptions.headers['Authorization'] = `Bearer ${token}`
+    }
+  }
+
   function getUserData() {
-    const data = localStorage.getItem(STORAGE_AUTH)
-    return data ? JSON.parse(data) : null
+    const storageItem = localStorage.getItem(STORAGE_AUTH)    
+    setAuthentication(storageItem)
+    return storageItem
   }
 
   function login(authData) {
-    localStorage.setItem(STORAGE_AUTH, JSON.stringify(authData.token.access))
+    localStorage.setItem(STORAGE_AUTH, authData.token.access)
+    setAuthentication(authData.token.access)
     setAuthData(authData)
   }
 
   function logout() {
     localStorage.removeItem(STORAGE_AUTH)
+    setAuthentication(null)
     setAuthData(null)
   }
 

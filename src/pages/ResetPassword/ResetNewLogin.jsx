@@ -2,20 +2,22 @@ import Logo from '../../assets/logo.svg'
 import { customFetch } from '../../utils/constants.js'
 import CustomPassword from '../../components/form/CustomPassword.jsx'
 import PropTypes from 'prop-types'
+import { useAuth } from '../../context/AuthContext.jsx'
 
 const ResetNewLogin = ({ navigate }) => {
+  const {login} = useAuth()
   async function handleSubmit(event) {
     event.preventDefault()
     const formData = Object.fromEntries(new FormData(event.currentTarget))
     const response = await customFetch.post('account/set-password/', {
       json: formData,
     })
-    console.log(response)
     // TODO: Handle Error
+    if (response.ok) {
+      login(await response.json())
+    }
+    console.log(response)
     navigate()
-    // if (response.ok) {
-    //     return
-    // }
   }
 
   return (

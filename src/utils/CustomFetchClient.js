@@ -1,10 +1,12 @@
 class CustomFetchClient {
   baseUrl
   defaultOptions
+
   constructor(baseUrl = '', defaultOptions = {}) {
-    this.baseUrl = baseUrl.replace(/\/$/, '') // Remove trailing slash
+    this.baseUrl = baseUrl.replace(/\/$/, '') 
     this.defaultOptions = {
       credentials: 'include',
+      headers: {},
       ...defaultOptions,
     }
   }
@@ -15,6 +17,7 @@ class CustomFetchClient {
     if (options.json) {
       options.headers = {
         ...options.headers,
+        ...this.defaultOptions.headers,
         'Content-Type': 'application/json',
       }
       options.body = JSON.stringify(options.json)
@@ -48,4 +51,5 @@ class CustomFetchClient {
     return this.request('DELETE', path, options)
   }
 }
+
 export default CustomFetchClient
