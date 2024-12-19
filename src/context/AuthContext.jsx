@@ -15,15 +15,12 @@ export const AuthProvider = ({ children }) => {
   const [authData, setAuthData] = useState(getUserData())
 
   function setAuthentication(token) {
-    console.log(token);
-    if (token) {
-      // @ts-expect-error Header is not Type Safe
-      customFetch.defaultOptions.headers['Authorization'] = `Bearer ${token}`
-    }
+    const authToken = token ? `Bearer ${token}` : null
+    customFetch.defaultOptions.headers['Authorization'] = authToken
   }
 
   function getUserData() {
-    const storageItem = localStorage.getItem(STORAGE_AUTH)    
+    const storageItem = localStorage.getItem(STORAGE_AUTH)
     setAuthentication(storageItem)
     return storageItem
   }
