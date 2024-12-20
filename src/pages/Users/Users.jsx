@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import UsersBlack from '../../assets/UsersBlack.svg'
-import UsersPurple from '../../assets/UsersBlack.svg'
-import UsersGreen from '../../assets/UsersGreen.svg'
-import UsersGold from '../../assets/UsersGold.svg'
 import outline from '../../assets/outline.svg'
 import SendOutline from '../../assets/SendOutline.svg'
-import UsersRed from '../../assets/UsersRed.svg'
 import ArrowDownBlue from '../../assets/ArrowDownBlue.svg'
 import add from '../../assets/add.svg'
 import UserTable from '../../Tables/UserTable/UserTable'
@@ -14,12 +9,14 @@ import { MdOutlineCalendarMonth, MdOutlineKeyboardArrowDown } from 'react-icons/
 import Footer from '../../components/Footer'
 import SubInviteUserModal from '../../Modals/SubInviteUserModal'
 import { LiaTimesSolid } from 'react-icons/lia'
-import Calenda from '../../components/Calenda'
+import Calendar from '../../components/Calenda'
+import UserStatistic from './UserStatistic.jsx'
 
 const Users = () => {
+
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isSubModalVisible, setSubIsModalVisible] = useState(false)
-  const [isCalendalVisible, setIsCalendaVisible] = useState(false)
+  const [isCalendarVisible, setIsCalendarVisible] = useState(false)
   const calendarRef = useRef(null) // Use a ref for the calendar
   // const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false)
 
@@ -35,8 +32,8 @@ const Users = () => {
     setSubIsModalVisible(!isSubModalVisible)
   }
 
-  const ToggleCalendaVisible = () => {
-    setIsCalendaVisible(!isCalendalVisible)
+  const ToggleCalendarVisible = () => {
+    setIsCalendarVisible(!isCalendarVisible)
   }
 
   const closeModal = () => {
@@ -51,10 +48,10 @@ const Users = () => {
   useEffect(() => {
     const handleClickOutside = event => {
       if (calendarRef.current && !calendarRef.current.contains(event.target)) {
-        setIsCalendaVisible(false) // Close the calendar if clicked outside
+        setIsCalendarVisible(false) // Close the calendar if clicked outside
       }
     }
-    if (isCalendalVisible) {
+    if (isCalendarVisible) {
       document.addEventListener('mousedown', handleClickOutside)
     } else {
       document.removeEventListener('mousedown', handleClickOutside)
@@ -63,74 +60,11 @@ const Users = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [isCalendalVisible])
+  }, [isCalendarVisible])
 
   return (
     <section className='relative w-full'>
-      <div className='lg:w-full'>
-        <div className='w-[95%] mx-auto mt-14 smd:mt-14 lg:mt-8 xl:mt-4'>
-          <h1 className='text-[34px] py-10 xl:py-5 text-[#1D1D1D] leading-[28px] font-semibold'>
-            Users Statistic
-          </h1>
-        </div>
-        <div className='grid smd:grid-cols-3 lg:grid-cols-5 gap-2 mx-3 xl:ml-8 xl:mr-14'>
-          <div className='bg-white flex gap-6 py-3 rounded-lg shadow-sm '>
-            <img
-              src={UsersBlack}
-              alt='#'
-              className='ms-5 w-16 h-16 object-cover'
-            />
-            <div className='flex flex-col gap-2'>
-              <p className='text-[26px] smd:text-[18px] lg:text-[20px]'>3000</p>
-              <p className='text-gray-500 text-sm'>Total Users</p>
-            </div>
-          </div>
-          <div className='bg-white flex gap-6 py-3 rounded-lg shadow-sm '>
-            <img
-              src={UsersGreen}
-              alt='#'
-              className='ms-5 w-16 h-16 object-cover'
-            />
-            <div className='flex flex-col gap-2'>
-              <p className='text-[26px] smd:text-[18px] lg:text-[20px]'>2800</p>
-              <p className='text-gray-500 text-sm'>Verified Users</p>
-            </div>
-          </div>
-          <div className='bg-white flex gap-6 py-3 rounded-lg shadow-sm '>
-            <img
-              src={UsersPurple}
-              alt='#'
-              className='ms-5 w-16 h-16 object-cover'
-            />
-            <div className='flex flex-col '>
-              <p className='text-[26px] smd:text-[18px] lg:text-[20px]'>500</p>
-              <p className='text-gray-500 text-sm'>Unverified Users</p>
-            </div>
-          </div>
-          <div className='bg-white flex gap-6 py-3 rounded-lg shadow-sm '>
-            <img
-              src={UsersGold}
-              alt='#'
-              className='ms-5 w-16 h-16 object-cover'
-            />
-            <div className='flex flex-col '>
-              <p className='text-[26px] smd:text-[18px] lg:text-[20px]'>100</p>
-              <p className='text-gray-500 text-sm'>Deactivated Accounts</p>
-            </div>
-          </div>
-          <div className='bg-white flex gap-6 py-3 rounded-lg shadow-sm '>
-            <img
-              src={UsersRed}
-              alt='#'
-              className='ms-5 w-16 h-16 object-cover'
-            />
-            <div className='flex flex-col '>
-              <p className='text-[26px] smd:text-[18px] lg:text-[20px]'>50</p>
-              <p className='text-gray-500 text-sm'>Suspended Accounts</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <UserStatistic />
       <div className='flex justify-end lg:px-14 pt-12 my-8 '>
         <div className='flex gap-5 mx-2 lg:mx-0'>
           <button className='flex gap-2 px-6 py-3 font-semibold bg-white border border-[#4cb8ed] text-[#4cb8ed] rounded-xl'>
@@ -245,7 +179,7 @@ const Users = () => {
               />
             </div>
             <div
-              onClick={ToggleCalendaVisible}
+              onClick={ToggleCalendarVisible}
               className='flex items-center gap-2 border border-gray-300 rounded-lg px-6 py-3 lg:py-4'
             >
               <MdOutlineCalendarMonth className='text-gray-500' />
@@ -253,7 +187,7 @@ const Users = () => {
                 Filter
               </button>
             </div>
-            {isCalendalVisible && (
+            {isCalendarVisible && (
               <>
                 {/*Overlay */}
                 <div className='fixed inset-0 bg-black opacity-20 z-20'></div>
@@ -261,7 +195,7 @@ const Users = () => {
                   ref={calendarRef}
                   className='absolute top-[30%] right-20 z-20'
                 >
-                  <Calenda className='' />
+                  <Calendar className='' />
                 </div>
               </>
             )}
