@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-placeholder::placeholder {
+    transition: font-size 0.5s ease; /* Apply the transition here */
+}
+
+body {
+    /*height: 100vh;*/
+    /*@apply overflow-hidden h-screen*/
+}
+
+.layout {
+    /*grid-auto-rows: auto 1fr;*/
+}
