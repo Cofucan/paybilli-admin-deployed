@@ -17,8 +17,9 @@ export default {
       colors: {
         "light-grey": "#F5F7FA",
         "light-grey-500": "#CBD5E1",
-        "light-blue-500": "#3FAAE0",
         "light-blue": "#3bbeff",
+        "light-blue-300": "#4cb8ed",
+        "light-blue-500": "#3FAAE0",
       },
       inset: (theme, { negative }) => ({
         ...theme("width"),

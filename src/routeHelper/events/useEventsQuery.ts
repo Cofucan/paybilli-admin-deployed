@@ -22,7 +22,6 @@ async function fetchTable({
   const response = await fetch(
     `http://localhost:3000/events?${query.toString()}`,
   );
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return (await response.json()) as EventsTableResponse;
 }
 
