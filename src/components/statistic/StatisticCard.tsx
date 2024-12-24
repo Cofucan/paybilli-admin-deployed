@@ -8,7 +8,7 @@ export interface StatisticCardProps {
 
 const StatisticCard: FC<StatisticCardProps> = (props) => {
   return (
-    <div className="flex gap-6 rounded-lg bg-white py-3 shadow-sm">
+    <div className="flex gap-6 rounded-lg bg-white py-3 shadow-sm w-full">
       <img
         src={props.icon}
         alt={props.label}

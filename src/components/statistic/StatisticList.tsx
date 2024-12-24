@@ -18,7 +18,7 @@ const StatisticList: FC<StatisticListProps> = (props) => {
         </h1>
         {props.children}
       </div>
-      <div className="mx-3 grid gap-2 smd:grid-cols-3 lg:grid-cols-5 xl:ml-8 xl:mr-14">
+      <div className="mx-3 flex gap-2 xl:ml-8 xl:mr-10">
         {props.stats.map((x, i) => (
           <Fragment key={i}>
             {props.isLoading ? (

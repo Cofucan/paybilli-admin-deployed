@@ -18,6 +18,7 @@ import { Route as AuthIndexImport } from './routes/_auth/index'
 import { Route as AccountNoAuthImport } from './routes/account/_noAuth'
 import { Route as AuthUsersImport } from './routes/_auth/users'
 import { Route as AuthSettingImport } from './routes/_auth/setting'
+import { Route as AuthEventsImport } from './routes/_auth/events'
 import { Route as AccountNoAuthResetPasswordImport } from './routes/account/_noAuth.reset-password'
 import { Route as AccountNoAuthLoginImport } from './routes/account/_noAuth.login'
 
@@ -61,6 +62,12 @@ const AuthSettingRoute = AuthSettingImport.update({
   getParentRoute: () => AuthRoute,
 } as any)
 
+const AuthEventsRoute = AuthEventsImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => AuthRoute,
+} as any)
+
 const AccountNoAuthResetPasswordRoute = AccountNoAuthResetPasswordImport.update(
   {
     id: '/reset-password',
@@ -85,6 +92,13 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
+    }
+    '/_auth/events': {
+      id: '/_auth/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof AuthEventsImport
+      parentRoute: typeof AuthImport
     }
     '/_auth/setting': {
       id: '/_auth/setting'
@@ -141,12 +155,14 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AuthRouteChildren {
+  AuthEventsRoute: typeof AuthEventsRoute
   AuthSettingRoute: typeof AuthSettingRoute
   AuthUsersRoute: typeof AuthUsersRoute
   AuthIndexRoute: typeof AuthIndexRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
+  AuthEventsRoute: AuthEventsRoute,
   AuthSettingRoute: AuthSettingRoute,
   AuthUsersRoute: AuthUsersRoute,
   AuthIndexRoute: AuthIndexRoute,
@@ -181,6 +197,7 @@ const AccountRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '': typeof AuthRouteWithChildren
+  '/events': typeof AuthEventsRoute
   '/setting': typeof AuthSettingRoute
   '/users': typeof AuthUsersRoute
   '/account': typeof AccountNoAuthRouteWithChildren
@@ -190,6 +207,7 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
+  '/events': typeof AuthEventsRoute
   '/setting': typeof AuthSettingRoute
   '/users': typeof AuthUsersRoute
   '/account': typeof AccountNoAuthRouteWithChildren
@@ -201,6 +219,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_auth': typeof AuthRouteWithChildren
+  '/_auth/events': typeof AuthEventsRoute
   '/_auth/setting': typeof AuthSettingRoute
   '/_auth/users': typeof AuthUsersRoute
   '/account': typeof AccountRouteWithChildren
@@ -214,6 +233,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
+    | '/events'
     | '/setting'
     | '/users'
     | '/account'
@@ -222,6 +242,7 @@ export interface FileRouteTypes {
     | '/account/reset-password'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/events'
     | '/setting'
     | '/users'
     | '/account'
@@ -231,6 +252,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_auth'
+    | '/_auth/events'
     | '/_auth/setting'
     | '/_auth/users'
     | '/account'
@@ -268,10 +290,15 @@ export const routeTree = rootRoute
     "/_auth": {
       "filePath": "_auth.tsx",
       "children": [
+        "/_auth/events",
         "/_auth/setting",
         "/_auth/users",
         "/_auth/"
       ]
+    },
+    "/_auth/events": {
+      "filePath": "_auth/events.tsx",
+      "parent": "/_auth"
     },
     "/_auth/setting": {
       "filePath": "_auth/setting.tsx",

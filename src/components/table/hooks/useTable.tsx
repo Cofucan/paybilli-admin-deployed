@@ -44,12 +44,12 @@ export interface TableProps<
   filter?: TableFilterHook<Columns, Data>;
 }
 
-interface TableCell {
+export interface TableCell {
   id: string;
   content: ReactNode;
 }
 
-interface TableStructure {
+export interface TableStructure {
   headers: TableCell[];
   rows: TableCell[][];
 }

@@ -7,6 +7,7 @@ import { usersColumns, usersStats } from "../../routeHelper/users/usersData";
 import useUsersQuery, { FetchUsersTableProps } from "../../routeHelper/users/useUsersQuery";
 import { generateUUID } from "../../utils/constants";
 import TableHeader from "../../components/table/TableHeader.tsx";
+import TableContent from "../../components/table/TableContent.tsx";
 
 export const Route = createFileRoute("/_auth/users")({
   component: RouteComponent,
@@ -49,14 +50,7 @@ function RouteComponent() {
       />
       <section className="bg-white p-5 rounded shadow">
         <TableHeader title={"Users"} onSearch={handleSearch} filterOptions={tableHeaderData} />
-        <table className="w-full text-sm">
-          <thead>
-            <tr>{structure.headers.map(x => <th key={x.id} className="text-center">{x.content}</th>)}</tr>
-          </thead>
-          <tbody>
-            {structure.rows.map((rows, i) => <tr key={i}>{rows.map(x => <td key={x.id}>{x.content}</td>)}</tr>)}
-          </tbody>
-        </table>
+        <TableContent structure={structure} />
         <TablePagination {...pagination} />
       </section>
     </main>

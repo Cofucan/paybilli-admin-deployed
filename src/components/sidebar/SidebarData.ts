@@ -53,7 +53,7 @@ export const sidebarItems: {
   },
   {
     label: "Events",
-    to: "/admin/event",
+    to: "/events",
     activeImage: EventWhite,
     inactiveImage: Event,
     startsWith: "/admin/event",

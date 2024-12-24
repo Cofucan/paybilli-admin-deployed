@@ -46,19 +46,19 @@ function useTablePagination(config: TablePaginationConfig): TablePaginationHook 
     setItemsPerPage(config.itemsPerPage ?? 10);
   }, [config.itemsPerPage]);
   useEffect(() => {
-    setTotalPages(config.totalPages ?? -1);
-  }, [config.totalPages]);
+    setTotalPages(config.totalPages ? config.totalPages + initialPage : -1);
+  }, [config.totalPages, initialPage]);
   useEffect(() => {
     setCurrentPage(config.currentPage ?? initialPage);
   }, [config.currentPage, initialPage]);
 
   useEffect(() => {
-    if (totalPages === -1 && itemsPerPage) {
-      setTotalPages(Math.ceil(totalItems / itemsPerPage) - 1);
+    if (totalPages === -1 && totalItems !== -1) {
+      setTotalPages(Math.ceil(totalItems / itemsPerPage) - 1 + initialPage);
     }
-  }, [totalPages, itemsPerPage, totalItems]);
+  }, [totalPages, itemsPerPage, totalItems, initialPage]);
   useEffect(() => {
-    if (totalItems === -1 && totalPages) {
+    if (totalItems === -1 && totalPages !== -1) {
       setTotalItems(totalPages * itemsPerPage);
     }
   }, [totalItems, totalPages, itemsPerPage]);
@@ -81,12 +81,12 @@ function useTablePagination(config: TablePaginationConfig): TablePaginationHook 
   const first = () => { setPageIndex(initialPage); };
   const last = () => { setPageIndex(totalPages); };
 
-  console.log(hasNext(), {
-    currentPage,
-    itemsPerPage,
-    totalItems,
-    totalPages,
-  });
+  // console.log(hasNext(), {
+  //   currentPage,
+  //   itemsPerPage,
+  //   totalItems,
+  //   totalPages,
+  // });
 
   return {
     currentPage,
