@@ -1,10 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import Logo from "../../assets/logo.svg";
+import FormField from "../../components/form/FormField.tsx";
 import { useCustomForm } from "../../components/form/useCustomForm.ts";
 import { useAuth } from "../../context/AuthContext.tsx";
-import { customFetch } from "../../utils/constants.ts";
+import { customFetch, sleep } from "../../utils/constants.ts";
 import { AuthResponse } from "../../utils/types.ts";
-import FormField from "../../components/form/FormField.tsx";
 
 export const Route = createFileRoute("/account/_noAuth/login")({
   component: RouteComponent,
@@ -25,13 +25,13 @@ function RouteComponent() {
     formErrorHelper,
     formState: { isSubmitting, errors },
   } = useCustomForm<LoginForm>();
-  console.log(errors);
 
   const onSubmit = handleSubmit(async (data) => {
     const response = await customFetch.post("account/login/", {
       json: data,
     });
     login((await response.json()) as AuthResponse);
+    await sleep(1)
     await navigate({ to: search.redirect ?? "/" });
   });
 

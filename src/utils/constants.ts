@@ -19,3 +19,7 @@ export function generateUUID() {
     return v.toString(16);
   });
 }
+
+export async function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}

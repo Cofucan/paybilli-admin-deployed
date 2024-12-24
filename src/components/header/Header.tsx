@@ -9,7 +9,7 @@ import avatar from "./assets/avatar.svg";
 import AvatarImg from "./assets/AvataImg.svg";
 import SignoutIcon from "./assets/SignOut.svg";
 import { useAuth } from "../../context/AuthContext.tsx";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import Sidebar from "../sidebar/Sidebar.tsx";
 // import Sidebar from './Sidebar'
 // import { NavLink } from 'react-router-dom'
@@ -23,6 +23,7 @@ const Header = () => {
   const [isModalToggle, setIsModalToggle] = useState(false);
   const [isModalProfileView, setIsModalProfileView] = useState(false);
   const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -39,6 +40,11 @@ const Header = () => {
   const toggleProfileDropdown = () => {
     setIsModalProfileView(!isModalProfileView);
   };
+
+  async function handleLogout() {
+    logout()
+    await navigate({ to: "/account/login" })
+  }
 
   return (
     <div className="z-0">
@@ -99,7 +105,7 @@ const Header = () => {
                 alt="#"
                 className="object-cover text-slate-900"
               />
-              <button onClick={logout} className="text-slate-900">
+              <button onClick={handleLogout} className="text-slate-900">
                 Logout
               </button>
             </div>
@@ -110,9 +116,8 @@ const Header = () => {
       {/*Sidebar Section */}
       {/*TODO: Remove this code*/}
       <div
-        className={`fixed left-0 top-0 z-20 h-full w-64 transform overflow-y-auto bg-white text-red-500 ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out md:hidden`}
+        className={`fixed left-0 top-0 z-20 h-full w-64 transform overflow-y-auto bg-white text-red-500 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } transition-transform duration-300 ease-in-out md:hidden`}
       >
         <Sidebar />
       </div>
