@@ -7,7 +7,7 @@ import useTableSort, { TableSortHook } from "./useTableSort";
 
 export interface TableColumn<T> {
   id: string;
-  header: () => ReactNode;
+  header: ReactNode;
   cell: (rowData: T) => ReactNode;
   filterType: (rowData: T) => unknown;
 }
@@ -23,10 +23,10 @@ export function createColumn<T, K extends keyof T & string>(
 
   return {
     id: key,
-    header: (): string => options.header as string,
+    header: options.header as string,
     cell: options.cell ?? defaultCell,
     filterType: (data) => data[key],
-  } as const satisfies TableColumn<T>; 
+  } as const satisfies TableColumn<T>;
 }
 
 export type TableColumnId<
@@ -95,7 +95,7 @@ const useTable = <Columns extends readonly TableColumn<Data>[], Data>(
   const structure: TableStructure = {
     headers: props.columns.map((column) => ({
       id: column.id,
-      content: column.header(),
+      content: column.header,
     })),
     rows: data.map((row) =>
       props.columns.map((column) => ({

@@ -30,7 +30,8 @@ import { Route as AuthAuditImport } from './routes/_auth/audit'
 import { Route as AuthAdministratorImport } from './routes/_auth/administrator'
 import { Route as AccountNoAuthResetPasswordImport } from './routes/account/_noAuth.reset-password'
 import { Route as AccountNoAuthLoginImport } from './routes/account/_noAuth.login'
-import { Route as AuthUserIdViewImport } from './routes/_auth/$userId/view'
+import { Route as AuthUserIdProfileImport } from './routes/_auth/$userId/profile'
+import { Route as AuthUserIdEditImport } from './routes/_auth/$userId/edit'
 
 // Create Virtual Routes
 
@@ -146,9 +147,15 @@ const AccountNoAuthLoginRoute = AccountNoAuthLoginImport.update({
   getParentRoute: () => AccountNoAuthRoute,
 } as any)
 
-const AuthUserIdViewRoute = AuthUserIdViewImport.update({
-  id: '/$userId/view',
-  path: '/$userId/view',
+const AuthUserIdProfileRoute = AuthUserIdProfileImport.update({
+  id: '/$userId/profile',
+  path: '/$userId/profile',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthUserIdEditRoute = AuthUserIdEditImport.update({
+  id: '/$userId/edit',
+  path: '/$userId/edit',
   getParentRoute: () => AuthRoute,
 } as any)
 
@@ -268,11 +275,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthIndexImport
       parentRoute: typeof AuthImport
     }
-    '/_auth/$userId/view': {
-      id: '/_auth/$userId/view'
-      path: '/$userId/view'
-      fullPath: '/$userId/view'
-      preLoaderRoute: typeof AuthUserIdViewImport
+    '/_auth/$userId/edit': {
+      id: '/_auth/$userId/edit'
+      path: '/$userId/edit'
+      fullPath: '/$userId/edit'
+      preLoaderRoute: typeof AuthUserIdEditImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/$userId/profile': {
+      id: '/_auth/$userId/profile'
+      path: '/$userId/profile'
+      fullPath: '/$userId/profile'
+      preLoaderRoute: typeof AuthUserIdProfileImport
       parentRoute: typeof AuthImport
     }
     '/account/_noAuth/login': {
@@ -308,7 +322,8 @@ interface AuthRouteChildren {
   AuthWalletRoute: typeof AuthWalletRoute
   AuthWithdrawalRoute: typeof AuthWithdrawalRoute
   AuthIndexRoute: typeof AuthIndexRoute
-  AuthUserIdViewRoute: typeof AuthUserIdViewRoute
+  AuthUserIdEditRoute: typeof AuthUserIdEditRoute
+  AuthUserIdProfileRoute: typeof AuthUserIdProfileRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
@@ -325,7 +340,8 @@ const AuthRouteChildren: AuthRouteChildren = {
   AuthWalletRoute: AuthWalletRoute,
   AuthWithdrawalRoute: AuthWithdrawalRoute,
   AuthIndexRoute: AuthIndexRoute,
-  AuthUserIdViewRoute: AuthUserIdViewRoute,
+  AuthUserIdEditRoute: AuthUserIdEditRoute,
+  AuthUserIdProfileRoute: AuthUserIdProfileRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -371,7 +387,8 @@ export interface FileRoutesByFullPath {
   '/withdrawal': typeof AuthWithdrawalRoute
   '/account': typeof AccountNoAuthRouteWithChildren
   '/': typeof AuthIndexRoute
-  '/$userId/view': typeof AuthUserIdViewRoute
+  '/$userId/edit': typeof AuthUserIdEditRoute
+  '/$userId/profile': typeof AuthUserIdProfileRoute
   '/account/login': typeof AccountNoAuthLoginRoute
   '/account/reset-password': typeof AccountNoAuthResetPasswordRoute
 }
@@ -391,7 +408,8 @@ export interface FileRoutesByTo {
   '/withdrawal': typeof AuthWithdrawalRoute
   '/account': typeof AccountNoAuthRouteWithChildren
   '/': typeof AuthIndexRoute
-  '/$userId/view': typeof AuthUserIdViewRoute
+  '/$userId/edit': typeof AuthUserIdEditRoute
+  '/$userId/profile': typeof AuthUserIdProfileRoute
   '/account/login': typeof AccountNoAuthLoginRoute
   '/account/reset-password': typeof AccountNoAuthResetPasswordRoute
 }
@@ -414,7 +432,8 @@ export interface FileRoutesById {
   '/account': typeof AccountRouteWithChildren
   '/account/_noAuth': typeof AccountNoAuthRouteWithChildren
   '/_auth/': typeof AuthIndexRoute
-  '/_auth/$userId/view': typeof AuthUserIdViewRoute
+  '/_auth/$userId/edit': typeof AuthUserIdEditRoute
+  '/_auth/$userId/profile': typeof AuthUserIdProfileRoute
   '/account/_noAuth/login': typeof AccountNoAuthLoginRoute
   '/account/_noAuth/reset-password': typeof AccountNoAuthResetPasswordRoute
 }
@@ -437,7 +456,8 @@ export interface FileRouteTypes {
     | '/withdrawal'
     | '/account'
     | '/'
-    | '/$userId/view'
+    | '/$userId/edit'
+    | '/$userId/profile'
     | '/account/login'
     | '/account/reset-password'
   fileRoutesByTo: FileRoutesByTo
@@ -456,7 +476,8 @@ export interface FileRouteTypes {
     | '/withdrawal'
     | '/account'
     | '/'
-    | '/$userId/view'
+    | '/$userId/edit'
+    | '/$userId/profile'
     | '/account/login'
     | '/account/reset-password'
   id:
@@ -477,7 +498,8 @@ export interface FileRouteTypes {
     | '/account'
     | '/account/_noAuth'
     | '/_auth/'
-    | '/_auth/$userId/view'
+    | '/_auth/$userId/edit'
+    | '/_auth/$userId/profile'
     | '/account/_noAuth/login'
     | '/account/_noAuth/reset-password'
   fileRoutesById: FileRoutesById
@@ -523,7 +545,8 @@ export const routeTree = rootRoute
         "/_auth/wallet",
         "/_auth/withdrawal",
         "/_auth/",
-        "/_auth/$userId/view"
+        "/_auth/$userId/edit",
+        "/_auth/$userId/profile"
       ]
     },
     "/_auth/administrator": {
@@ -592,8 +615,12 @@ export const routeTree = rootRoute
       "filePath": "_auth/index.tsx",
       "parent": "/_auth"
     },
-    "/_auth/$userId/view": {
-      "filePath": "_auth/$userId/view.tsx",
+    "/_auth/$userId/edit": {
+      "filePath": "_auth/$userId/edit.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/$userId/profile": {
+      "filePath": "_auth/$userId/profile.tsx",
       "parent": "/_auth"
     },
     "/account/_noAuth/login": {

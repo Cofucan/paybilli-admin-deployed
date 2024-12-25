@@ -3,6 +3,7 @@ import SearchIcon from "./SearchIcon.tsx";
 import FilterIcon from "./FilterIcon.tsx";
 
 export interface TableHeaderProps {
+  onBulkSearch?: () => void;
   onFilter?: () => void;
   placeholder?: string;
   title: string;
@@ -34,7 +35,7 @@ const TableHeader = (props: TableHeaderProps) => {
                 <SearchIcon />
                 <input
                   className="border-none focus:border-none focus:ring-0 outline-none w-full placeholder:text-xs placeholder:lg:text-lg smd:text-sm text-gray-700 placeholder-gray-950"
-                  type="text" placeholder={`Search ${props.placeholder ?? props.title}`} onInput={handleSearch} />
+                  type="text" placeholder={`${props.placeholder ?? props.title}`} onInput={handleSearch} />
               </div> : <></>}
             {props.onFilter ?
               <div
@@ -45,9 +46,8 @@ const TableHeader = (props: TableHeaderProps) => {
               </div> : <></>}
           </div> : <></>}
       </div>
-      {props.filterOptions.length > 0 ?
-        <div className={"space-y-6 px-6"}>
-          <ul
+      {props.filterOptions.length > 0 || props.onBulkSearch ? <div className={"space-y-6 px-6"}>
+          {props.filterOptions.length > 0 ? <ul
             className="flex flex-col lg:flex-row justify-between items-center text-sm text-gray-500 mb-1 border gap-2 border-[#58bff2] lg:border-gray-200 rounded-xl py-2 px-4">
             {props.filterOptions.map((option, index) => (
               <li key={index}>
@@ -57,13 +57,12 @@ const TableHeader = (props: TableHeaderProps) => {
                   }}
                   className={`px-5 py-3 border-none ${index === headerIndex ? "bg-[#93dbff] rounded-lg text-black bg-opacity-50" : "text-gray-500"}`}>{option.header} </button>
               </li>))}
-          </ul>
-          <div>
-            <button
-              className="mb-4 text-sm border-2 px-4 py-2 rounded-lg font-semibold transition-colors bg-white text-[#4cb8ed] border-[#58bff2]">Bulk
-              Action
-            </button>
-          </div>
+          </ul> : <></>}
+          {props.onBulkSearch ? <button
+            className="mb-4 text-sm border-2 px-4 py-2 rounded-lg font-semibold transition-colors bg-white text-[#4cb8ed] border-[#58bff2] inline-block"
+            onClick={props.onBulkSearch}>Bulk
+            Action
+          </button> : <></>}
         </div>
         : <></>}
     </div>

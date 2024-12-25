@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import StatisticList from "../../components/statistic/StatisticList";
 import useTable from "../../components/table/hooks/useTable";
@@ -16,9 +16,12 @@ const checkboxId = generateUUID();
 
 function RouteComponent() {
   const [tableData, setTableData] = useState<FetchUsersTableProps>({});
-  const { statisticQuery, tableQuery } = useUsersQuery(tableData);
+  const [columnIndex, setColumnIndex] = useState(-1);
+  const navigate = useNavigate();
+  const { statisticQuery, tableQuery, tableMutationAction } = useUsersQuery(tableData);
+  const columns = usersColumns({ checkboxId, navigate, tableMutationAction, columnIndex, setColumnIndex });
   const { structure, pagination, filter } = useTable({
-    columns: usersColumns(checkboxId),
+    columns,
     data: tableQuery.data?.data,
     pagination: tableQuery.data?.meta,
   });
@@ -62,12 +65,22 @@ function RouteComponent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter.data, pagination.itemsPerPage, pagination.currentPage]);
 
+  useEffect(() => {
+    document.onmousedown = () => {
+      setColumnIndex(-1);
+    };
+  }, []);
+
   const handleSearch = (search: string) => {
     filter.set("user", search);
   };
 
   function handleFilter() {
-    console.log("TODO: Handle Here")
+    console.log("TODO: Handle Here");
+  }
+
+  function handleBulkSearch() {
+
   }
 
   return (
@@ -78,7 +91,8 @@ function RouteComponent() {
         isLoading={statisticQuery.isLoading}
       />
       <section className="bg-white rounded-t-lg shadow">
-        <TableHeader title={"Users"} onSearch={handleSearch} filterOptions={tableHeaderData} onFilter={handleFilter}/>
+        <TableHeader title={"Users"} onSearch={handleSearch} filterOptions={tableHeaderData} onFilter={handleFilter}
+                     onBulkSearch={handleBulkSearch} />
         <div className={"p-6 pt-0"}>
           <TableContent structure={structure} />
           <TablePagination {...pagination} />

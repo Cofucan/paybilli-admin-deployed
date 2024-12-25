@@ -101,7 +101,7 @@ export const eventsColumn = () => [
       </>;
     },
     id: "action",
-    header: () => "Action",
+    header: "Action",
     filterType: () => null
   }
 ] as const satisfies readonly TableColumn<EventsTableData>[]
