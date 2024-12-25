@@ -1,12 +1,12 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import PageButtons from "../../components/custom-buttons/page-buttons/PageButtons.tsx";
 import StatisticList from "../../components/statistic/StatisticList";
 import useTable from "../../components/table/hooks/useTable";
 import TableSection from "../../components/table/TableSection.tsx";
 import { usersColumns, usersStats } from "../../routeHelper/users/usersData";
 import useUsersQuery, { FetchUsersTableProps } from "../../routeHelper/users/useUsersQuery";
 import { generateUUID } from "../../utils/constants";
-import PageButtons from "../../components/custom-buttons/page-buttons/PageButtons.tsx";
 
 export const Route = createFileRoute("/_auth/users")({
   component: RouteComponent,
