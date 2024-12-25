@@ -1,11 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
-import UserProfile from "../../../routeHelper/userId/userProfile";
-import profilePicture from "../../../routeHelper/userId/assets/profilePicture.svg";
-import UserStatistics from "../../../routeHelper/userId/userStatistics";
+import { createFileRoute } from '@tanstack/react-router'
+import UserProfile from '../../../routeHelper/userId/userProfile'
+import profilePicture from '../../../routeHelper/userId/assets/profilePicture.svg'
+import UserStatistics from '../../../routeHelper/userId/userStatistics'
 
-export const Route = createFileRoute("/_auth/$userId/")({
+
+export const Route = createFileRoute('/_auth/$userId/')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
   return (
@@ -24,5 +25,5 @@ function RouteComponent() {
       />
       <UserStatistics />
     </div>
-  );
+  )
 }
