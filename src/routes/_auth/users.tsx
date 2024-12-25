@@ -4,7 +4,9 @@ import StatisticList from "../../components/statistic/StatisticList";
 import useTable from "../../components/table/hooks/useTable";
 import TablePagination from "../../components/table/TablePagination.tsx";
 import { usersColumns, usersStats } from "../../routeHelper/users/usersData";
-import useUsersQuery, { FetchUsersTableProps } from "../../routeHelper/users/useUsersQuery";
+import useUsersQuery, {
+  FetchUsersTableProps,
+} from "../../routeHelper/users/useUsersQuery";
 import { generateUUID } from "../../utils/constants";
 import TableHeader from "../../components/table/TableHeader.tsx";
 import TableContent from "../../components/table/TableContent.tsx";
@@ -18,8 +20,15 @@ function RouteComponent() {
   const [tableData, setTableData] = useState<FetchUsersTableProps>({});
   const [columnIndex, setColumnIndex] = useState(-1);
   const navigate = useNavigate();
-  const { statisticQuery, tableQuery, tableMutationAction } = useUsersQuery(tableData);
-  const columns = usersColumns({ checkboxId, navigate, tableMutationAction, columnIndex, setColumnIndex });
+  const { statisticQuery, tableQuery, tableMutationAction } =
+    useUsersQuery(tableData);
+  const columns = usersColumns({
+    checkboxId,
+    navigate,
+    tableMutationAction,
+    columnIndex,
+    setColumnIndex,
+  });
   const { structure, pagination, filter } = useTable({
     columns,
     data: tableQuery.data?.data,
@@ -28,27 +37,32 @@ function RouteComponent() {
 
   const tableHeaderData = [
     {
-      header: "All Users", onClick: () => {
+      header: "All Users",
+      onClick: () => {
         filter.remove("status");
       },
     },
     {
-      header: "Verified Users", onClick: () => {
+      header: "Verified Users",
+      onClick: () => {
         filter.set("status", "verified");
       },
     },
     {
-      header: "Unverified Users", onClick: () => {
+      header: "Unverified Users",
+      onClick: () => {
         filter.set("status", "unverified");
       },
     },
     {
-      header: "Deactivated Accounts", onClick: () => {
+      header: "Deactivated Accounts",
+      onClick: () => {
         filter.set("status", "deactivated");
       },
     },
     {
-      header: "Suspended Accounts", onClick: () => {
+      header: "Suspended Accounts",
+      onClick: () => {
         filter.set("status", "suspended");
       },
     },
@@ -79,9 +93,7 @@ function RouteComponent() {
     console.log("TODO: Handle Here");
   }
 
-  function handleBulkSearch() {
-
-  }
+  function handleBulkSearch() {}
 
   return (
     <main className="mx-8 my-4 space-y-20">
@@ -90,9 +102,14 @@ function RouteComponent() {
         stats={usersStats(statisticQuery.data)}
         isLoading={statisticQuery.isLoading}
       />
-      <section className="bg-white rounded-t-lg shadow">
-        <TableHeader title={"Users"} onSearch={handleSearch} filterOptions={tableHeaderData} onFilter={handleFilter}
-                     onBulkSearch={handleBulkSearch} />
+      <section className="rounded-t-lg bg-white shadow">
+        <TableHeader
+          title={"Users"}
+          onSearch={handleSearch}
+          filterOptions={tableHeaderData}
+          onFilter={handleFilter}
+          onBulkSearch={handleBulkSearch}
+        />
         <div className={"p-6 pt-0"}>
           <TableContent structure={structure} />
           <TablePagination {...pagination} />

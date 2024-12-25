@@ -72,6 +72,10 @@ function RouteComponent() {
     filter.set("creator", { name: search, username: "" });
   };
 
+  function handleFilter() {
+    console.log("TODO: Handle Here");
+  }
+
   return (
     <main className="mx-8 my-4 space-y-20">
       <StatisticList
@@ -86,6 +90,7 @@ function RouteComponent() {
         filterOptions={tableHeaderData}
         structure={structure}
         placeholder={"Search Bets"}
+        onFilter={handleFilter}
       />
     </main>
   );

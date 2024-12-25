@@ -28,6 +28,7 @@ import { Route as AuthEventsImport } from './routes/_auth/events'
 import { Route as AuthEscrowImport } from './routes/_auth/escrow'
 import { Route as AuthAuditImport } from './routes/_auth/audit'
 import { Route as AuthAdministratorImport } from './routes/_auth/administrator'
+import { Route as AuthUserIdIndexImport } from './routes/_auth/$userId/index'
 import { Route as AccountNoAuthResetPasswordImport } from './routes/account/_noAuth.reset-password'
 import { Route as AccountNoAuthLoginImport } from './routes/account/_noAuth.login'
 import { Route as AuthUserIdProfileImport } from './routes/_auth/$userId/profile'
@@ -130,6 +131,12 @@ const AuthAuditRoute = AuthAuditImport.update({
 const AuthAdministratorRoute = AuthAdministratorImport.update({
   id: '/administrator',
   path: '/administrator',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthUserIdIndexRoute = AuthUserIdIndexImport.update({
+  id: '/$userId/',
+  path: '/$userId/',
   getParentRoute: () => AuthRoute,
 } as any)
 
@@ -303,6 +310,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AccountNoAuthResetPasswordImport
       parentRoute: typeof AccountNoAuthImport
     }
+    '/_auth/$userId/': {
+      id: '/_auth/$userId/'
+      path: '/$userId'
+      fullPath: '/$userId'
+      preLoaderRoute: typeof AuthUserIdIndexImport
+      parentRoute: typeof AuthImport
+    }
   }
 }
 
@@ -324,6 +338,7 @@ interface AuthRouteChildren {
   AuthIndexRoute: typeof AuthIndexRoute
   AuthUserIdEditRoute: typeof AuthUserIdEditRoute
   AuthUserIdProfileRoute: typeof AuthUserIdProfileRoute
+  AuthUserIdIndexRoute: typeof AuthUserIdIndexRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
@@ -342,6 +357,7 @@ const AuthRouteChildren: AuthRouteChildren = {
   AuthIndexRoute: AuthIndexRoute,
   AuthUserIdEditRoute: AuthUserIdEditRoute,
   AuthUserIdProfileRoute: AuthUserIdProfileRoute,
+  AuthUserIdIndexRoute: AuthUserIdIndexRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -391,6 +407,7 @@ export interface FileRoutesByFullPath {
   '/$userId/profile': typeof AuthUserIdProfileRoute
   '/account/login': typeof AccountNoAuthLoginRoute
   '/account/reset-password': typeof AccountNoAuthResetPasswordRoute
+  '/$userId': typeof AuthUserIdIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -412,6 +429,7 @@ export interface FileRoutesByTo {
   '/$userId/profile': typeof AuthUserIdProfileRoute
   '/account/login': typeof AccountNoAuthLoginRoute
   '/account/reset-password': typeof AccountNoAuthResetPasswordRoute
+  '/$userId': typeof AuthUserIdIndexRoute
 }
 
 export interface FileRoutesById {
@@ -436,6 +454,7 @@ export interface FileRoutesById {
   '/_auth/$userId/profile': typeof AuthUserIdProfileRoute
   '/account/_noAuth/login': typeof AccountNoAuthLoginRoute
   '/account/_noAuth/reset-password': typeof AccountNoAuthResetPasswordRoute
+  '/_auth/$userId/': typeof AuthUserIdIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -460,6 +479,7 @@ export interface FileRouteTypes {
     | '/$userId/profile'
     | '/account/login'
     | '/account/reset-password'
+    | '/$userId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/administrator'
@@ -480,6 +500,7 @@ export interface FileRouteTypes {
     | '/$userId/profile'
     | '/account/login'
     | '/account/reset-password'
+    | '/$userId'
   id:
     | '__root__'
     | '/_auth'
@@ -502,6 +523,7 @@ export interface FileRouteTypes {
     | '/_auth/$userId/profile'
     | '/account/_noAuth/login'
     | '/account/_noAuth/reset-password'
+    | '/_auth/$userId/'
   fileRoutesById: FileRoutesById
 }
 
@@ -546,7 +568,8 @@ export const routeTree = rootRoute
         "/_auth/withdrawal",
         "/_auth/",
         "/_auth/$userId/edit",
-        "/_auth/$userId/profile"
+        "/_auth/$userId/profile",
+        "/_auth/$userId/"
       ]
     },
     "/_auth/administrator": {
@@ -630,6 +653,10 @@ export const routeTree = rootRoute
     "/account/_noAuth/reset-password": {
       "filePath": "account/_noAuth.reset-password.tsx",
       "parent": "/account/_noAuth"
+    },
+    "/_auth/$userId/": {
+      "filePath": "_auth/$userId/index.tsx",
+      "parent": "/_auth"
     }
   }
 }
