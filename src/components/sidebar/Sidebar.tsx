@@ -17,7 +17,7 @@ const Sidebar = () => {
   };
 
   return (
-    <section className="h-full w-[250px] overflow-auto border-r bg-[#fff] lg:w-[320px]">
+    <section className="h-full w-[250px] sidebar-scroll border-r bg-[#fff] lg:w-[320px]">
       <ul className="flex h-full w-full flex-col">
         {sidebarItems.map(
           ({ label, to, activeImage, inactiveImage }, index) => {
