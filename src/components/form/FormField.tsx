@@ -5,6 +5,7 @@ import { cn } from "../../utils/constants.ts";
 import FormErrorText from "./FormErrorText.tsx";
 import FormOtp from "./FormOtp.tsx";
 import FormButton from "./FormButton.tsx";
+import FormSelect from "./FormSelect.tsx";
 
 export const formFieldVariants = cva("", {
   variants: {
@@ -33,6 +34,7 @@ const FormField = ({
 };
 
 FormField.Input = FormInput;
+FormField.Select = FormSelect;
 FormField.Button = FormButton;
 FormField.ErrorText = FormErrorText;
 FormField.Otp = FormOtp;

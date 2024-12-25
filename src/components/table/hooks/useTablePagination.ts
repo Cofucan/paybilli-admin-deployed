@@ -9,6 +9,7 @@ export interface TablePaginationConfig {
 }
 
 export interface TablePaginationState {
+  initialPage: number
   totalItems: number;
   totalPages: number;
   itemsPerPage: number;
@@ -46,7 +47,7 @@ function useTablePagination(config: TablePaginationConfig): TablePaginationHook 
     setItemsPerPage(config.itemsPerPage ?? 10);
   }, [config.itemsPerPage]);
   useEffect(() => {
-    setTotalPages(config.totalPages ? config.totalPages + initialPage : -1);
+    setTotalPages(config.totalPages ? config.totalPages + initialPage - 1 : -1);
   }, [config.totalPages, initialPage]);
   useEffect(() => {
     setCurrentPage(config.currentPage ?? initialPage);
@@ -74,6 +75,7 @@ function useTablePagination(config: TablePaginationConfig): TablePaginationHook 
   const prev = () => {
     setCurrentPage(Math.max(currentPage - 1, initialPage));
   };
+  
 
   const hasNext = () => currentPage < totalPages;
   const hasPrev = () => currentPage > initialPage;
@@ -81,14 +83,8 @@ function useTablePagination(config: TablePaginationConfig): TablePaginationHook 
   const first = () => { setPageIndex(initialPage); };
   const last = () => { setPageIndex(totalPages); };
 
-  // console.log(hasNext(), {
-  //   currentPage,
-  //   itemsPerPage,
-  //   totalItems,
-  //   totalPages,
-  // });
-
   return {
+    initialPage,
     currentPage,
     itemsPerPage,
     totalItems,

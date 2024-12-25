@@ -6,6 +6,7 @@ import FormInputPassword from "./FormInputPassword.tsx";
 export const inputVariants = cva("", {
   variants: {
     intent: {
+      admin: "w-full px-4 py-2 border-2 border-gray-200 rounded-lg placeholder:text-sm placeholder:text-gray-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-light-blue-500",
       login:
         "border-light-grey-500 rounded-lg border-2 p-5 placeholder:text-lg focus:border-blue-400 focus:ring-blue-300 focus:placeholder:text-sm w-full custom-placeholder",
     },

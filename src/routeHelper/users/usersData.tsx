@@ -9,13 +9,14 @@ import UsersGreen from "./assets/UsersGreen.svg";
 import UsersPurple from "./assets/UsersPurple.svg";
 import UsersRed from "./assets/UsersRed.svg";
 import { TableColumn } from "../../components/table/hooks/useTable.ts";
-import { UsersStatisticResponse, UsersTableData } from "./usersTypes.ts";
+import { UsersStatisticResponse } from "./usersTypes.ts";
 import { createColumn } from "../../components/table/hooks/useTable.tsx";
 import { UseNavigateResult } from "@tanstack/react-router";
 import { UseMutationResult } from "@tanstack/react-query";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { Dispatch, SetStateAction } from "react";
 import TableActionDropdown from "../../components/dropdown/TableActionDropdown.tsx";
+import { User } from "../../utils/types.ts";
 
 const statusClasses = {
   verified: {
@@ -65,12 +66,12 @@ export const usersTableAction = ({ navigate, tableMutationAction }: UsersTableAc
   {
     title: "View User",
     icon: Eye,
-    onClick: (id: string) => navigate({ to: "/$userId/profile", params: { userId: id } }),
+    onClick: (id: string) => navigate({ to: "/user/$userId", params: { userId: id } }),
   },
   {
     title: "Edit User",
     icon: Edit,
-    onClick: (id: string) => navigate({ to: "/$userId/edit", params: { userId: id } }),
+    onClick: (id: string) => navigate({ to: "/user/$userId/edit", params: { userId: id } }),
   },
   {
     title: "Verify User", icon: VerifyCheck, onClick: (id: string) => {
@@ -92,8 +93,8 @@ export const usersTableAction = ({ navigate, tableMutationAction }: UsersTableAc
 
 interface UsersColumn extends UsersTableAction {
   checkboxId: string;
-  columnIndex: number;
-  setColumnIndex: Dispatch<SetStateAction<number>>;
+  columnIndex: number | string;
+  setColumnIndex: Dispatch<SetStateAction<number | string>>;
 }
 
 export const usersColumns = (props: UsersColumn) =>
@@ -153,7 +154,7 @@ export const usersColumns = (props: UsersColumn) =>
       cell: ({ id }) => (<div className={"relative"}>
         <button
           onClick={() => {
-            props.setColumnIndex(id );
+            props.setColumnIndex(id === props.columnIndex ? -1 : id);
           }}
           className="text-gray-400 hover:text-gray-600 text-xl"
         >
@@ -165,4 +166,4 @@ export const usersColumns = (props: UsersColumn) =>
       </div>),
       filterType: () => <></>,
     },
-  ] as const satisfies readonly TableColumn<UsersTableData> [];
+  ] as const satisfies readonly TableColumn<User>[];

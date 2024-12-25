@@ -35,7 +35,7 @@ const TableHeader = (props: TableHeaderProps) => {
                 <SearchIcon />
                 <input
                   className="border-none focus:border-none focus:ring-0 outline-none w-full placeholder:text-xs placeholder:lg:text-lg smd:text-sm text-gray-700 placeholder-gray-950"
-                  type="text" placeholder={`${props.placeholder ?? props.title}`} onInput={handleSearch} />
+                  type="text" placeholder={props.placeholder ?? props.title} onInput={handleSearch} />
               </div> : <></>}
             {props.onFilter ?
               <div

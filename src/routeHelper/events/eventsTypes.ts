@@ -14,7 +14,7 @@ export interface EventsTableResponse {
 
 export interface EventsTableData {
   id: number;
-  creator: { name: string; username: string };
+  creator: { name: string; username: string, id: string, profileImage: string };
   participants: never[];
   bet_type: string;
   event_type: string;

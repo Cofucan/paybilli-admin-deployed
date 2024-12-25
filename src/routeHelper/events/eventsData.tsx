@@ -1,12 +1,19 @@
+import { UseNavigateResult } from "@tanstack/react-router";
+import { Dispatch, SetStateAction } from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import TableActionDropdown, { TableActionDropdownProps } from "../../components/dropdown/TableActionDropdown";
 import {
   createColumn, TableColumn
 } from "../../components/table/hooks/useTable";
+import BetDetails from './assets/BetDetails.svg';
+import CloseBet from './assets/CloseBet.svg';
 import EventStarBlack from "./assets/EventBlack.svg";
 import EventStarGold from "./assets/EventStarGold.svg";
 import EventStarGreen from "./assets/EventStarGreen.svg";
 import EventStarRed from "./assets/EventStarRed.svg";
+import Eye from './assets/Eye.svg';
 import { EventsStatsResponse, EventsTableData } from "./eventsTypes";
+
 const statusClasses = {
   open: {
     dot: 'bg-green-600',
@@ -41,26 +48,53 @@ export const eventsStats = (data?: EventsStatsResponse) => [
   },
 ];
 
+interface EventsTableAction {
+  navigate: UseNavigateResult<string>,
+  handleCloseBetButton: ({ id }: { id: number }) => void | Promise<void>
+}
 
-export const eventsColumn = () => [
+export const eventsTableAction = ({ navigate, handleCloseBetButton }: EventsTableAction): TableActionDropdownProps<{ id: number, userId: string }>["data"] => [
+  {
+    title: "View Bet Details",
+    icon: BetDetails,
+    onClick: ({ id }) => navigate({ to: "/event/$eventId", params: { eventId: id.toString() } }),
+  },
+  {
+    title: "Close Bet",
+    icon: CloseBet,
+    onClick: handleCloseBetButton,
+  },
+  {
+    title: "View User", icon: Eye, onClick: ({ userId }) => navigate({ to: "/user/$userId", params: { userId } })
+  },
+];
+
+
+interface EventsColumn extends EventsTableAction {
+  columnIndex: number | string;
+  setColumnIndex: Dispatch<SetStateAction<number | string>>;
+}
+
+
+export const eventsColumn = (props: EventsColumn) => [
   createColumn("id", { header: "S/N" }),
-  createColumn("creator", {
-    header: "Creator", cell({ creator }) {
-      return (
-        <div className="flex items-center space-x-6">
-          <img
-            src={creator.name}
-            alt={creator.name + "'s Profile Picture"}
-            className="w-8 h-8 rounded-full"
-          />
-          <div>
-            {/* Access creator fields directly from record */}
-            <p className="font-medium">{creator.name || 'Unknown Creator'}</p>
-            <p className="text-xs text-gray-400">{creator.username || 'No Username'}</p>
-          </div>
-        </div>)
-    },
-  }),
+  {
+    id: "creator",
+    header: "Creator",
+    cell: ({ creator }) => <div className="flex items-center space-x-6">
+      <img
+        src={creator.name}
+        alt={creator.name + "'s Profile Picture"}
+        className="w-8 h-8 rounded-full"
+      />
+      <div>
+        {/* Access creator fields directly from record */}
+        <p className="font-medium">{creator.name || 'Unknown Creator'}</p>
+        <p className="text-xs text-gray-400">{creator.username || 'No Username'}</p>
+      </div>
+    </div>,
+    filterType: ({creator}) => creator.name
+  },
   createColumn("bet_type", { header: "Bet Type" }),
   createColumn("created_at", {
     header: "Bet Date", cell({ created_at }) {
@@ -91,15 +125,19 @@ export const eventsColumn = () => [
     },
   }),
   {
-    cell() {
-      return <>
-        <button
-          className='text-gray-400 hover:text-gray-600 text-xl'
-        >
-          <HiOutlineDotsVertical />
-        </button>
-      </>;
-    },
+    cell: ({ id, creator }) => (<div className={"relative"}>
+      <button
+        onClick={() => {
+          props.setColumnIndex(id === props.columnIndex ? -1 : id);
+        }}
+        className="text-gray-400 hover:text-gray-600 text-xl"
+      >
+        <HiOutlineDotsVertical />
+      </button>
+      {id === props.columnIndex ? <div className="absolute right-0 z-20">
+        <TableActionDropdown id={{ id, userId: creator.id }} data={eventsTableAction(props)} />,
+      </div> : null}
+    </div>),
     id: "action",
     header: "Action",
     filterType: () => null
