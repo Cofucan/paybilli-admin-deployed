@@ -4,7 +4,7 @@ import { Events, EventsStatus, PaginationRequest, PaginationRespose } from "../u
 
 const EVENTS = "events";
 const QUERY_KEY = {
-  get: [EVENTS],
+  getStats: [EVENTS, "stats"],
   getById: (id: string) => [EVENTS, id],
   getTable: (params: EventsGetTableRequest) => [EVENTS, params],
 };
@@ -18,7 +18,7 @@ export interface EventsGetStatsResponse {
 }
 export const useEventsGetStats = () => {
   return useQuery({
-    queryKey: QUERY_KEY.get,
+    queryKey: QUERY_KEY.getStats,
     queryFn: async () => {
       const res = await customFetch.get(`app_admin/events/stats/?${baseSearch().toString()}`);
       return (await res.json()) as EventsGetStatsResponse;
@@ -41,10 +41,23 @@ export const useEventsGetTable = (params: EventsGetTableRequest) => {
       if (params.status) search.append("status", params.status.toString());
       if (params.page_size) search.append("page_size", params.page_size.toString());
       const res = await customFetch.get(`app_admin/events/?${search.toString()}`);
-      return (await res.json()) as PaginationRespose<Events>;
+      const data = (await res.json()) as PaginationRespose<Events>;
+      return {...data, results: data.results.map((x, i) => ({...x, serial_no: i+1}))}
     },
   });
 };
+
+// TODO: Optimize Later
+export const useEventsGetById = (id: string) => {
+  return useQuery({
+    queryKey: QUERY_KEY.getById(id),
+    queryFn: async () => {
+      const res = await customFetch.get(`app_admin/events/${id}/`);
+      return (await res.json()) as Events;
+    },
+  });
+};
+
 export interface EventsCreateRequest {
   event_name: string;
   due_date: string;
@@ -60,7 +73,8 @@ export const useEventsCreate = () => {
       return (await res.json()) as Events;
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: QUERY_KEY.get });
+      await queryClient.invalidateQueries({ queryKey: [EVENTS] });
     },
   });
 };
+

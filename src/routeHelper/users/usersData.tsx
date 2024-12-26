@@ -1,7 +1,7 @@
 import Eye from "./assets/eye.svg";
 import Edit from "./assets/edit.svg";
 import VerifyCheck from "./assets/verifyCheck.svg";
-import Like from "./assets/like.svg";
+import CloseBet from "./assets/CloseBet.svg";
 import Delete from "./assets/delete.svg";
 import UsersBlack from "./assets/UsersBlack.svg";
 import UsersGold from "./assets/UsersGold.svg";
@@ -17,6 +17,9 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import { Dispatch, SetStateAction } from "react";
 import TableActionDropdown from "../../components/dropdown/TableActionDropdown.tsx";
 import { User } from "../../utils/types.ts";
+import { formatDate } from "../../utils/DateFormatter.ts";
+import { BASE_URL } from "../../utils/constants.ts";
+import { UserChangeStatusRequest } from "../../hooks/useUsersQuery.ts";
 
 const statusClasses = {
   verified: {
@@ -59,23 +62,19 @@ export const usersStats = (data?: UsersStatisticResponse) => [
 
 interface UsersTableAction {
   navigate: UseNavigateResult<string>;
-  tableMutationAction: UseMutationResult<
-    { id: string; status: string },
-    Error,
-    { id: string; status: string }
-  >;
+  tableMutationAction:  UseMutationResult<User, Error, UserChangeStatusRequest>
 }
 
 export const usersTableAction = ({ navigate, tableMutationAction }: UsersTableAction) => [
   {
     title: "View User",
     icon: Eye,
-    onClick: (id: string) => navigate({ to: "/user/$userId", params: { userId: id } }),
+    onClick: (id: string) => navigate({ to: "/users/$userId", params: { userId: id } }),
   },
   {
     title: "Edit User",
     icon: Edit,
-    onClick: (id: string) => navigate({ to: "/user/$userId/edit", params: { userId: id } }),
+    onClick: (id: string) => navigate({ to: "/users/$userId/edit", params: { userId: id } }),
   },
   {
     title: "Verify User",
@@ -85,17 +84,17 @@ export const usersTableAction = ({ navigate, tableMutationAction }: UsersTableAc
     },
   },
   {
-    title: "Reactivate User",
-    icon: Like,
+    title: "Suspend User",
+    icon: CloseBet,
     onClick: (id: string) => {
-      tableMutationAction.mutate({ id, status: "deactivated" });
+      tableMutationAction.mutate({ id, status: "suspended" });
     },
   },
   {
-    title: "Suspend User",
+    title: "Deactivate User",
     icon: Delete,
     onClick: (id: string) => {
-      tableMutationAction.mutate({ id, status: "suspended" });
+      tableMutationAction.mutate({ id, status: "deactivated" });
     },
   },
 ];
@@ -122,7 +121,7 @@ export const usersColumns = (props: UsersColumn) =>
       cell: (data) => (
         <div className='flex items-center gap-4 text-left'>
           <img
-            src={data.profile_image_url}
+            src={BASE_URL + data.profile_image_url}
             alt={data.first_name + "'s Picture"}
             className='size-8 rounded-full'
           />
@@ -135,15 +134,15 @@ export const usersColumns = (props: UsersColumn) =>
       filterType: (data) => `${data.first_name} ${data.last_name}`,
     },
     createColumn("email", { header: "Email Address" }),
-    // createColumn("dateRegistered", {
-    //   header: "Date Registered",
-    //   cell: ({ dateRegistered }) => (
-    //     <>{new Date(dateRegistered).toDateString()}</>
-    //   ),
-    // }),
+    createColumn("date_joined", {
+      header: "Date Registered",
+      cell: ({ date_joined }) => (
+        <>{formatDate(date_joined)}</>
+      ),
+    }),
     createColumn("recent_activity", {
       header: "Recent Activity",
-      cell: ({ recent_activity }) => <>{new Date(recent_activity ?? "").toDateString()}</>,
+      cell: ({ recent_activity }) => <>{formatDate(recent_activity ?? "")}</>,
     }),
     createColumn("account_status", {
       header: "Status",

@@ -8,557 +8,560 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as AuthImport } from "./routes/_auth";
-import { Route as AuthIndexImport } from "./routes/_auth/index";
-import { Route as AccountNoAuthImport } from "./routes/account/_noAuth";
-import { Route as AuthWithdrawalImport } from "./routes/_auth/withdrawal";
-import { Route as AuthWalletImport } from "./routes/_auth/wallet";
-import { Route as AuthUsersImport } from "./routes/_auth/users";
-import { Route as AuthTransactionImport } from "./routes/_auth/transaction";
-import { Route as AuthSupportImport } from "./routes/_auth/support";
-import { Route as AuthSettingImport } from "./routes/_auth/setting";
-import { Route as AuthRevenueImport } from "./routes/_auth/revenue";
-import { Route as AuthNotificationImport } from "./routes/_auth/notification";
-import { Route as AuthEventsImport } from "./routes/_auth/events";
-import { Route as AuthEscrowImport } from "./routes/_auth/escrow";
-import { Route as AuthAuditImport } from "./routes/_auth/audit";
-import { Route as AuthAdministratorImport } from "./routes/_auth/administrator";
-import { Route as AccountNoAuthResetPasswordImport } from "./routes/account/_noAuth.reset-password";
-import { Route as AccountNoAuthLoginImport } from "./routes/account/_noAuth.login";
-import { Route as AuthEventCreateImport } from "./routes/_auth/event/create";
-import { Route as AuthEventEventIdImport } from "./routes/_auth/event/$eventId";
-import { Route as AuthUserUserIdIndexImport } from "./routes/_auth/user/$userId.index";
-import { Route as AuthUserUserIdEditImport } from "./routes/_auth/user/$userId.edit";
+import { Route as rootRoute } from './routes/__root'
+import { Route as AuthImport } from './routes/_auth'
+import { Route as AuthIndexImport } from './routes/_auth/index'
+import { Route as AccountNoAuthImport } from './routes/account/_noAuth'
+import { Route as AuthWithdrawalImport } from './routes/_auth/withdrawal'
+import { Route as AuthWalletImport } from './routes/_auth/wallet'
+import { Route as AuthTransactionImport } from './routes/_auth/transaction'
+import { Route as AuthSupportImport } from './routes/_auth/support'
+import { Route as AuthSettingImport } from './routes/_auth/setting'
+import { Route as AuthRevenueImport } from './routes/_auth/revenue'
+import { Route as AuthNotificationImport } from './routes/_auth/notification'
+import { Route as AuthEscrowImport } from './routes/_auth/escrow'
+import { Route as AuthAuditImport } from './routes/_auth/audit'
+import { Route as AuthAdministratorImport } from './routes/_auth/administrator'
+import { Route as AuthUsersIndexImport } from './routes/_auth/users/index'
+import { Route as AuthEventsIndexImport } from './routes/_auth/events/index'
+import { Route as AccountNoAuthResetPasswordImport } from './routes/account/_noAuth.reset-password'
+import { Route as AccountNoAuthLoginImport } from './routes/account/_noAuth.login'
+import { Route as AuthEventsCreateImport } from './routes/_auth/events/create'
+import { Route as AuthEventsEventIdImport } from './routes/_auth/events/$eventId'
+import { Route as AuthUsersUserIdIndexImport } from './routes/_auth/users/$userId.index'
+import { Route as AuthUsersUserIdEditImport } from './routes/_auth/users/$userId.edit'
 
 // Create Virtual Routes
 
-const AccountImport = createFileRoute("/account")();
+const AccountImport = createFileRoute('/account')()
 
 // Create/Update Routes
 
 const AccountRoute = AccountImport.update({
-  id: "/account",
-  path: "/account",
+  id: '/account',
+  path: '/account',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const AuthRoute = AuthImport.update({
-  id: "/_auth",
+  id: '/_auth',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const AuthIndexRoute = AuthIndexImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
 const AccountNoAuthRoute = AccountNoAuthImport.update({
-  id: "/_noAuth",
+  id: '/_noAuth',
   getParentRoute: () => AccountRoute,
-} as any);
+} as any)
 
 const AuthWithdrawalRoute = AuthWithdrawalImport.update({
-  id: "/withdrawal",
-  path: "/withdrawal",
+  id: '/withdrawal',
+  path: '/withdrawal',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
 const AuthWalletRoute = AuthWalletImport.update({
-  id: "/wallet",
-  path: "/wallet",
+  id: '/wallet',
+  path: '/wallet',
   getParentRoute: () => AuthRoute,
-} as any);
-
-const AuthUsersRoute = AuthUsersImport.update({
-  id: "/users",
-  path: "/users",
-  getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
 const AuthTransactionRoute = AuthTransactionImport.update({
-  id: "/transaction",
-  path: "/transaction",
+  id: '/transaction',
+  path: '/transaction',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
 const AuthSupportRoute = AuthSupportImport.update({
-  id: "/support",
-  path: "/support",
+  id: '/support',
+  path: '/support',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
 const AuthSettingRoute = AuthSettingImport.update({
-  id: "/setting",
-  path: "/setting",
+  id: '/setting',
+  path: '/setting',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
 const AuthRevenueRoute = AuthRevenueImport.update({
-  id: "/revenue",
-  path: "/revenue",
+  id: '/revenue',
+  path: '/revenue',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
 const AuthNotificationRoute = AuthNotificationImport.update({
-  id: "/notification",
-  path: "/notification",
+  id: '/notification',
+  path: '/notification',
   getParentRoute: () => AuthRoute,
-} as any);
-
-const AuthEventsRoute = AuthEventsImport.update({
-  id: "/events",
-  path: "/events",
-  getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
 const AuthEscrowRoute = AuthEscrowImport.update({
-  id: "/escrow",
-  path: "/escrow",
+  id: '/escrow',
+  path: '/escrow',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
 const AuthAuditRoute = AuthAuditImport.update({
-  id: "/audit",
-  path: "/audit",
+  id: '/audit',
+  path: '/audit',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
 const AuthAdministratorRoute = AuthAdministratorImport.update({
-  id: "/administrator",
-  path: "/administrator",
+  id: '/administrator',
+  path: '/administrator',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
-const AccountNoAuthResetPasswordRoute = AccountNoAuthResetPasswordImport.update({
-  id: "/reset-password",
-  path: "/reset-password",
-  getParentRoute: () => AccountNoAuthRoute,
-} as any);
+const AuthUsersIndexRoute = AuthUsersIndexImport.update({
+  id: '/users/',
+  path: '/users/',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthEventsIndexRoute = AuthEventsIndexImport.update({
+  id: '/events/',
+  path: '/events/',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AccountNoAuthResetPasswordRoute = AccountNoAuthResetPasswordImport.update(
+  {
+    id: '/reset-password',
+    path: '/reset-password',
+    getParentRoute: () => AccountNoAuthRoute,
+  } as any,
+)
 
 const AccountNoAuthLoginRoute = AccountNoAuthLoginImport.update({
-  id: "/login",
-  path: "/login",
+  id: '/login',
+  path: '/login',
   getParentRoute: () => AccountNoAuthRoute,
-} as any);
+} as any)
 
-const AuthEventCreateRoute = AuthEventCreateImport.update({
-  id: "/event/create",
-  path: "/event/create",
+const AuthEventsCreateRoute = AuthEventsCreateImport.update({
+  id: '/events/create',
+  path: '/events/create',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
-const AuthEventEventIdRoute = AuthEventEventIdImport.update({
-  id: "/event/$eventId",
-  path: "/event/$eventId",
+const AuthEventsEventIdRoute = AuthEventsEventIdImport.update({
+  id: '/events/$eventId',
+  path: '/events/$eventId',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
-const AuthUserUserIdIndexRoute = AuthUserUserIdIndexImport.update({
-  id: "/user/$userId/",
-  path: "/user/$userId/",
+const AuthUsersUserIdIndexRoute = AuthUsersUserIdIndexImport.update({
+  id: '/users/$userId/',
+  path: '/users/$userId/',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
-const AuthUserUserIdEditRoute = AuthUserUserIdEditImport.update({
-  id: "/user/$userId/edit",
-  path: "/user/$userId/edit",
+const AuthUsersUserIdEditRoute = AuthUsersUserIdEditImport.update({
+  id: '/users/$userId/edit',
+  path: '/users/$userId/edit',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/_auth": {
-      id: "/_auth";
-      path: "";
-      fullPath: "";
-      preLoaderRoute: typeof AuthImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/_auth/administrator": {
-      id: "/_auth/administrator";
-      path: "/administrator";
-      fullPath: "/administrator";
-      preLoaderRoute: typeof AuthAdministratorImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/audit": {
-      id: "/_auth/audit";
-      path: "/audit";
-      fullPath: "/audit";
-      preLoaderRoute: typeof AuthAuditImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/escrow": {
-      id: "/_auth/escrow";
-      path: "/escrow";
-      fullPath: "/escrow";
-      preLoaderRoute: typeof AuthEscrowImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/events": {
-      id: "/_auth/events";
-      path: "/events";
-      fullPath: "/events";
-      preLoaderRoute: typeof AuthEventsImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/notification": {
-      id: "/_auth/notification";
-      path: "/notification";
-      fullPath: "/notification";
-      preLoaderRoute: typeof AuthNotificationImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/revenue": {
-      id: "/_auth/revenue";
-      path: "/revenue";
-      fullPath: "/revenue";
-      preLoaderRoute: typeof AuthRevenueImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/setting": {
-      id: "/_auth/setting";
-      path: "/setting";
-      fullPath: "/setting";
-      preLoaderRoute: typeof AuthSettingImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/support": {
-      id: "/_auth/support";
-      path: "/support";
-      fullPath: "/support";
-      preLoaderRoute: typeof AuthSupportImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/transaction": {
-      id: "/_auth/transaction";
-      path: "/transaction";
-      fullPath: "/transaction";
-      preLoaderRoute: typeof AuthTransactionImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/users": {
-      id: "/_auth/users";
-      path: "/users";
-      fullPath: "/users";
-      preLoaderRoute: typeof AuthUsersImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/wallet": {
-      id: "/_auth/wallet";
-      path: "/wallet";
-      fullPath: "/wallet";
-      preLoaderRoute: typeof AuthWalletImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/withdrawal": {
-      id: "/_auth/withdrawal";
-      path: "/withdrawal";
-      fullPath: "/withdrawal";
-      preLoaderRoute: typeof AuthWithdrawalImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/account": {
-      id: "/account";
-      path: "/account";
-      fullPath: "/account";
-      preLoaderRoute: typeof AccountImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/account/_noAuth": {
-      id: "/account/_noAuth";
-      path: "/account";
-      fullPath: "/account";
-      preLoaderRoute: typeof AccountNoAuthImport;
-      parentRoute: typeof AccountRoute;
-    };
-    "/_auth/": {
-      id: "/_auth/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof AuthIndexImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/event/$eventId": {
-      id: "/_auth/event/$eventId";
-      path: "/event/$eventId";
-      fullPath: "/event/$eventId";
-      preLoaderRoute: typeof AuthEventEventIdImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/event/create": {
-      id: "/_auth/event/create";
-      path: "/event/create";
-      fullPath: "/event/create";
-      preLoaderRoute: typeof AuthEventCreateImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/account/_noAuth/login": {
-      id: "/account/_noAuth/login";
-      path: "/login";
-      fullPath: "/account/login";
-      preLoaderRoute: typeof AccountNoAuthLoginImport;
-      parentRoute: typeof AccountNoAuthImport;
-    };
-    "/account/_noAuth/reset-password": {
-      id: "/account/_noAuth/reset-password";
-      path: "/reset-password";
-      fullPath: "/account/reset-password";
-      preLoaderRoute: typeof AccountNoAuthResetPasswordImport;
-      parentRoute: typeof AccountNoAuthImport;
-    };
-    "/_auth/user/$userId/edit": {
-      id: "/_auth/user/$userId/edit";
-      path: "/user/$userId/edit";
-      fullPath: "/user/$userId/edit";
-      preLoaderRoute: typeof AuthUserUserIdEditImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/user/$userId/": {
-      id: "/_auth/user/$userId/";
-      path: "/user/$userId";
-      fullPath: "/user/$userId";
-      preLoaderRoute: typeof AuthUserUserIdIndexImport;
-      parentRoute: typeof AuthImport;
-    };
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthImport
+      parentRoute: typeof rootRoute
+    }
+    '/_auth/administrator': {
+      id: '/_auth/administrator'
+      path: '/administrator'
+      fullPath: '/administrator'
+      preLoaderRoute: typeof AuthAdministratorImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/audit': {
+      id: '/_auth/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuthAuditImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/escrow': {
+      id: '/_auth/escrow'
+      path: '/escrow'
+      fullPath: '/escrow'
+      preLoaderRoute: typeof AuthEscrowImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/notification': {
+      id: '/_auth/notification'
+      path: '/notification'
+      fullPath: '/notification'
+      preLoaderRoute: typeof AuthNotificationImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/revenue': {
+      id: '/_auth/revenue'
+      path: '/revenue'
+      fullPath: '/revenue'
+      preLoaderRoute: typeof AuthRevenueImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/setting': {
+      id: '/_auth/setting'
+      path: '/setting'
+      fullPath: '/setting'
+      preLoaderRoute: typeof AuthSettingImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/support': {
+      id: '/_auth/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof AuthSupportImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/transaction': {
+      id: '/_auth/transaction'
+      path: '/transaction'
+      fullPath: '/transaction'
+      preLoaderRoute: typeof AuthTransactionImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/wallet': {
+      id: '/_auth/wallet'
+      path: '/wallet'
+      fullPath: '/wallet'
+      preLoaderRoute: typeof AuthWalletImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/withdrawal': {
+      id: '/_auth/withdrawal'
+      path: '/withdrawal'
+      fullPath: '/withdrawal'
+      preLoaderRoute: typeof AuthWithdrawalImport
+      parentRoute: typeof AuthImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountImport
+      parentRoute: typeof rootRoute
+    }
+    '/account/_noAuth': {
+      id: '/account/_noAuth'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountNoAuthImport
+      parentRoute: typeof AccountRoute
+    }
+    '/_auth/': {
+      id: '/_auth/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AuthIndexImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/events/$eventId': {
+      id: '/_auth/events/$eventId'
+      path: '/events/$eventId'
+      fullPath: '/events/$eventId'
+      preLoaderRoute: typeof AuthEventsEventIdImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/events/create': {
+      id: '/_auth/events/create'
+      path: '/events/create'
+      fullPath: '/events/create'
+      preLoaderRoute: typeof AuthEventsCreateImport
+      parentRoute: typeof AuthImport
+    }
+    '/account/_noAuth/login': {
+      id: '/account/_noAuth/login'
+      path: '/login'
+      fullPath: '/account/login'
+      preLoaderRoute: typeof AccountNoAuthLoginImport
+      parentRoute: typeof AccountNoAuthImport
+    }
+    '/account/_noAuth/reset-password': {
+      id: '/account/_noAuth/reset-password'
+      path: '/reset-password'
+      fullPath: '/account/reset-password'
+      preLoaderRoute: typeof AccountNoAuthResetPasswordImport
+      parentRoute: typeof AccountNoAuthImport
+    }
+    '/_auth/events/': {
+      id: '/_auth/events/'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof AuthEventsIndexImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/users/': {
+      id: '/_auth/users/'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AuthUsersIndexImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/users/$userId/edit': {
+      id: '/_auth/users/$userId/edit'
+      path: '/users/$userId/edit'
+      fullPath: '/users/$userId/edit'
+      preLoaderRoute: typeof AuthUsersUserIdEditImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/users/$userId/': {
+      id: '/_auth/users/$userId/'
+      path: '/users/$userId'
+      fullPath: '/users/$userId'
+      preLoaderRoute: typeof AuthUsersUserIdIndexImport
+      parentRoute: typeof AuthImport
+    }
   }
 }
 
 // Create and export the route tree
 
 interface AuthRouteChildren {
-  AuthAdministratorRoute: typeof AuthAdministratorRoute;
-  AuthAuditRoute: typeof AuthAuditRoute;
-  AuthEscrowRoute: typeof AuthEscrowRoute;
-  AuthEventsRoute: typeof AuthEventsRoute;
-  AuthNotificationRoute: typeof AuthNotificationRoute;
-  AuthRevenueRoute: typeof AuthRevenueRoute;
-  AuthSettingRoute: typeof AuthSettingRoute;
-  AuthSupportRoute: typeof AuthSupportRoute;
-  AuthTransactionRoute: typeof AuthTransactionRoute;
-  AuthUsersRoute: typeof AuthUsersRoute;
-  AuthWalletRoute: typeof AuthWalletRoute;
-  AuthWithdrawalRoute: typeof AuthWithdrawalRoute;
-  AuthIndexRoute: typeof AuthIndexRoute;
-  AuthEventEventIdRoute: typeof AuthEventEventIdRoute;
-  AuthEventCreateRoute: typeof AuthEventCreateRoute;
-  AuthUserUserIdEditRoute: typeof AuthUserUserIdEditRoute;
-  AuthUserUserIdIndexRoute: typeof AuthUserUserIdIndexRoute;
+  AuthAdministratorRoute: typeof AuthAdministratorRoute
+  AuthAuditRoute: typeof AuthAuditRoute
+  AuthEscrowRoute: typeof AuthEscrowRoute
+  AuthNotificationRoute: typeof AuthNotificationRoute
+  AuthRevenueRoute: typeof AuthRevenueRoute
+  AuthSettingRoute: typeof AuthSettingRoute
+  AuthSupportRoute: typeof AuthSupportRoute
+  AuthTransactionRoute: typeof AuthTransactionRoute
+  AuthWalletRoute: typeof AuthWalletRoute
+  AuthWithdrawalRoute: typeof AuthWithdrawalRoute
+  AuthIndexRoute: typeof AuthIndexRoute
+  AuthEventsEventIdRoute: typeof AuthEventsEventIdRoute
+  AuthEventsCreateRoute: typeof AuthEventsCreateRoute
+  AuthEventsIndexRoute: typeof AuthEventsIndexRoute
+  AuthUsersIndexRoute: typeof AuthUsersIndexRoute
+  AuthUsersUserIdEditRoute: typeof AuthUsersUserIdEditRoute
+  AuthUsersUserIdIndexRoute: typeof AuthUsersUserIdIndexRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthAdministratorRoute: AuthAdministratorRoute,
   AuthAuditRoute: AuthAuditRoute,
   AuthEscrowRoute: AuthEscrowRoute,
-  AuthEventsRoute: AuthEventsRoute,
   AuthNotificationRoute: AuthNotificationRoute,
   AuthRevenueRoute: AuthRevenueRoute,
   AuthSettingRoute: AuthSettingRoute,
   AuthSupportRoute: AuthSupportRoute,
   AuthTransactionRoute: AuthTransactionRoute,
-  AuthUsersRoute: AuthUsersRoute,
   AuthWalletRoute: AuthWalletRoute,
   AuthWithdrawalRoute: AuthWithdrawalRoute,
   AuthIndexRoute: AuthIndexRoute,
-  AuthEventEventIdRoute: AuthEventEventIdRoute,
-  AuthEventCreateRoute: AuthEventCreateRoute,
-  AuthUserUserIdEditRoute: AuthUserUserIdEditRoute,
-  AuthUserUserIdIndexRoute: AuthUserUserIdIndexRoute,
-};
+  AuthEventsEventIdRoute: AuthEventsEventIdRoute,
+  AuthEventsCreateRoute: AuthEventsCreateRoute,
+  AuthEventsIndexRoute: AuthEventsIndexRoute,
+  AuthUsersIndexRoute: AuthUsersIndexRoute,
+  AuthUsersUserIdEditRoute: AuthUsersUserIdEditRoute,
+  AuthUsersUserIdIndexRoute: AuthUsersUserIdIndexRoute,
+}
 
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren);
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface AccountNoAuthRouteChildren {
-  AccountNoAuthLoginRoute: typeof AccountNoAuthLoginRoute;
-  AccountNoAuthResetPasswordRoute: typeof AccountNoAuthResetPasswordRoute;
+  AccountNoAuthLoginRoute: typeof AccountNoAuthLoginRoute
+  AccountNoAuthResetPasswordRoute: typeof AccountNoAuthResetPasswordRoute
 }
 
 const AccountNoAuthRouteChildren: AccountNoAuthRouteChildren = {
   AccountNoAuthLoginRoute: AccountNoAuthLoginRoute,
   AccountNoAuthResetPasswordRoute: AccountNoAuthResetPasswordRoute,
-};
+}
 
 const AccountNoAuthRouteWithChildren = AccountNoAuthRoute._addFileChildren(
   AccountNoAuthRouteChildren,
-);
+)
 
 interface AccountRouteChildren {
-  AccountNoAuthRoute: typeof AccountNoAuthRouteWithChildren;
+  AccountNoAuthRoute: typeof AccountNoAuthRouteWithChildren
 }
 
 const AccountRouteChildren: AccountRouteChildren = {
   AccountNoAuthRoute: AccountNoAuthRouteWithChildren,
-};
+}
 
-const AccountRouteWithChildren = AccountRoute._addFileChildren(AccountRouteChildren);
+const AccountRouteWithChildren =
+  AccountRoute._addFileChildren(AccountRouteChildren)
 
 export interface FileRoutesByFullPath {
-  "": typeof AuthRouteWithChildren;
-  "/administrator": typeof AuthAdministratorRoute;
-  "/audit": typeof AuthAuditRoute;
-  "/escrow": typeof AuthEscrowRoute;
-  "/events": typeof AuthEventsRoute;
-  "/notification": typeof AuthNotificationRoute;
-  "/revenue": typeof AuthRevenueRoute;
-  "/setting": typeof AuthSettingRoute;
-  "/support": typeof AuthSupportRoute;
-  "/transaction": typeof AuthTransactionRoute;
-  "/users": typeof AuthUsersRoute;
-  "/wallet": typeof AuthWalletRoute;
-  "/withdrawal": typeof AuthWithdrawalRoute;
-  "/account": typeof AccountNoAuthRouteWithChildren;
-  "/": typeof AuthIndexRoute;
-  "/event/$eventId": typeof AuthEventEventIdRoute;
-  "/event/create": typeof AuthEventCreateRoute;
-  "/account/login": typeof AccountNoAuthLoginRoute;
-  "/account/reset-password": typeof AccountNoAuthResetPasswordRoute;
-  "/user/$userId/edit": typeof AuthUserUserIdEditRoute;
-  "/user/$userId": typeof AuthUserUserIdIndexRoute;
+  '': typeof AuthRouteWithChildren
+  '/administrator': typeof AuthAdministratorRoute
+  '/audit': typeof AuthAuditRoute
+  '/escrow': typeof AuthEscrowRoute
+  '/notification': typeof AuthNotificationRoute
+  '/revenue': typeof AuthRevenueRoute
+  '/setting': typeof AuthSettingRoute
+  '/support': typeof AuthSupportRoute
+  '/transaction': typeof AuthTransactionRoute
+  '/wallet': typeof AuthWalletRoute
+  '/withdrawal': typeof AuthWithdrawalRoute
+  '/account': typeof AccountNoAuthRouteWithChildren
+  '/': typeof AuthIndexRoute
+  '/events/$eventId': typeof AuthEventsEventIdRoute
+  '/events/create': typeof AuthEventsCreateRoute
+  '/account/login': typeof AccountNoAuthLoginRoute
+  '/account/reset-password': typeof AccountNoAuthResetPasswordRoute
+  '/events': typeof AuthEventsIndexRoute
+  '/users': typeof AuthUsersIndexRoute
+  '/users/$userId/edit': typeof AuthUsersUserIdEditRoute
+  '/users/$userId': typeof AuthUsersUserIdIndexRoute
 }
 
 export interface FileRoutesByTo {
-  "/administrator": typeof AuthAdministratorRoute;
-  "/audit": typeof AuthAuditRoute;
-  "/escrow": typeof AuthEscrowRoute;
-  "/events": typeof AuthEventsRoute;
-  "/notification": typeof AuthNotificationRoute;
-  "/revenue": typeof AuthRevenueRoute;
-  "/setting": typeof AuthSettingRoute;
-  "/support": typeof AuthSupportRoute;
-  "/transaction": typeof AuthTransactionRoute;
-  "/users": typeof AuthUsersRoute;
-  "/wallet": typeof AuthWalletRoute;
-  "/withdrawal": typeof AuthWithdrawalRoute;
-  "/account": typeof AccountNoAuthRouteWithChildren;
-  "/": typeof AuthIndexRoute;
-  "/event/$eventId": typeof AuthEventEventIdRoute;
-  "/event/create": typeof AuthEventCreateRoute;
-  "/account/login": typeof AccountNoAuthLoginRoute;
-  "/account/reset-password": typeof AccountNoAuthResetPasswordRoute;
-  "/user/$userId/edit": typeof AuthUserUserIdEditRoute;
-  "/user/$userId": typeof AuthUserUserIdIndexRoute;
+  '/administrator': typeof AuthAdministratorRoute
+  '/audit': typeof AuthAuditRoute
+  '/escrow': typeof AuthEscrowRoute
+  '/notification': typeof AuthNotificationRoute
+  '/revenue': typeof AuthRevenueRoute
+  '/setting': typeof AuthSettingRoute
+  '/support': typeof AuthSupportRoute
+  '/transaction': typeof AuthTransactionRoute
+  '/wallet': typeof AuthWalletRoute
+  '/withdrawal': typeof AuthWithdrawalRoute
+  '/account': typeof AccountNoAuthRouteWithChildren
+  '/': typeof AuthIndexRoute
+  '/events/$eventId': typeof AuthEventsEventIdRoute
+  '/events/create': typeof AuthEventsCreateRoute
+  '/account/login': typeof AccountNoAuthLoginRoute
+  '/account/reset-password': typeof AccountNoAuthResetPasswordRoute
+  '/events': typeof AuthEventsIndexRoute
+  '/users': typeof AuthUsersIndexRoute
+  '/users/$userId/edit': typeof AuthUsersUserIdEditRoute
+  '/users/$userId': typeof AuthUsersUserIdIndexRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  "/_auth": typeof AuthRouteWithChildren;
-  "/_auth/administrator": typeof AuthAdministratorRoute;
-  "/_auth/audit": typeof AuthAuditRoute;
-  "/_auth/escrow": typeof AuthEscrowRoute;
-  "/_auth/events": typeof AuthEventsRoute;
-  "/_auth/notification": typeof AuthNotificationRoute;
-  "/_auth/revenue": typeof AuthRevenueRoute;
-  "/_auth/setting": typeof AuthSettingRoute;
-  "/_auth/support": typeof AuthSupportRoute;
-  "/_auth/transaction": typeof AuthTransactionRoute;
-  "/_auth/users": typeof AuthUsersRoute;
-  "/_auth/wallet": typeof AuthWalletRoute;
-  "/_auth/withdrawal": typeof AuthWithdrawalRoute;
-  "/account": typeof AccountRouteWithChildren;
-  "/account/_noAuth": typeof AccountNoAuthRouteWithChildren;
-  "/_auth/": typeof AuthIndexRoute;
-  "/_auth/event/$eventId": typeof AuthEventEventIdRoute;
-  "/_auth/event/create": typeof AuthEventCreateRoute;
-  "/account/_noAuth/login": typeof AccountNoAuthLoginRoute;
-  "/account/_noAuth/reset-password": typeof AccountNoAuthResetPasswordRoute;
-  "/_auth/user/$userId/edit": typeof AuthUserUserIdEditRoute;
-  "/_auth/user/$userId/": typeof AuthUserUserIdIndexRoute;
+  __root__: typeof rootRoute
+  '/_auth': typeof AuthRouteWithChildren
+  '/_auth/administrator': typeof AuthAdministratorRoute
+  '/_auth/audit': typeof AuthAuditRoute
+  '/_auth/escrow': typeof AuthEscrowRoute
+  '/_auth/notification': typeof AuthNotificationRoute
+  '/_auth/revenue': typeof AuthRevenueRoute
+  '/_auth/setting': typeof AuthSettingRoute
+  '/_auth/support': typeof AuthSupportRoute
+  '/_auth/transaction': typeof AuthTransactionRoute
+  '/_auth/wallet': typeof AuthWalletRoute
+  '/_auth/withdrawal': typeof AuthWithdrawalRoute
+  '/account': typeof AccountRouteWithChildren
+  '/account/_noAuth': typeof AccountNoAuthRouteWithChildren
+  '/_auth/': typeof AuthIndexRoute
+  '/_auth/events/$eventId': typeof AuthEventsEventIdRoute
+  '/_auth/events/create': typeof AuthEventsCreateRoute
+  '/account/_noAuth/login': typeof AccountNoAuthLoginRoute
+  '/account/_noAuth/reset-password': typeof AccountNoAuthResetPasswordRoute
+  '/_auth/events/': typeof AuthEventsIndexRoute
+  '/_auth/users/': typeof AuthUsersIndexRoute
+  '/_auth/users/$userId/edit': typeof AuthUsersUserIdEditRoute
+  '/_auth/users/$userId/': typeof AuthUsersUserIdIndexRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | ""
-    | "/administrator"
-    | "/audit"
-    | "/escrow"
-    | "/events"
-    | "/notification"
-    | "/revenue"
-    | "/setting"
-    | "/support"
-    | "/transaction"
-    | "/users"
-    | "/wallet"
-    | "/withdrawal"
-    | "/account"
-    | "/"
-    | "/event/$eventId"
-    | "/event/create"
-    | "/account/login"
-    | "/account/reset-password"
-    | "/user/$userId/edit"
-    | "/user/$userId";
-  fileRoutesByTo: FileRoutesByTo;
+    | ''
+    | '/administrator'
+    | '/audit'
+    | '/escrow'
+    | '/notification'
+    | '/revenue'
+    | '/setting'
+    | '/support'
+    | '/transaction'
+    | '/wallet'
+    | '/withdrawal'
+    | '/account'
+    | '/'
+    | '/events/$eventId'
+    | '/events/create'
+    | '/account/login'
+    | '/account/reset-password'
+    | '/events'
+    | '/users'
+    | '/users/$userId/edit'
+    | '/users/$userId'
+  fileRoutesByTo: FileRoutesByTo
   to:
-    | "/administrator"
-    | "/audit"
-    | "/escrow"
-    | "/events"
-    | "/notification"
-    | "/revenue"
-    | "/setting"
-    | "/support"
-    | "/transaction"
-    | "/users"
-    | "/wallet"
-    | "/withdrawal"
-    | "/account"
-    | "/"
-    | "/event/$eventId"
-    | "/event/create"
-    | "/account/login"
-    | "/account/reset-password"
-    | "/user/$userId/edit"
-    | "/user/$userId";
+    | '/administrator'
+    | '/audit'
+    | '/escrow'
+    | '/notification'
+    | '/revenue'
+    | '/setting'
+    | '/support'
+    | '/transaction'
+    | '/wallet'
+    | '/withdrawal'
+    | '/account'
+    | '/'
+    | '/events/$eventId'
+    | '/events/create'
+    | '/account/login'
+    | '/account/reset-password'
+    | '/events'
+    | '/users'
+    | '/users/$userId/edit'
+    | '/users/$userId'
   id:
-    | "__root__"
-    | "/_auth"
-    | "/_auth/administrator"
-    | "/_auth/audit"
-    | "/_auth/escrow"
-    | "/_auth/events"
-    | "/_auth/notification"
-    | "/_auth/revenue"
-    | "/_auth/setting"
-    | "/_auth/support"
-    | "/_auth/transaction"
-    | "/_auth/users"
-    | "/_auth/wallet"
-    | "/_auth/withdrawal"
-    | "/account"
-    | "/account/_noAuth"
-    | "/_auth/"
-    | "/_auth/event/$eventId"
-    | "/_auth/event/create"
-    | "/account/_noAuth/login"
-    | "/account/_noAuth/reset-password"
-    | "/_auth/user/$userId/edit"
-    | "/_auth/user/$userId/";
-  fileRoutesById: FileRoutesById;
+    | '__root__'
+    | '/_auth'
+    | '/_auth/administrator'
+    | '/_auth/audit'
+    | '/_auth/escrow'
+    | '/_auth/notification'
+    | '/_auth/revenue'
+    | '/_auth/setting'
+    | '/_auth/support'
+    | '/_auth/transaction'
+    | '/_auth/wallet'
+    | '/_auth/withdrawal'
+    | '/account'
+    | '/account/_noAuth'
+    | '/_auth/'
+    | '/_auth/events/$eventId'
+    | '/_auth/events/create'
+    | '/account/_noAuth/login'
+    | '/account/_noAuth/reset-password'
+    | '/_auth/events/'
+    | '/_auth/users/'
+    | '/_auth/users/$userId/edit'
+    | '/_auth/users/$userId/'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  AuthRoute: typeof AuthRouteWithChildren;
-  AccountRoute: typeof AccountRouteWithChildren;
+  AuthRoute: typeof AuthRouteWithChildren
+  AccountRoute: typeof AccountRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRouteWithChildren,
   AccountRoute: AccountRouteWithChildren,
-};
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -576,20 +579,20 @@ export const routeTree = rootRoute
         "/_auth/administrator",
         "/_auth/audit",
         "/_auth/escrow",
-        "/_auth/events",
         "/_auth/notification",
         "/_auth/revenue",
         "/_auth/setting",
         "/_auth/support",
         "/_auth/transaction",
-        "/_auth/users",
         "/_auth/wallet",
         "/_auth/withdrawal",
         "/_auth/",
-        "/_auth/event/$eventId",
-        "/_auth/event/create",
-        "/_auth/user/$userId/edit",
-        "/_auth/user/$userId/"
+        "/_auth/events/$eventId",
+        "/_auth/events/create",
+        "/_auth/events/",
+        "/_auth/users/",
+        "/_auth/users/$userId/edit",
+        "/_auth/users/$userId/"
       ]
     },
     "/_auth/administrator": {
@@ -602,10 +605,6 @@ export const routeTree = rootRoute
     },
     "/_auth/escrow": {
       "filePath": "_auth/escrow.tsx",
-      "parent": "/_auth"
-    },
-    "/_auth/events": {
-      "filePath": "_auth/events.tsx",
       "parent": "/_auth"
     },
     "/_auth/notification": {
@@ -626,10 +625,6 @@ export const routeTree = rootRoute
     },
     "/_auth/transaction": {
       "filePath": "_auth/transaction.tsx",
-      "parent": "/_auth"
-    },
-    "/_auth/users": {
-      "filePath": "_auth/users.tsx",
       "parent": "/_auth"
     },
     "/_auth/wallet": {
@@ -658,12 +653,12 @@ export const routeTree = rootRoute
       "filePath": "_auth/index.tsx",
       "parent": "/_auth"
     },
-    "/_auth/event/$eventId": {
-      "filePath": "_auth/event/$eventId.tsx",
+    "/_auth/events/$eventId": {
+      "filePath": "_auth/events/$eventId.tsx",
       "parent": "/_auth"
     },
-    "/_auth/event/create": {
-      "filePath": "_auth/event/create.tsx",
+    "/_auth/events/create": {
+      "filePath": "_auth/events/create.tsx",
       "parent": "/_auth"
     },
     "/account/_noAuth/login": {
@@ -674,12 +669,20 @@ export const routeTree = rootRoute
       "filePath": "account/_noAuth.reset-password.tsx",
       "parent": "/account/_noAuth"
     },
-    "/_auth/user/$userId/edit": {
-      "filePath": "_auth/user/$userId.edit.tsx",
+    "/_auth/events/": {
+      "filePath": "_auth/events/index.tsx",
       "parent": "/_auth"
     },
-    "/_auth/user/$userId/": {
-      "filePath": "_auth/user/$userId.index.tsx",
+    "/_auth/users/": {
+      "filePath": "_auth/users/index.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/users/$userId/edit": {
+      "filePath": "_auth/users/$userId.edit.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/users/$userId/": {
+      "filePath": "_auth/users/$userId.index.tsx",
       "parent": "/_auth"
     }
   }

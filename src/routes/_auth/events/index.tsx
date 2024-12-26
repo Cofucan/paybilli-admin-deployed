@@ -1,25 +1,24 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import PageButtons from "../../components/custom-buttons/page-buttons/PageButtons";
-import StatisticList from "../../components/statistic/StatisticList";
-import useTable from "../../components/table/hooks/useTable";
-import TableSection from "../../components/table/TableSection";
-import { useEscrowGetStats, useEscrowGetTable } from "../../hooks/useEscrowQuery";
-import { EventsGetTableRequest } from "../../hooks/useEventQuery";
-import { escrowColumn } from "../../routeHelper/escrow/escrowData";
-import { eventsStats } from "../../routeHelper/events/eventsData";
+import { createFileRoute, useNavigate } from "@tanstack/react-router"
+import { useState, useEffect } from "react"
+import PageButtons from "../../../components/custom-buttons/page-buttons/PageButtons"
+import StatisticList from "../../../components/statistic/StatisticList"
+import useTable from "../../../components/table/hooks/useTable"
+import TableSection from "../../../components/table/TableSection"
+import { EventsGetTableRequest, useEventsGetStats, useEventsGetTable } from "../../../hooks/useEventQuery"
+import { eventsColumn, eventsStats } from "../../../routeHelper/events/eventsData"
 
-export const Route = createFileRoute("/_auth/escrow")({
+
+export const Route = createFileRoute('/_auth/events/')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
   const [tableData, setTableData] = useState<EventsGetTableRequest>({})
-  const statsQuery = useEscrowGetStats()
-  const tableQuery = useEscrowGetTable(tableData)
+  const statsQuery = useEventsGetStats()
+  const tableQuery = useEventsGetTable(tableData)
   const [columnIndex, setColumnIndex] = useState<string | number>(-1)
   const navigate = useNavigate()
-  const columns = escrowColumn({
+  const columns = eventsColumn({
     columnIndex,
     setColumnIndex,
     navigate,
@@ -86,23 +85,28 @@ function RouteComponent() {
     // Implement the export data functionality here
   }
 
+  const handleCreateEvent = async () => {
+    // Implement the create event functionality here
+    await navigate({ to: '/events/create' })
+  }
   function handleCloseBetButton() {
     // Implement the handle close bet button functionality here
   }
-
   const handleFilter = () => {
     // Implement the filter functionality here
   }
-
   return (
     <main className="mx-8 my-4">
       <StatisticList
         isLoading={statsQuery.isLoading}
         stats={eventsStats(statsQuery.data)}
-        title={'Escrow Bets'}
+        title={'Events'}
       />
       <PageButtons
-        onExportData={handleExportData} addText={""} />
+        onExportData={handleExportData}
+        onAdd={handleCreateEvent}
+        addText={'Create New Events'}
+      />
       <TableSection
         title={'Latest Actions'}
         {...pagination}

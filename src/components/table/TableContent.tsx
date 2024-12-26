@@ -22,7 +22,7 @@ const TableContent: FC<{
         {structure.rows.map((rows, i) => (
           <tr key={i}>
             {rows.map((x) => (
-              <td key={x.id} className='p-2 text-black/80'>
+              <td key={x.id} className='p-2.5 text-black/80'>
                 {x.content}
               </td>
             ))}

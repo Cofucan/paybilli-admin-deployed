@@ -1,21 +1,20 @@
-import { UseNavigateResult } from "@tanstack/react-router";
-import { Dispatch, SetStateAction } from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import TableActionDropdown, {
   TableActionDropdownProps,
 } from "../../components/dropdown/TableActionDropdown";
 import { createColumn, TableColumn } from "../../components/table/hooks/useTable";
 import { EventsGetStatsResponse } from "../../hooks/useEventQuery";
-import { BASE_URL } from "../../utils/constants";
 import { formatDate } from "../../utils/DateFormatter";
 import { Events } from "../../utils/types";
+import { EventsColumn, EventsTableAction, eventsTableAction } from "../events/eventsData";
 import BetDetails from "./assets/BetDetails.svg";
 import CloseBet from "./assets/CloseBet.svg";
 import EventStarBlack from "./assets/EventBlack.svg";
 import EventStarGold from "./assets/EventStarGold.svg";
 import EventStarGreen from "./assets/EventStarGreen.svg";
 import EventStarRed from "./assets/EventStarRed.svg";
-import Eye from "./assets/Eye.svg";
+import Info from './assets/Info Circle.svg';
+
 
 const statusClasses = {
   open: {
@@ -36,7 +35,7 @@ const statusClasses = {
   },
 };
 
-export const eventsStats = (data?: EventsGetStatsResponse) => [
+export const escrowStats = (data?: EventsGetStatsResponse) => [
   { icon: EventStarBlack, count: data?.total_count, label: "Total Bets" },
   { icon: EventStarGreen, count: data?.open_count, label: "Open Bets" },
   {
@@ -51,12 +50,8 @@ export const eventsStats = (data?: EventsGetStatsResponse) => [
   },
 ];
 
-export interface EventsTableAction {
-  navigate: UseNavigateResult<string>;
-  handleCloseBetButton: ({ id }: { id: number }) => void | Promise<void>;
-}
 
-export const eventsTableAction = ({
+export const escrowTableAction = ({
   navigate,
   handleCloseBetButton,
 }: EventsTableAction): TableActionDropdownProps<{ id: number; userId: string }>["data"] => [
@@ -70,40 +65,19 @@ export const eventsTableAction = ({
       icon: CloseBet,
       onClick: handleCloseBetButton,
     },
-    {
-      title: "View User",
-      icon: Eye,
-      onClick: ({ userId }) => navigate({ to: "/users/$userId", params: { userId } }),
-    },
   ];
 
-export interface EventsColumn extends EventsTableAction {
-  columnIndex: number | string;
-  setColumnIndex: Dispatch<SetStateAction<number | string>>;
-}
 
-export const eventsColumn = (props: EventsColumn) =>
+export const escrowColumn = (props: EventsColumn) =>
   [
     createColumn("serial_no", { header: "S/N" }),
-    {
-      id: "creator",
-      header: "Creator",
-      cell: ({ creator }) => (
-        <div className='flex items-center space-x-6'>
-          <img
-            src={BASE_URL + creator.profile_image}
-            alt={creator.name + "'s Profile Picture"}
-            className='h-8 w-8 rounded-full'
-          />
-          <div>
-            {/* Access creator fields directly from record */}
-            <p className='font-medium'>{creator.name || "Unknown Creator"}</p>
-            <p className='text-xs text-gray-400'>{creator.username || "No Username"}</p>
-          </div>
-        </div>
-      ),
-      filterType: ({ creator }) => creator.name,
-    },
+    createColumn("id", { header: "Bet ID" }),
+    createColumn("participants", {
+      header: "Participants",
+      cell: ({ participants }) => <div className="text-gray-500 space-x-2">
+        <span className="sr-only">Participants Size</span>{participants.length}
+        <img src={Info} alt="" className="inline-block size-5" />   </div>
+    }),
     createColumn("event_type", { header: "Bet Type" }),
     createColumn("created_at", {
       header: "Bet Date",

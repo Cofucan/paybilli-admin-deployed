@@ -4,7 +4,8 @@ import { twMerge } from "tailwind-merge";
 import clsx, { ClassValue } from "clsx";
 
 export const queryClient = new QueryClient();
-export const customFetch = new CustomFetchClient("http://localhost:8000", {
+export const BASE_URL = "http://localhost:8000"
+export const customFetch = new CustomFetchClient(BASE_URL, {
   credentials: "include",
 });
 

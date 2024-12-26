@@ -19,7 +19,6 @@ export interface PaginationRespose<T> {
   previous: string | null;
   results: T[];
 }
-
 export interface User {
   id: string;
   first_name: string;
@@ -40,14 +39,16 @@ export interface User {
   is_kyc_completed: boolean;
   is_transaction_pin_set: boolean;
   is_onboarding_completed: boolean;
-  account_status: AccountStatus;
+  account_status: UserStatus;
   recent_activity: null | string;
+  date_joined: string;
 }
 
-export type AccountStatus = "verified" | "unverified" | "deactivated" | "suspended";
+export type UserStatus = "verified" | "unverified" | "deactivated" | "suspended";
 
 export interface Events {
   id: number;
+  serial_no: number,
   creator: {
     id: number;
     username: string;
@@ -82,3 +83,14 @@ export interface Events {
   created_at: string;
 }
 export type EventsStatus = "open" | "pending" | "closed" | "waiting";
+
+export interface Wallet {
+  id: number;
+  status: string;
+  currency: string;
+  balance: string;
+  created_at: string;
+  last_top_up_at: null;
+  user: number;
+}
+export type WalletStatus = "active" | "inactive" | "frozen";
