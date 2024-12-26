@@ -12,6 +12,7 @@ import SettingEditProfileFormModal, {
 import useCustomForm from "../../components/form/useCustomForm";
 
 export const Route = createFileRoute("/_auth/setting")({
+export const Route = createFileRoute("/_auth/setting")({
   component: RouteComponent,
 });
 function RouteComponent() {

@@ -23,6 +23,7 @@ import { Route as AuthSupportImport } from './routes/_auth/support'
 import { Route as AuthSettingImport } from './routes/_auth/setting'
 import { Route as AuthRevenueImport } from './routes/_auth/revenue'
 import { Route as AuthNotificationImport } from './routes/_auth/notification'
+import { Route as AuthEventsImport } from './routes/_auth/events'
 import { Route as AuthEscrowImport } from './routes/_auth/escrow'
 import { Route as AuthAuditImport } from './routes/_auth/audit'
 import { Route as AuthAdministratorImport } from './routes/_auth/administrator'
@@ -105,6 +106,12 @@ const AuthNotificationRoute = AuthNotificationImport.update({
   getParentRoute: () => AuthRoute,
 } as any)
 
+const AuthEventsRoute = AuthEventsImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => AuthRoute,
+} as any)
+
 const AuthEscrowRoute = AuthEscrowImport.update({
   id: '/escrow',
   path: '/escrow',
@@ -130,9 +137,9 @@ const AuthUsersIndexRoute = AuthUsersIndexImport.update({
 } as any)
 
 const AuthEventsIndexRoute = AuthEventsIndexImport.update({
-  id: '/events/',
-  path: '/events/',
-  getParentRoute: () => AuthRoute,
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthEventsRoute,
 } as any)
 
 const AccountNoAuthResetPasswordRoute = AccountNoAuthResetPasswordImport.update(
@@ -150,15 +157,15 @@ const AccountNoAuthLoginRoute = AccountNoAuthLoginImport.update({
 } as any)
 
 const AuthEventsCreateRoute = AuthEventsCreateImport.update({
-  id: '/events/create',
-  path: '/events/create',
-  getParentRoute: () => AuthRoute,
+  id: '/create',
+  path: '/create',
+  getParentRoute: () => AuthEventsRoute,
 } as any)
 
 const AuthEventsEventIdRoute = AuthEventsEventIdImport.update({
-  id: '/events/$eventId',
-  path: '/events/$eventId',
-  getParentRoute: () => AuthRoute,
+  id: '/$eventId',
+  path: '/$eventId',
+  getParentRoute: () => AuthEventsRoute,
 } as any)
 
 const AuthUsersUserIdIndexRoute = AuthUsersUserIdIndexImport.update({
@@ -203,6 +210,13 @@ declare module '@tanstack/react-router' {
       path: '/escrow'
       fullPath: '/escrow'
       preLoaderRoute: typeof AuthEscrowImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/events': {
+      id: '/_auth/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof AuthEventsImport
       parentRoute: typeof AuthImport
     }
     '/_auth/notification': {
@@ -277,17 +291,17 @@ declare module '@tanstack/react-router' {
     }
     '/_auth/events/$eventId': {
       id: '/_auth/events/$eventId'
-      path: '/events/$eventId'
+      path: '/$eventId'
       fullPath: '/events/$eventId'
       preLoaderRoute: typeof AuthEventsEventIdImport
-      parentRoute: typeof AuthImport
+      parentRoute: typeof AuthEventsImport
     }
     '/_auth/events/create': {
       id: '/_auth/events/create'
-      path: '/events/create'
+      path: '/create'
       fullPath: '/events/create'
       preLoaderRoute: typeof AuthEventsCreateImport
-      parentRoute: typeof AuthImport
+      parentRoute: typeof AuthEventsImport
     }
     '/account/_noAuth/login': {
       id: '/account/_noAuth/login'
@@ -305,10 +319,10 @@ declare module '@tanstack/react-router' {
     }
     '/_auth/events/': {
       id: '/_auth/events/'
-      path: '/events'
-      fullPath: '/events'
+      path: '/'
+      fullPath: '/events/'
       preLoaderRoute: typeof AuthEventsIndexImport
-      parentRoute: typeof AuthImport
+      parentRoute: typeof AuthEventsImport
     }
     '/_auth/users/': {
       id: '/_auth/users/'
@@ -336,10 +350,27 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface AuthEventsRouteChildren {
+  AuthEventsEventIdRoute: typeof AuthEventsEventIdRoute
+  AuthEventsCreateRoute: typeof AuthEventsCreateRoute
+  AuthEventsIndexRoute: typeof AuthEventsIndexRoute
+}
+
+const AuthEventsRouteChildren: AuthEventsRouteChildren = {
+  AuthEventsEventIdRoute: AuthEventsEventIdRoute,
+  AuthEventsCreateRoute: AuthEventsCreateRoute,
+  AuthEventsIndexRoute: AuthEventsIndexRoute,
+}
+
+const AuthEventsRouteWithChildren = AuthEventsRoute._addFileChildren(
+  AuthEventsRouteChildren,
+)
+
 interface AuthRouteChildren {
   AuthAdministratorRoute: typeof AuthAdministratorRoute
   AuthAuditRoute: typeof AuthAuditRoute
   AuthEscrowRoute: typeof AuthEscrowRoute
+  AuthEventsRoute: typeof AuthEventsRouteWithChildren
   AuthNotificationRoute: typeof AuthNotificationRoute
   AuthRevenueRoute: typeof AuthRevenueRoute
   AuthSettingRoute: typeof AuthSettingRoute
@@ -348,9 +379,6 @@ interface AuthRouteChildren {
   AuthWalletRoute: typeof AuthWalletRoute
   AuthWithdrawalRoute: typeof AuthWithdrawalRoute
   AuthIndexRoute: typeof AuthIndexRoute
-  AuthEventsEventIdRoute: typeof AuthEventsEventIdRoute
-  AuthEventsCreateRoute: typeof AuthEventsCreateRoute
-  AuthEventsIndexRoute: typeof AuthEventsIndexRoute
   AuthUsersIndexRoute: typeof AuthUsersIndexRoute
   AuthUsersUserIdEditRoute: typeof AuthUsersUserIdEditRoute
   AuthUsersUserIdIndexRoute: typeof AuthUsersUserIdIndexRoute
@@ -360,6 +388,7 @@ const AuthRouteChildren: AuthRouteChildren = {
   AuthAdministratorRoute: AuthAdministratorRoute,
   AuthAuditRoute: AuthAuditRoute,
   AuthEscrowRoute: AuthEscrowRoute,
+  AuthEventsRoute: AuthEventsRouteWithChildren,
   AuthNotificationRoute: AuthNotificationRoute,
   AuthRevenueRoute: AuthRevenueRoute,
   AuthSettingRoute: AuthSettingRoute,
@@ -368,9 +397,6 @@ const AuthRouteChildren: AuthRouteChildren = {
   AuthWalletRoute: AuthWalletRoute,
   AuthWithdrawalRoute: AuthWithdrawalRoute,
   AuthIndexRoute: AuthIndexRoute,
-  AuthEventsEventIdRoute: AuthEventsEventIdRoute,
-  AuthEventsCreateRoute: AuthEventsCreateRoute,
-  AuthEventsIndexRoute: AuthEventsIndexRoute,
   AuthUsersIndexRoute: AuthUsersIndexRoute,
   AuthUsersUserIdEditRoute: AuthUsersUserIdEditRoute,
   AuthUsersUserIdIndexRoute: AuthUsersUserIdIndexRoute,
@@ -408,6 +434,7 @@ export interface FileRoutesByFullPath {
   '/administrator': typeof AuthAdministratorRoute
   '/audit': typeof AuthAuditRoute
   '/escrow': typeof AuthEscrowRoute
+  '/events': typeof AuthEventsRouteWithChildren
   '/notification': typeof AuthNotificationRoute
   '/revenue': typeof AuthRevenueRoute
   '/setting': typeof AuthSettingRoute
@@ -421,7 +448,7 @@ export interface FileRoutesByFullPath {
   '/events/create': typeof AuthEventsCreateRoute
   '/account/login': typeof AccountNoAuthLoginRoute
   '/account/reset-password': typeof AccountNoAuthResetPasswordRoute
-  '/events': typeof AuthEventsIndexRoute
+  '/events/': typeof AuthEventsIndexRoute
   '/users': typeof AuthUsersIndexRoute
   '/users/$userId/edit': typeof AuthUsersUserIdEditRoute
   '/users/$userId': typeof AuthUsersUserIdIndexRoute
@@ -456,6 +483,7 @@ export interface FileRoutesById {
   '/_auth/administrator': typeof AuthAdministratorRoute
   '/_auth/audit': typeof AuthAuditRoute
   '/_auth/escrow': typeof AuthEscrowRoute
+  '/_auth/events': typeof AuthEventsRouteWithChildren
   '/_auth/notification': typeof AuthNotificationRoute
   '/_auth/revenue': typeof AuthRevenueRoute
   '/_auth/setting': typeof AuthSettingRoute
@@ -483,6 +511,7 @@ export interface FileRouteTypes {
     | '/administrator'
     | '/audit'
     | '/escrow'
+    | '/events'
     | '/notification'
     | '/revenue'
     | '/setting'
@@ -496,7 +525,7 @@ export interface FileRouteTypes {
     | '/events/create'
     | '/account/login'
     | '/account/reset-password'
-    | '/events'
+    | '/events/'
     | '/users'
     | '/users/$userId/edit'
     | '/users/$userId'
@@ -528,6 +557,7 @@ export interface FileRouteTypes {
     | '/_auth/administrator'
     | '/_auth/audit'
     | '/_auth/escrow'
+    | '/_auth/events'
     | '/_auth/notification'
     | '/_auth/revenue'
     | '/_auth/setting'
@@ -579,6 +609,7 @@ export const routeTree = rootRoute
         "/_auth/administrator",
         "/_auth/audit",
         "/_auth/escrow",
+        "/_auth/events",
         "/_auth/notification",
         "/_auth/revenue",
         "/_auth/setting",
@@ -587,9 +618,6 @@ export const routeTree = rootRoute
         "/_auth/wallet",
         "/_auth/withdrawal",
         "/_auth/",
-        "/_auth/events/$eventId",
-        "/_auth/events/create",
-        "/_auth/events/",
         "/_auth/users/",
         "/_auth/users/$userId/edit",
         "/_auth/users/$userId/"
@@ -606,6 +634,15 @@ export const routeTree = rootRoute
     "/_auth/escrow": {
       "filePath": "_auth/escrow.tsx",
       "parent": "/_auth"
+    },
+    "/_auth/events": {
+      "filePath": "_auth/events.tsx",
+      "parent": "/_auth",
+      "children": [
+        "/_auth/events/$eventId",
+        "/_auth/events/create",
+        "/_auth/events/"
+      ]
     },
     "/_auth/notification": {
       "filePath": "_auth/notification.tsx",
@@ -655,11 +692,11 @@ export const routeTree = rootRoute
     },
     "/_auth/events/$eventId": {
       "filePath": "_auth/events/$eventId.tsx",
-      "parent": "/_auth"
+      "parent": "/_auth/events"
     },
     "/_auth/events/create": {
       "filePath": "_auth/events/create.tsx",
-      "parent": "/_auth"
+      "parent": "/_auth/events"
     },
     "/account/_noAuth/login": {
       "filePath": "account/_noAuth.login.tsx",
@@ -671,7 +708,7 @@ export const routeTree = rootRoute
     },
     "/_auth/events/": {
       "filePath": "_auth/events/index.tsx",
-      "parent": "/_auth"
+      "parent": "/_auth/events"
     },
     "/_auth/users/": {
       "filePath": "_auth/users/index.tsx",

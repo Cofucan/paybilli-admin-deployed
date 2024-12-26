@@ -17,6 +17,37 @@ const Sidebar = () => {
   };
 
   return (
+    <section className="h-full w-[250px] sidebar-scroll border-r bg-[#fff] lg:w-[320px]">
+      <ul className="flex h-full w-full flex-col">
+        {sidebarItems.map(
+          ({ label, to, activeImage, inactiveImage }, index) => {
+            return (
+              <li key={index} className="-mb-4">
+                <Link
+                  className={
+                    "mx-4 mt-5 flex items-center gap-2 rounded-md p-4 text-lg font-normal"
+                  }
+                  activeProps={{
+                    className: "bg-light-blue-500 text-white hover:text-white",
+                  }}
+                  inactiveProps={{
+                    className: "text-slate-800 hover:text-slate-800",
+                  }}
+                  to={to}
+                >
+                  <img
+                    src={
+                      router.location.href === to ? activeImage : inactiveImage
+                    }
+                    alt={`${label} Icon`}
+                    className="h-5 w-5"
+                  />
+                  {label}
+                </Link>
+              </li>
+            );
+          },
+        )}
     <section className='sidebar-scroll h-full w-[250px] border-r bg-[#fff] lg:w-[320px]'>
       <ul className='flex h-full w-full flex-col'>
         {sidebarItems.map(({ label, to, activeImage, inactiveImage }, index) => {
