@@ -58,8 +58,12 @@ export const usersStats = (data?: UsersStatisticResponse) => [
 ];
 
 interface UsersTableAction {
-  navigate: UseNavigateResult<string>,
-  tableMutationAction: UseMutationResult<{ id: string, status: string }, Error, { id: string, status: string }>
+  navigate: UseNavigateResult<string>;
+  tableMutationAction: UseMutationResult<
+    { id: string; status: string },
+    Error,
+    { id: string; status: string }
+  >;
 }
 
 export const usersTableAction = ({ navigate, tableMutationAction }: UsersTableAction) => [
@@ -74,22 +78,27 @@ export const usersTableAction = ({ navigate, tableMutationAction }: UsersTableAc
     onClick: (id: string) => navigate({ to: "/user/$userId/edit", params: { userId: id } }),
   },
   {
-    title: "Verify User", icon: VerifyCheck, onClick: (id: string) => {
+    title: "Verify User",
+    icon: VerifyCheck,
+    onClick: (id: string) => {
       tableMutationAction.mutate({ id, status: "verified" });
     },
   },
   {
-    title: "Reactivate User", icon: Like, onClick: (id: string) => {
+    title: "Reactivate User",
+    icon: Like,
+    onClick: (id: string) => {
       tableMutationAction.mutate({ id, status: "deactivated" });
     },
   },
   {
-    title: "Suspend User", icon: Delete, onClick: (id: string) => {
+    title: "Suspend User",
+    icon: Delete,
+    onClick: (id: string) => {
       tableMutationAction.mutate({ id, status: "suspended" });
     },
   },
 ];
-
 
 interface UsersColumn extends UsersTableAction {
   checkboxId: string;
@@ -111,59 +120,62 @@ export const usersColumns = (props: UsersColumn) =>
       id: "user",
       header: "User",
       cell: (data) => (
-        <div className="flex gap-4 text-left items-center">
-          <img src={data.profilePicture} alt={data.firstName + "'s Picture"} className="size-8 rounded-full" />
+        <div className='flex items-center gap-4 text-left'>
+          <img
+            src={data.profile_image_url}
+            alt={data.first_name + "'s Picture"}
+            className='size-8 rounded-full'
+          />
           <div>
-            <h3 className="font-medium">
-              {(`${data.firstName} ${data.lastName}`).slice(0, 10)}
-            </h3>
-            <span className="text-xs text-gray-400">@{data.userName}</span>
+            <h3 className='font-medium'>{`${data.first_name} ${data.last_name}`.slice(0, 10)}</h3>
+            <span className='text-xs text-gray-400'>@{data.username}</span>
           </div>
         </div>
       ),
-      filterType: (data) => `${data.firstName} ${data.lastName}`,
+      filterType: (data) => `${data.first_name} ${data.last_name}`,
     },
     createColumn("email", { header: "Email Address" }),
-    createColumn("dateRegistered", {
-      header: "Date Registered",
-      cell: ({ dateRegistered }) => (
-        <>{new Date(dateRegistered).toDateString()}</>
-      ),
-    }),
-    createColumn("recentActivity", {
+    // createColumn("dateRegistered", {
+    //   header: "Date Registered",
+    //   cell: ({ dateRegistered }) => (
+    //     <>{new Date(dateRegistered).toDateString()}</>
+    //   ),
+    // }),
+    createColumn("recent_activity", {
       header: "Recent Activity",
-      cell: ({ recentActivity }) => (
-        <>{new Date(recentActivity).toDateString()}</>
-      ),
+      cell: ({ recent_activity }) => <>{new Date(recent_activity ?? "").toDateString()}</>,
     }),
-    createColumn("status", {
-      header: "Status", cell: ({ status }) => <div className="flex items-center">
-        <span
-          className={`w-2 h-2 rounded-full mr-2 ${statusClasses[status].dot}`}
-        />
-        <span
-          className={`px-2 py-1 text-xs rounded-lg ${statusClasses[status].label}`}
-        >
-          {status}
-        </span>
-      </div>,
+    createColumn("account_status", {
+      header: "Status",
+      cell: ({ account_status }) => (
+        <div className='flex items-center'>
+          <span className={`mr-2 h-2 w-2 rounded-full ${statusClasses[account_status].dot}`} />
+          <span className={`rounded-lg px-2 py-1 text-xs ${statusClasses[account_status].label}`}>
+            {account_status}
+          </span>
+        </div>
+      ),
     }),
     {
       id: "action",
       header: <>Action</>,
-      cell: ({ id }) => (<div className={"relative"}>
-        <button
-          onClick={() => {
-            props.setColumnIndex(id === props.columnIndex ? -1 : id);
-          }}
-          className="text-gray-400 hover:text-gray-600 text-xl"
-        >
-          <HiOutlineDotsVertical />
-        </button>
-        {id === props.columnIndex ? <div className="absolute right-0 z-20">
-          <TableActionDropdown id={id.toString()} data={usersTableAction(props)} />,
-        </div> : null}
-      </div>),
+      cell: ({ id }) => (
+        <div className={"relative"}>
+          <button
+            onClick={() => {
+              props.setColumnIndex(id === props.columnIndex ? -1 : id);
+            }}
+            className='text-xl text-gray-400 hover:text-gray-600'
+          >
+            <HiOutlineDotsVertical />
+          </button>
+          {id === props.columnIndex ? (
+            <div className='absolute right-0 z-20'>
+              <TableActionDropdown id={id.toString()} data={usersTableAction(props)} />,
+            </div>
+          ) : null}
+        </div>
+      ),
       filterType: () => <></>,
     },
   ] as const satisfies readonly TableColumn<User>[];

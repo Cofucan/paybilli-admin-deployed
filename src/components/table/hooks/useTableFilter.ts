@@ -2,34 +2,23 @@ import { useCallback, useState } from "react";
 import { TableColumn } from "./useTable.ts";
 
 // Represents the mapping of column IDs to their corresponding filter values
-type TableColumnFilterMapping<
-  Columns extends readonly TableColumn<Data>[],
-  Data,
-> = {
+type TableColumnFilterMapping<Columns extends readonly TableColumn<Data>[], Data> = {
   [ColumnId in Columns[number]["id"]]: ReturnType<
     Extract<Columns[number], { id: ColumnId }>["filterType"]
   >;
 };
 
-export interface TableFilterHook<
-  Columns extends readonly TableColumn<Data>[],
-  Data,
-> {
+export interface TableFilterHook<Columns extends readonly TableColumn<Data>[], Data> {
   set: <ColumnId extends keyof TableColumnFilterMapping<Columns, Data>>(
     columnId: ColumnId,
     filterValue: TableColumnFilterMapping<Columns, Data>[ColumnId],
   ) => void;
-  remove: (
-    columnId: keyof TableColumnFilterMapping<Columns, Data>,
-  ) => void;
+  remove: (columnId: keyof TableColumnFilterMapping<Columns, Data>) => void;
   clear: () => void;
   get: <ColumnId extends keyof TableColumnFilterMapping<Columns, Data>>(
     columnId: ColumnId,
   ) => TableColumnFilterMapping<Columns, Data>[ColumnId] | undefined;
-  data: Map<
-    Columns[number]["id"],
-    TableColumnFilterMapping<Columns, Data>[Columns[number]["id"]]
-  >;
+  data: Map<Columns[number]["id"], TableColumnFilterMapping<Columns, Data>[Columns[number]["id"]]>;
 }
 
 /**
@@ -38,17 +27,14 @@ export interface TableFilterHook<
  * @template Data - Type of data in the table rows
  * @returns Object containing filter management functions and current filter state
  */
-const useTableFilter = <
-  Columns extends readonly TableColumn<Data>[],
-  Data,
->(): TableFilterHook<Columns, Data> => {
+const useTableFilter = <Columns extends readonly TableColumn<Data>[], Data>(): TableFilterHook<
+  Columns,
+  Data
+> => {
   const [data, setData] = useState<
     Map<
       keyof TableColumnFilterMapping<Columns, Data>,
-      TableColumnFilterMapping<Columns, Data>[keyof TableColumnFilterMapping<
-        Columns,
-        Data
-      >]
+      TableColumnFilterMapping<Columns, Data>[keyof TableColumnFilterMapping<Columns, Data>]
     >
   >(new Map());
 
@@ -56,14 +42,10 @@ const useTableFilter = <
     columnId: ColumnId,
     filterValue: TableColumnFilterMapping<Columns, Data>[ColumnId],
   ) => {
-    setData(
-      (currentFilters) => new Map(currentFilters.set(columnId, filterValue)),
-    );
+    setData((currentFilters) => new Map(currentFilters.set(columnId, filterValue)));
   };
 
-  const remove = (
-    columnId: keyof TableColumnFilterMapping<Columns, Data>,
-  ) => {
+  const remove = (columnId: keyof TableColumnFilterMapping<Columns, Data>) => {
     setData((currentFilters) => {
       const updatedFilters = new Map(currentFilters);
       updatedFilters.delete(columnId);

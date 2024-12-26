@@ -1,9 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/_auth/notification')({
+export const Route = createFileRoute("/_auth/notification")({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-  return <div>Hello "/_auth/notification"!</div>
+  return <div>Hello "/_auth/notification"!</div>;
 }

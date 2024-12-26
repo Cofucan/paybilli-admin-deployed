@@ -1,15 +1,22 @@
-import { FC, ReactNode, useEffect, useRef } from "react"
-import { LiaTimesSolid } from "react-icons/lia"
+import { FC, ReactNode, useEffect, useRef } from "react";
+import { LiaTimesSolid } from "react-icons/lia";
 
 export interface ModalProps {
-  isVisible: boolean
-  toggleVisibility: () => void | Promise<void>
-  title: ReactNode
-  children: ReactNode
-  showClose?: boolean
-  isRounded?: boolean
+  isVisible: boolean;
+  toggleVisibility: () => void | Promise<void>;
+  title: ReactNode;
+  children: ReactNode;
+  showClose?: boolean;
+  isRounded?: boolean;
 }
-const Modal: FC<ModalProps> = ({ isVisible, toggleVisibility, children, title, showClose = true, isRounded = true }) => {
+const Modal: FC<ModalProps> = ({
+  isVisible,
+  toggleVisibility,
+  children,
+  title,
+  showClose = true,
+  isRounded = true,
+}) => {
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -23,18 +30,21 @@ const Modal: FC<ModalProps> = ({ isVisible, toggleVisibility, children, title, s
   return (
     <dialog
       ref={ref}
-      onCancel={toggleVisibility} className={`p-6 ${isRounded ? "rounded-2xl": ""}`}
+      onCancel={toggleVisibility}
+      className={`p-6 ${isRounded ? "rounded-2xl" : ""}`}
     >
       <div>
         {title}
-        {showClose ? <button onClick={toggleVisibility}>
-          <span className="sr-only">Close Modal</span>
-          <LiaTimesSolid />
-        </button> : null}
+        {showClose ? (
+          <button onClick={toggleVisibility}>
+            <span className='sr-only'>Close Modal</span>
+            <LiaTimesSolid />
+          </button>
+        ) : null}
       </div>
       {children}
     </dialog>
   );
-}
+};
 
 export default Modal;

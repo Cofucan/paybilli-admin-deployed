@@ -1,29 +1,29 @@
-import { ComponentPropsWithoutRef, FC } from "react";
+import { ComponentPropsWithoutRef, forwardRef } from "react";
 import { cn } from "../../utils/constants";
 import { inputVariants } from "./FormInput";
 import { VariantProps } from "class-variance-authority";
 
 type SelectProps = {
-  options: { value: string; name: string | null }[];
-} &  VariantProps<typeof inputVariants> & ComponentPropsWithoutRef<"select"> ;
+  options: { title?: string, value: string }[];
+} & VariantProps<typeof inputVariants> &
+  ComponentPropsWithoutRef<"select">;
 
-const FormSelect: FC<SelectProps> = ({ intent, options, className, ...attributes }) => {
+const FormSelect = forwardRef<HTMLSelectElement, SelectProps>(function CustomSelect(
+  { className, intent, options, ...props },
+  ref,
+) {
   return (
     <select
-      {...attributes}
+      ref={ref}
+      {...props}
       className={cn(inputVariants({ intent }), className)}
     >
       {options.map((x, i) => (
-        <option
-          value={x.name ?? ""}
-          key={i}
-          disabled={!x.name}
-          selected={!x.name}
-        >
-          {x.value}
+        <option value={x.value} key={i} disabled={!x.value}>
+          {x.title}
         </option>
       ))}
     </select>
   );
-};
+});
 export default FormSelect;

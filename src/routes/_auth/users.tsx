@@ -18,41 +18,51 @@ function RouteComponent() {
   const [columnIndex, setColumnIndex] = useState<string | number>(-1);
   const navigate = useNavigate();
   const { statisticQuery, tableQuery, tableMutationAction } = useUsersQuery(tableData);
-  const columns = usersColumns({ checkboxId, navigate, tableMutationAction, columnIndex, setColumnIndex });
+  const columns = usersColumns({
+    checkboxId,
+    navigate,
+    tableMutationAction,
+    columnIndex,
+    setColumnIndex,
+  });
   const { structure, pagination, filter } = useTable({
     columns,
-    data: tableQuery.data?.data,
-    pagination: tableQuery.data?.meta,
+    data: tableQuery.data?.results,
+    pagination: { totalItems: tableQuery.data?.count, itemsPerPage: 20 },
   });
 
   const tableHeaderData = [
     {
-      header: "All Users", onClick: () => {
+      header: "All Users",
+      onClick: () => {
         filter.remove("status");
       },
     },
     {
-      header: "Verified Users", onClick: () => {
+      header: "Verified Users",
+      onClick: () => {
         filter.set("status", "verified");
       },
     },
     {
-      header: "Unverified Users", onClick: () => {
+      header: "Unverified Users",
+      onClick: () => {
         filter.set("status", "unverified");
       },
     },
     {
-      header: "Deactivated Accounts", onClick: () => {
+      header: "Deactivated Accounts",
+      onClick: () => {
         filter.set("status", "deactivated");
       },
     },
     {
-      header: "Suspended Accounts", onClick: () => {
+      header: "Suspended Accounts",
+      onClick: () => {
         filter.set("status", "suspended");
       },
     },
   ];
-  console.log(pagination);
 
   useEffect(() => {
     setTableData({
@@ -63,7 +73,6 @@ function RouteComponent() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter.data, pagination.itemsPerPage, pagination.currentPage]);
-
 
   const handleSearch = (search: string) => {
     filter.set("user", search);
@@ -86,7 +95,7 @@ function RouteComponent() {
   };
 
   return (
-    <main className="mx-8 my-4">
+    <main className='mx-8 my-4'>
       <StatisticList
         title={"Users Statistic"}
         stats={usersStats(statisticQuery.data)}
@@ -95,17 +104,17 @@ function RouteComponent() {
       <PageButtons
         onExportData={handleExportData}
         onAdd={handleInviteUser}
-        addText={'Invite User'}
+        addText={"Invite User"}
       />
       <TableSection
-        title={'Users'}
+        title={"Users"}
         {...pagination}
         onSearch={handleSearch}
         onBulkSearch={handleBulkSearch}
         onFilter={handleFilter}
         filterOptions={tableHeaderData}
         structure={structure}
-        placeholder={'Search Bets'}
+        placeholder={"Search Bets"}
       />
     </main>
   );

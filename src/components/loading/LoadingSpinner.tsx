@@ -23,18 +23,10 @@ export type LoadingSpinnerProps = ComponentPropsWithoutRef<"div"> &
     children?: ReactNode;
   };
 
-const LoadingSpinner: FC<LoadingSpinnerProps> = ({
-  className,
-  size,
-  ...props
-}) => {
+const LoadingSpinner: FC<LoadingSpinnerProps> = ({ className, size, ...props }) => {
   return (
-    <div
-      className={cn(spinnerVariants({ className, size }))}
-      role="status"
-      {...props}
-    >
-      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+    <div className={cn(spinnerVariants({ className, size }))} role='status' {...props}>
+      <span className='!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]'>
         Loading...
       </span>
     </div>

@@ -2,7 +2,7 @@ import Logo from "../../assets/logo.svg";
 import { FC } from "react";
 import { useAuth } from "../../context/AuthContext.tsx";
 import { customFetch } from "../../utils/constants.ts";
-import { useCustomForm } from "../../components/form/useCustomForm.ts";
+import useCustomForm from "../../components/form/useCustomForm.ts";
 import { AuthResponse } from "../../utils/types.ts";
 import FormField from "../../components/form/FormField.tsx";
 
@@ -31,28 +31,26 @@ const ResetNewLogin: FC<{ navigate: () => void }> = ({ navigate }) => {
   });
 
   return (
-    <div className="bg-light-grey">
-      <div className="mx-auto flex w-[85%] items-center justify-between">
-        <div className="hidden lg:block lg:w-[40%]">
-          <img src={Logo} alt="logo" width={500} />
+    <div className='bg-light-grey'>
+      <div className='mx-auto flex w-[85%] items-center justify-between'>
+        <div className='hidden lg:block lg:w-[40%]'>
+          <img src={Logo} alt='logo' width={500} />
         </div>
 
-        <div className="w-[90vw] lg:w-[45%]">
-          <div className="my-3 flex items-center justify-center">
-            <img src={Logo} width={100} alt="logo" />
+        <div className='w-[90vw] lg:w-[45%]'>
+          <div className='my-3 flex items-center justify-center'>
+            <img src={Logo} width={100} alt='logo' />
           </div>
-          <div className="border border-light-grey-500 bg-white shadow">
-            <div className="py-5 text-center">
-              <h2 className="text-3xl font-semibold">Admin</h2>
-              <h3 className="pt-2 text-2xl font-normal text-gray-500">
-                Welcome Back
-              </h3>
+          <div className='border border-light-grey-500 bg-white shadow'>
+            <div className='py-5 text-center'>
+              <h2 className='text-3xl font-semibold'>Admin</h2>
+              <h3 className='pt-2 text-2xl font-normal text-gray-500'>Welcome Back</h3>
             </div>
-            <form className="mx-auto flex flex-col gap-3" onSubmit={onSubmit}>
+            <form className='mx-auto flex flex-col gap-3' onSubmit={onSubmit}>
               <FormField intent={"login"}>
                 <span>Email</span>
                 <FormField.Input
-                  type="email"
+                  type='email'
                   placeholder={"Enter your email address"}
                   intent={"login"}
                   {...register(
@@ -91,19 +89,14 @@ const ResetNewLogin: FC<{ navigate: () => void }> = ({ navigate }) => {
                   {...register(
                     "confirmPassword",
                     formErrorHelper("Confirm Password", {
-                      validate: (value, formValues) =>
-                        value === formValues.password,
+                      validate: (value, formValues) => value === formValues.password,
                     }),
                   )}
                 />
                 <FormField.ErrorText error={errors.confirmPassword} />
               </FormField>
-              <div className="my-5">
-                <FormField.Button
-                  size={"6"}
-                  isSubmitted={isSubmitting}
-                  intent={"login"}
-                >
+              <div className='my-5'>
+                <FormField.Button size={"6"} isSubmitted={isSubmitting} intent={"login"}>
                   Update Password
                 </FormField.Button>
               </div>

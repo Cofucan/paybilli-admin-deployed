@@ -1,11 +1,4 @@
-import {
-  ComponentPropsWithoutRef,
-  FC,
-  KeyboardEvent,
-  useCallback,
-  useRef,
-  useState,
-} from "react";
+import { ComponentPropsWithoutRef, FC, KeyboardEvent, useCallback, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { cn } from "../../utils/constants.ts";
 import FormInput from "../form/FormInput.tsx";
@@ -17,16 +10,9 @@ export interface FormOtpProps {
   name: string;
 }
 
-const FormOtp: FC<FormOtpProps> = ({
-                                     length = 4,
-                                     className,
-                                     inputProps,
-                                     name,
-                                   }) => {
+const FormOtp: FC<FormOtpProps> = ({ length = 4, className, inputProps, name }) => {
   const [otpValues, setOtpValues] = useState<string[]>(Array(length).fill(""));
-  const inputRefs = useRef<(HTMLInputElement | null)[]>(
-    Array<null>(length).fill(null),
-  );
+  const inputRefs = useRef<(HTMLInputElement | null)[]>(Array<null>(length).fill(null));
 
   const handleInputChange = useCallback(
     (index: number, value: string) => {
@@ -92,8 +78,8 @@ const FormOtp: FC<FormOtpProps> = ({
           key={index}
           intent={"login"}
           ref={(el) => (inputRefs.current[index] = el)}
-          type="text"
-          pattern="\d*"
+          type='text'
+          pattern='\d*'
           maxLength={1}
           value={value}
           onChange={(e) => {

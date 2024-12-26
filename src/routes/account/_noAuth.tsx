@@ -10,7 +10,7 @@ export const Route = createFileRoute("/account/_noAuth")({
   beforeLoad: ({ context, search }) => {
     if (context.auth.authToken) {
       console.log(context.auth.authToken);
-       
+
       throw redirect({ to: search.redirect ?? "/" });
     }
   },

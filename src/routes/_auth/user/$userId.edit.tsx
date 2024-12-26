@@ -1,89 +1,145 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import FormField from '../../../components/form/FormField'
-import { useCustomForm } from '../../../components/form/useCustomForm'
-import { FaEye } from 'react-icons/fa'
-import { ChangeEvent } from 'react'
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { ChangeEvent } from "react";
+import { FaEye } from "react-icons/fa";
+import SubPageHeader from "../../../components/custom-buttons/SubPageHeader";
+import FormField from "../../../components/form/FormField";
+import useCustomForm from "../../../components/form/useCustomForm";
 
-export const Route = createFileRoute('/_auth/user/$userId/edit')({
-    component: RouteComponent,
-})
+export const Route = createFileRoute("/_auth/user/$userId/edit")({
+  component: RouteComponent,
+});
+
+interface EditForm {
+  username: string;
+  status: string;
+  role: string;
+}
 
 function RouteComponent() {
-    const { userId } = Route.useParams()
-    const profileImage = null
-    // Get User from Get User Query
-    const { formState: { isSubmitting } } = useCustomForm()
-    function handleImageUpload(event: ChangeEvent<HTMLInputElement>): void {
-        throw new Error('Function not implemented.')
-    }
+  const { userId } = Route.useParams();
+  const profileImage = null;
+  // Get User from Get User Query
+  const {
+    formState: { isSubmitting },
+    register,
+    handleSubmit,
+    reset,
+    formErrorHelper,
+  } = useCustomForm<EditForm>();
+  const navigate = useNavigate();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function handleImageUpload(_event: ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
+  }
 
-    return <>
-        <div className='flex justify-between items-center w-[80%] mb-6'>
-            <div className='flex items-center space-x-4'>
-                {/* Display profile image if uploaded, otherwise show initials */}
-                <div className='relative w-28 h-28 z-20'>
-                    {profileImage ? (
-                        <img
-                            src={profileImage}
-                            alt='Profile'
-                            className='w-full h-full object-cover rounded-full'
-                        />
-                    ) : (
-                        <div className='w-full h-full bg-[#fbfafa] border-2 border-dotted border-gray-300 rounded-full flex items-center justify-center text-2xl'>
-                            CN
-                        </div>
-                    )}
-                </div>
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+  });
 
-                {/* Upload button */}
-                <label className='text-light-blue-500 font-semibold cursor-pointer'>
-                    <input
-                        type='file'
-                        className='hidden'
-                        onChange={handleImageUpload}
-                    />
-                    Upload profile image
-                </label>
-            </div>
+  async function onReset(): Promise<void> {
+    reset();
+    await navigate({ to: "/user/$userId", params: { userId } });
+  }
+  // section className='w-full h-full mt-16 smd:mt-20 lg:mt-10 xl:mt-0'>
+  return (
+    <main className='my-10 ml-14 mr-64'>
+      <SubPageHeader to='/user/$userId' params={{ userId }} title='Edit User' />
+      <div className='flex items-center justify-between'>
+        <div className='flex items-center space-x-4'>
+          {/* Display profile image if uploaded, otherwise show initials */}
+          <div className='relative z-20 h-28 w-28'>
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt='Profile'
+                className='h-full w-full rounded-full object-cover'
+              />
+            ) : (
+              <div className='flex h-full w-full items-center justify-center rounded-full border-2 border-dotted border-gray-300 bg-[#fbfafa] text-2xl'>
+                CN
+              </div>
+            )}
+          </div>
 
-            {/* View User Button */}
-            <Link
-                to="/user/$userId"
-                className='flex items-center text-white bg-light-blue-500 px-6 py-3 rounded-lg hover:shadow-md' params={{ userId }}            >
-                <FaEye className='mr-2' />
-                View User
-            </Link>
-        </div >
-        <form>
+          {/* Upload button */}
+          <label className='cursor-pointer font-semibold text-light-blue-500'>
+            <input type='file' className='hidden' onChange={handleImageUpload} />
+            Upload profile image
+          </label>
+        </div>
 
-            <FormField>
-                <span>Username</span>
-                <FormField.Input intent={"admin"} placeholder='Enter Username' />
-            </FormField>
-            <FormField>
-                <span>Account Status</span>
-                <FormField.Select intent={"admin"} options={[{ value: "active", name: "Active" }, { value: "inactive", name: "Inactive" }]}></FormField.Select>
-            </FormField>
-            <FormField>
-                <span>Role</span>
-                <FormField.Select intent={"admin"} options={[{ value: "member", name: "Member" }, { value: "admin", name: "Admin" }]}></FormField.Select>
-            </FormField>
-            <FormField>
-                <span>Username</span>
-                <FormField.Input intent={"admin"} placeholder='Enter Username' />
-            </FormField>
-            {/* Action Buttons */}
-            <div className='flex justify-between items-center w-[80%]'>
-                {/* Cancel Button */}
-                <FormField.Button type='reset' className='text-black bg-white font-medium px-4 py-3 border rounded-lg'>
-                    Cancel
-                </FormField.Button>
+        {/* View User Button */}
+        <Link
+          to='/user/$userId'
+          className='flex items-center rounded-lg bg-light-blue-500 px-6 py-3 text-white hover:shadow-md'
+          params={{ userId }}
+        >
+          <FaEye className='mr-2' />
+          View User
+        </Link>
+      </div>
+      <form className='mt-6 grid grid-cols-2 gap-6' onSubmit={onSubmit} onReset={onReset}>
+        <FormField intent={"admin"}>
+          <span className='font-medium'>Username</span>
+          <FormField.Input
+            intent={"admin"}
+            placeholder='Enter Username'
+            {...register(
+              "username",
+              formErrorHelper("User Name", { minLength: 3, maxLength: 200, isRequired: true }),
+            )}
+          />
+        </FormField>
+        <FormField intent={"admin"}>
+          <span className='font-medium'>Account Status</span>
+          <FormField.Select
+            intent={"admin"}
+            options={[
+              { value: "Active", title: "active" },
+              { value: "Inactive", title: "inactive" },
+            ]}
+            {...register("status", formErrorHelper("Status", { isRequired: true }))}
+          />
+        </FormField>
+        <FormField intent={"admin"}>
+          <span className='font-medium'>Role</span>
+          <FormField.Select
+            intent={"admin"}
+            options={
+              [
+                { value: "member", title: "Member" },
+                { value: "admin", title: "Admin" },
+              ] as const
+            }
+            {...register("role", formErrorHelper("Role", { isRequired: true }))}
+          />
+        </FormField>
+        {/* TODO: Remove Later */}
+        <div></div>
+        {/* Action Buttons */}
 
-                {/* Save Changes Button */}
-                <FormField.Button isSubmitted={isSubmitting} className='bg-light-blue-500 text-sm text-white px-10 py-3 rounded-lg hover:shadow-md'>
-                    Save Changes
-                </FormField.Button>
-            </div>
-        </form></>
+        {/* Cancel Button */}
+        <FormField.Button
+          type='reset'
+          intent={"admin"}
+          themeColor={"rounded-grey"}
+          themeSize={"3"}
+          className='w-max bg-white'
+        >
+          Cancel
+        </FormField.Button>
 
+        {/* Save Changes Button */}
+        <FormField.Button
+          isSubmitted={isSubmitting}
+          intent={"admin"}
+          themeColor={"full-blue"}
+          themeSize={"36"}
+          className='max-w-max justify-self-end'
+        >
+          Save Changes
+        </FormField.Button>
+      </form>
+    </main>
+  );
 }

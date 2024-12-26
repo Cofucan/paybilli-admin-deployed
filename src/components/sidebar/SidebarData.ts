@@ -25,11 +25,8 @@ import AuditWhite from "./assets/auditwhite.svg";
 import Audit from "./assets/audit.svg";
 import { LinkProps } from "@tanstack/react-router";
 // Function to determine active state and image
-export const getImage = (
-  isActive: boolean,
-  activeImage: string,
-  inactiveImage: string,
-) => (isActive ? activeImage : inactiveImage);
+export const getImage = (isActive: boolean, activeImage: string, inactiveImage: string) =>
+  isActive ? activeImage : inactiveImage;
 
 // Sidebar items
 export const sidebarItems: {

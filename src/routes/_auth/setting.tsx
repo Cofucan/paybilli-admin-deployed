@@ -1,11 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { useCustomForm } from "../../components/form/useCustomForm";
 import EditPen from "../../routeHelper/Settings/assets/editPen.svg";
 import ProfileImage from "../../routeHelper/Settings/assets/userImg.svg";
 import ProfileSection from "../../routeHelper/Settings/ProfileSection";
-import SettingChangePasswordFormModal, { SettingChangePasswordForm } from "../../routeHelper/Settings/SettingChangePasswordFormModal";
-import SettingEditProfileFormModal, { SettingEditProfileForm } from "../../routeHelper/Settings/SettingEditProfileFormModal";
+import SettingChangePasswordFormModal, {
+  SettingChangePasswordForm,
+} from "../../routeHelper/Settings/SettingChangePasswordFormModal";
+import SettingEditProfileFormModal, {
+  SettingEditProfileForm,
+} from "../../routeHelper/Settings/SettingEditProfileFormModal";
+import useCustomForm from "../../components/form/useCustomForm";
 
 export const Route = createFileRoute("/_auth/setting")({
   component: RouteComponent,
@@ -17,7 +21,6 @@ function RouteComponent() {
   const editProfileForm = useCustomForm<SettingEditProfileForm>();
   const resetPasswordForm = useCustomForm<SettingChangePasswordForm>();
 
-
   const toggleModalPassword = () => {
     setIsModalPassword(!isModalPassword);
   };
@@ -28,7 +31,6 @@ function RouteComponent() {
   function handleEditProfile(data: SettingEditProfileForm): void | Promise<void> {
     console.log(data);
     throw new Error("Function not implemented.");
-
   }
 
   function handleResetPassword(data: SettingChangePasswordForm): void | Promise<void> {
@@ -37,10 +39,10 @@ function RouteComponent() {
   }
 
   return (
-    <div className="relative w-full">
-      <div className="lg:w-full">
-        <div className="mx-auto mt-14 w-[85%] smd:mt-14 lg:mt-12 xl:mt-3">
-          <h1 className="py-10 text-[34px] font-semibold leading-[28px] text-[#1D1D1D] xl:py-5">
+    <div className='relative w-full'>
+      <div className='lg:w-full'>
+        <div className='mx-auto mt-14 w-[85%] smd:mt-14 lg:mt-12 xl:mt-3'>
+          <h1 className='py-10 text-[34px] font-semibold leading-[28px] text-[#1D1D1D] xl:py-5'>
             Settings
           </h1>
         </div>
@@ -52,9 +54,18 @@ function RouteComponent() {
           EditPen={EditPen}
         />
 
-        <SettingChangePasswordFormModal form={resetPasswordForm} isModalVisible={isModalPassword} setIsModalVisible={setIsModalPassword} onSubmit={handleResetPassword} />
-        <SettingEditProfileFormModal form={editProfileForm} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} onSubmit={handleEditProfile} />
-
+        <SettingChangePasswordFormModal
+          form={resetPasswordForm}
+          isModalVisible={isModalPassword}
+          setIsModalVisible={setIsModalPassword}
+          onSubmit={handleResetPassword}
+        />
+        <SettingEditProfileFormModal
+          form={editProfileForm}
+          isModalVisible={isModalVisible}
+          setIsModalVisible={setIsModalVisible}
+          onSubmit={handleEditProfile}
+        />
       </div>
     </div>
   );

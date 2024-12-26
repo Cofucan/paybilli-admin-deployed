@@ -9,12 +9,6 @@ export interface UsersStatisticResponse {
 }
 
 export interface UsersTableResponse {
-  meta: {
-    totalItems: number;
-    totalPages: number;
-    currentPage: number;
-    itemsPerPage: number;
-  };
-  data: User[];
+  count: number;
+  results: User[];
 }
-

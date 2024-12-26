@@ -3,17 +3,11 @@ import { TableColumn } from "./useTable.ts";
 
 export type SortDirection = "asc" | "desc";
 
-export interface TableSortHook<
-  Columns extends readonly TableColumn<Data>[],
-  Data,
-> {
+export interface TableSortHook<Columns extends readonly TableColumn<Data>[], Data> {
   set: (columnId: Columns[number]["id"], direction: SortDirection) => void;
   remove: (columnId: Columns[number]["id"]) => void;
   clear: () => void;
-  toggle: (
-    columnId: Columns[number]["id"],
-    defaultDirection?: SortDirection,
-  ) => void;
+  toggle: (columnId: Columns[number]["id"], defaultDirection?: SortDirection) => void;
   data: Map<Columns[number]["id"], SortDirection>;
 }
 
@@ -23,13 +17,11 @@ export interface TableSortHook<
  * @template Data - Type of data in the table rows
  * @returns Object containing sort management functions and current sort state
  */
-const useTableSort = <
-  Columns extends readonly TableColumn<Data>[],
-  Data,
->(): TableSortHook<Columns, Data> => {
-  const [data, setData] = useState<Map<Columns[number]["id"], SortDirection>>(
-    new Map(),
-  );
+const useTableSort = <Columns extends readonly TableColumn<Data>[], Data>(): TableSortHook<
+  Columns,
+  Data
+> => {
+  const [data, setData] = useState<Map<Columns[number]["id"], SortDirection>>(new Map());
 
   const set = (columnId: Columns[number]["id"], direction: SortDirection) => {
     setData((currentSorts) => new Map(currentSorts.set(columnId, direction)));
@@ -47,16 +39,12 @@ const useTableSort = <
     setData(new Map());
   };
 
-  const toggle = (
-    columnId: Columns[number]["id"],
-    defaultDirection: SortDirection = "asc",
-  ) => {
+  const toggle = (columnId: Columns[number]["id"], defaultDirection: SortDirection = "asc") => {
     setData((currentSorts) => {
       const updatedSorts = new Map(currentSorts);
 
       if (updatedSorts.has(columnId)) {
-        const newDirection =
-          updatedSorts.get(columnId) === "asc" ? "desc" : "asc";
+        const newDirection = updatedSorts.get(columnId) === "asc" ? "desc" : "asc";
         updatedSorts.set(columnId, newDirection);
       } else {
         updatedSorts.set(columnId, defaultDirection);
