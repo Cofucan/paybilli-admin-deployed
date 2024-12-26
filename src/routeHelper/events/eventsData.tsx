@@ -91,7 +91,7 @@ export const eventsColumn = (props: EventsColumn) =>
       cell: ({ creator }) => (
         <div className='flex items-center space-x-6'>
           <img
-            src={BASE_URL + creator.profile_image}
+            src={BASE_URL + creator.profile_image_url}
             alt={creator.name + "'s Profile Picture"}
             className='h-8 w-8 rounded-full'
           />

@@ -1,15 +1,11 @@
 import { FC } from "react";
 import FormField from "../../components/form/FormField";
-import { SettingModalFormProps } from "./settingTypes";
 import Modal from "../../components/modal/Modal";
+import { AccountChangePasswordRequest } from "../../hooks/useAccount";
+import { SettingModalFormProps } from "./settingTypes";
 
-export interface SettingChangePasswordForm {
-  currentPassword: string;
-  newPassword: string;
-  confirmPassword: string;
-}
 
-const SettingChangePasswordFormModal: FC<SettingModalFormProps<SettingChangePasswordForm>> = ({
+const SettingChangePasswordFormModal: FC<SettingModalFormProps<AccountChangePasswordRequest>> = ({
   form,
   isModalVisible,
   setIsModalVisible,
@@ -50,16 +46,16 @@ const SettingChangePasswordFormModal: FC<SettingModalFormProps<SettingChangePass
             intent={"admin"}
             placeholder='*******'
             {...form.register(
-              "currentPassword",
+              "old_password",
               form.formErrorHelper("Current Password", {
                 isRequired: true,
                 minLength: 6,
                 maxLength: 50,
               }),
             )}
-            aria-invalid={form.formState.errors.currentPassword ? "true" : "false"}
+            aria-invalid={form.formState.errors.old_password ? "true" : "false"}
           />
-          <FormField.ErrorText error={form.formState.errors.currentPassword} />
+          <FormField.ErrorText error={form.formState.errors.old_password} />
         </FormField>
         <FormField intent={"admin"}>
           <span>New Password</span>
@@ -67,16 +63,16 @@ const SettingChangePasswordFormModal: FC<SettingModalFormProps<SettingChangePass
             type={"password"}
             intent={"admin"}
             {...form.register(
-              "newPassword",
+              "new_password",
               form.formErrorHelper("New Password", {
                 isRequired: true,
                 minLength: 6,
                 maxLength: 50,
               }),
             )}
-            aria-invalid={form.formState.errors.newPassword ? "true" : "false"}
+            aria-invalid={form.formState.errors.new_password ? "true" : "false"}
           />
-          <FormField.ErrorText error={form.formState.errors.newPassword} />
+          <FormField.ErrorText error={form.formState.errors.new_password} />
         </FormField>
 
         {/*retype password */}
@@ -86,14 +82,14 @@ const SettingChangePasswordFormModal: FC<SettingModalFormProps<SettingChangePass
             type={"password"}
             intent={"admin"}
             {...form.register(
-              "confirmPassword",
+              "confirm_new_password",
               form.formErrorHelper("Confirm Password", {
-                validate: (value, formValues) => value === formValues.newPassword,
+                validate: (value, formValues) => value === formValues.new_password,
               }),
             )}
-            aria-invalid={form.formState.errors.confirmPassword ? "true" : "false"}
+            aria-invalid={form.formState.errors.confirm_new_password ? "true" : "false"}
           />
-          <FormField.ErrorText error={form.formState.errors.confirmPassword} />
+          <FormField.ErrorText error={form.formState.errors.confirm_new_password} />
         </FormField>
         <div className='flex items-center justify-between'>
           <FormField.Button

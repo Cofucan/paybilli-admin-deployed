@@ -1,4 +1,4 @@
-import { FieldValues, Path, RegisterOptions, useForm, UseFormReturn } from "react-hook-form";
+import { FieldValues, Path, RegisterOptions, useForm, UseFormProps, UseFormReturn } from "react-hook-form";
 
 export interface CustomFormErrorFields {
   isRequired: boolean;
@@ -17,8 +17,8 @@ export interface CustomFormHook<T extends FieldValues> extends UseFormReturn<T> 
   ) => RegisterOptions<T, Path<T>>;
 }
 
-const useCustomForm = <T extends FieldValues>(): CustomFormHook<T> => {
-  const form = useForm<T>();
+const useCustomForm = <T extends FieldValues>(props: UseFormProps<T> = {}): CustomFormHook<T> => {
+  const form = useForm<T>(props);  
 
   function formErrorHelper(
     fieldName: string,

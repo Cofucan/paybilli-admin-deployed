@@ -1,14 +1,16 @@
-import { createContext, FC, ReactNode, useContext, useEffect, useState } from "react";
-import { AuthResponse } from "../utils/types.ts";
+import { QueryClient, UseQueryResult } from "@tanstack/react-query";
+import { createContext, FC, ReactNode, useContext } from "react";
+import { ACCOUNT, useAccountGetUser } from "../hooks/useAccount.ts";
 import { customFetch } from "../utils/constants.ts";
+import { AuthResponse, User } from "../utils/types.ts";
 
 export interface AuthContextProps {
-  authToken: string | null;
-  login: (authData: AuthResponse) => void;
-  logout: () => void;
+  user: UseQueryResult<User>;
+  login: (authData: AuthResponse) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
-const AuthContext = createContext<AuthContextProps | null>(null);
+const AuthContext = createContext<AuthContextProps | null | undefined>(null);
 const STORAGE_AUTH = "auth";
 
 export const useAuth = () => {
@@ -17,32 +19,35 @@ export const useAuth = () => {
   return context;
 };
 
-function setAuthentication(token: string | null) {
+function setAuthentication(token: string | null | undefined) {
   const authToken = token ? `Bearer ${token}` : null;
   if (authToken) customFetch.defaultOptions.headers.Authorization = authToken;
+  else delete customFetch.defaultOptions.headers.Authorization
 }
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [authToken, setAuthToken] = useState<string | null>(getUserData());
-  useEffect(() => {
-    setAuthentication(authToken);
-  }, [authToken]);
+  const queryClient = new QueryClient()
 
-  function getUserData() {
-    return localStorage.getItem(STORAGE_AUTH);
-  }
+  const user = useAccountGetUser(() => {
+    setAuthentication(localStorage.getItem(STORAGE_AUTH));
+    return true
+  })
 
-  function login(authData: AuthResponse) {
+  async function login(authData: AuthResponse) {
     localStorage.setItem(STORAGE_AUTH, authData.token.access);
-    setAuthToken(authData.token.access);
+    setAuthentication(authData.token.access)
+    await queryClient.invalidateQueries({queryKey: [ACCOUNT]})
+    await user.refetch()
   }
-
-  function logout() {
+  
+  async function logout() {
     localStorage.removeItem(STORAGE_AUTH);
-    setAuthToken(null);
+    setAuthentication(null)
+    await queryClient.invalidateQueries({queryKey: [ACCOUNT]})
+    await user.refetch()
   }
 
   return (
-    <AuthContext.Provider value={{ authToken, login, logout }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ login, logout, user  }}>{children}</AuthContext.Provider>
   );
 };

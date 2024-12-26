@@ -54,7 +54,7 @@ export const escrowStats = (data?: EventsGetStatsResponse) => [
 export const escrowTableAction = ({
   navigate,
   handleCloseBetButton,
-}: EventsTableAction): TableActionDropdownProps<{ id: number; userId: string }>["data"] => [
+}: EventsTableAction): TableActionDropdownProps<{ id: number; }>["data"] => [
     {
       title: "View Bet Details",
       icon: BetDetails,

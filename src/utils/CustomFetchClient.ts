@@ -32,7 +32,6 @@ class CustomFetchClient {
       ...options,
       method,
     };
-    console.log(newOptions);
     return await fetch(url, newOptions);
   }
 

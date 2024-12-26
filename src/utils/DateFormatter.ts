@@ -1,12 +1,13 @@
 // Format: "01 Mar, 2024"
-export function formatDate(dateString: string | number | Date) {
+export function formatDate(dateString: string | number | Date, options: Partial<Intl.DateTimeFormatOptions> = {}) {
   const date = new Date(dateString);
-  const options: Intl.DateTimeFormatOptions = {
+  const newOptions: Intl.DateTimeFormatOptions = {
     day: "2-digit",
     month: "short",
     year: "numeric",
+    ...options
   };
-  return new Intl.DateTimeFormat("en-US", options).format(date);
+  return new Intl.DateTimeFormat("en-US", newOptions).format(date);
 }
 
 // Format: "29 Jul, 2024 04:30pm"

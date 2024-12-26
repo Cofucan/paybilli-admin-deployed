@@ -1,20 +1,19 @@
-import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
-import { ChangeEvent } from 'react'
-import { FaEye } from 'react-icons/fa'
-import SubPageHeader from '../../../components/custom-buttons/SubPageHeader'
-import FormField from '../../../components/form/FormField'
-import useCustomForm from '../../../components/form/useCustomForm'
-import { useUserGetById } from '../../../hooks/useUsersQuery'
-import { BASE_URL } from '../../../utils/constants'
-import { useCoreGetConstantsQuery } from '../../../hooks/useCoreQuery'
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { ChangeEvent } from "react";
+import { FaEye } from "react-icons/fa";
+import SubPageHeader from "../../../components/custom-buttons/SubPageHeader";
+import FormField from "../../../components/form/FormField";
+import useCustomForm from "../../../components/form/useCustomForm";
+import { useUserEdit, useUserGetById } from "../../../hooks/useUsersQuery";
+import { BASE_URL } from "../../../utils/constants";
+import { useCoreGetConstantsQuery } from "../../../hooks/useCoreQuery";
 
 export const Route = createFileRoute('/_auth/users/$userId/edit')({
   component: RouteComponent,
 })
 
 interface EditForm {
-  username: string
-  status: string
+  account_status: string
   role: string
 }
 
@@ -32,13 +31,15 @@ function RouteComponent() {
     formErrorHelper,
   } = useCustomForm<EditForm>()
   const navigate = useNavigate()
+  const editFormMutate = useUserEdit()
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function handleImageUpload(_event: ChangeEvent<HTMLInputElement>): void {
     throw new Error('Function not implemented.')
   }
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data)
+  const onSubmit = handleSubmit(async ({ role, account_status }) => {
+    await editFormMutate.mutateAsync({ id: userId, role, account_status })
   })
 
   async function onReset(): Promise<void> {
@@ -99,7 +100,7 @@ function RouteComponent() {
             disabled={constantsQuery.isLoading}
             options={(constantsQuery.data?.result.account_status ?? []).map(x => ({ title: x.display, value: x.value}))}
             {...register(
-              'status',
+              'account_status',
               formErrorHelper('Status', { isRequired: true }),
             )}
           />
@@ -119,8 +120,6 @@ function RouteComponent() {
             {...register('role', formErrorHelper('Role', { isRequired: true }))}
           />
         </FormField>
-        {/* TODO: Remove Later */}
-        <div></div>
         {/* Action Buttons */}
 
         {/* Cancel Button */}

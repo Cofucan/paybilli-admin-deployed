@@ -11,6 +11,7 @@ import SignoutIcon from "./assets/SignOut.svg";
 import { useAuth } from "../../context/AuthContext.tsx";
 import { Link, useNavigate } from "@tanstack/react-router";
 import Sidebar from "../sidebar/Sidebar.tsx";
+import { BASE_URL } from "../../utils/constants.ts";
 // import Sidebar from './Sidebar'
 // import { NavLink } from 'react-router-dom'
 // import Notification from '../Modals/Notification'
@@ -22,7 +23,7 @@ const Header = () => {
   const [toggleNotification, setToggleNotification] = useState(false);
   const [isModalToggle, setIsModalToggle] = useState(false);
   const [isModalProfileView, setIsModalProfileView] = useState(false);
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
 
   const toggleSidebar = () => {
@@ -42,7 +43,7 @@ const Header = () => {
   };
 
   async function handleLogout() {
-    logout();
+    await logout();
     await navigate({ to: "/account/login" });
   }
 
@@ -89,12 +90,13 @@ const Header = () => {
             />
           </Link>
           <button onClick={toggleProfileDropdown} className='flex items-center'>
-            <img src={avatar} alt='Avatar' className='w-8 md:w-10' />
-            <p className='ml-2 hidden smd:block'>Ajayi Joshua</p>
+            {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+            <img src={BASE_URL + user.data!.profile_image_url} alt='Avatar' className='w-8 md:w-10 rounded-full' />
+            <p className='ml-2 hidden smd:block'>{user.data?.first_name} {user.data?.last_name}</p>
           </button>
         </div>
         {isModalProfileView && (
-          <div className='absolute right-5 top-[65px] w-40 border-4 border-[white] bg-[#FAFAFA] smd:top-[90px] lg:top-[95px] xl:right-10 xl:top-[54px]'>
+          <div className='absolute right-5 top-[65px] w-40 border-4 border-[white] bg-[#FAFAFA] smd:top-[90px] lg:top-[95px] xl:right-10 xl:top-[54px] z-20'>
             <div className='flex items-center gap-3 px-2 py-2 hover:rounded-md hover:bg-[#aea0b9] hover:px-2 hover:py-2'>
               <img src={AvatarImg} alt='#' className='object-cover' />
               <button className='text-slate-900'>View Profile</button>

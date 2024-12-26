@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { customFetch } from "../utils/constants";
-import { Events, EventsStatus, PaginationRequest, PaginationRespose } from "../utils/types";
+import { Events, EventsStatus, PaginationRequest, PaginationResponse } from "../utils/types";
 
 const EVENTS = "events";
 const QUERY_KEY = {
@@ -41,7 +41,7 @@ export const useEventsGetTable = (params: EventsGetTableRequest) => {
       if (params.status) search.append("status", params.status.toString());
       if (params.page_size) search.append("page_size", params.page_size.toString());
       const res = await customFetch.get(`app_admin/events/?${search.toString()}`);
-      const data = (await res.json()) as PaginationRespose<Events>;
+      const data = (await res.json()) as PaginationResponse<Events>;
       return {...data, results: data.results.map((x, i) => ({...x, serial_no: i+1}))}
     },
   });

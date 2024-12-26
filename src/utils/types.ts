@@ -13,7 +13,7 @@ export interface PaginationRequest {
   page_size?: number;
 }
 
-export interface PaginationRespose<T> {
+export interface PaginationResponse<T> {
   count: number;
   next: string | null;
   previous: string | null;
@@ -53,7 +53,7 @@ export interface Events {
     id: number;
     username: string;
     name: string;
-    profile_image: string;
+    profile_image_url: string;
   };
   participants: [
     {

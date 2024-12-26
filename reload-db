@@ -1,0 +1,7 @@
+python manage.py migrate
+python manage.py seed_users
+python manage.py seed_bank
+python manage.py seed_eventtypes
+python manage.py seed_events
+python manage.py seed_config
+python manage.py runserver

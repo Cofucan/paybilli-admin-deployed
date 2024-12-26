@@ -21,7 +21,7 @@ import { formatDate } from "../../utils/DateFormatter.ts";
 import { BASE_URL } from "../../utils/constants.ts";
 import { UserChangeStatusRequest } from "../../hooks/useUsersQuery.ts";
 
-const statusClasses = {
+export const userStatusClasses = {
   verified: {
     dot: "bg-green-600",
     label: "bg-green-100 text-green-600",
@@ -148,8 +148,8 @@ export const usersColumns = (props: UsersColumn) =>
       header: "Status",
       cell: ({ account_status }) => (
         <div className='flex items-center'>
-          <span className={`mr-2 h-2 w-2 rounded-full ${statusClasses[account_status].dot}`} />
-          <span className={`rounded-lg px-2 py-1 text-xs ${statusClasses[account_status].label}`}>
+          <span className={`mr-2 h-2 w-2 rounded-full ${userStatusClasses[account_status].dot}`} />
+          <span className={`rounded-lg px-2 py-1 text-xs ${userStatusClasses[account_status].label}`}>
             {account_status}
           </span>
         </div>

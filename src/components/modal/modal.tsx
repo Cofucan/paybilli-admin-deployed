@@ -33,7 +33,7 @@ const Modal: FC<ModalProps> = ({
       onCancel={toggleVisibility}
       className={`p-6 ${isRounded ? "rounded-2xl" : ""}`}
     >
-      <div>
+      <div className={"flex justify-between"}>
         {title}
         {showClose ? (
           <button onClick={toggleVisibility}>

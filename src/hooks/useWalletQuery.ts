@@ -1,27 +1,38 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { customFetch } from "../utils/constants";
-import { Wallet, WalletStatus, PaginationRequest, PaginationRespose } from "../utils/types";
+import { Wallet, WalletStatus, PaginationRequest, PaginationResponse } from "../utils/types";
 
 const WALLET = "wallet";
 const QUERY_KEY = {
   getStats: [WALLET, "stats"],
-  getById: (id: string) => [WALLET, id],
+  getByName: (id: string) => [WALLET, id],
   getTable: (params: WalletGetTableRequest) => [WALLET, params],
 };
-
 export interface WalletGetStatsResponse {
-  total_count: number;
-  open_count: number;
-  pending_count: number;
-  closed_count: number;
+  total: number;
+  active: number;
+  inactive: number;
+  frozen: number;
+  total_balance: number;
 }
 export const useWalletGetStats = () => {
   return useQuery({
     queryKey: QUERY_KEY.getStats,
     queryFn: async () => {
-      const res = await customFetch.get(`app_admin/wallet/stats/?${baseSearch().toString()}`);
+      const res = await customFetch.get(`app_admin/wallet/stats/`);
       return (await res.json()) as WalletGetStatsResponse;
     },
+  });
+};
+
+export const useWalletGetByName = (name: string, enabled: boolean) => {
+  return useQuery({
+    queryKey: QUERY_KEY.getByName(name),
+    queryFn: async () => {
+      const res = await customFetch.get(`app_admin/wallets/?user=${name}`);
+      const data = (await res.json())
+      return data as PaginationResponse<Wallet>;
+    }, enabled
   });
 };
 
@@ -34,13 +45,13 @@ export const useWalletGetTable = (params: WalletGetTableRequest) => {
   return useQuery({
     queryKey: QUERY_KEY.getTable(params),
     queryFn: async () => {
-      const search = baseSearch();
+      const search = new URLSearchParams();
       if (params.page) search.append("page", params.page.toString());
       if (params.search) search.append("search", params.search.toString());
       if (params.status) search.append("status", params.status.toString());
       if (params.page_size) search.append("page_size", params.page_size.toString());
       const res = await customFetch.get(`app_admin/wallet/?${search.toString()}`);
-      return (await res.json()) as PaginationRespose<Wallet>;
+      return (await res.json()) as PaginationResponse<Wallet>;
     },
   });
 };
@@ -55,7 +66,7 @@ export const useWalletCreate = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (json: WalletCreateRequest) => {
-      const res = await customFetch.post(`app_admin/wallet/?${baseSearch().toString()}`, { json });
+      const res = await customFetch.post(`app_admin/wallet/`, { json });
       return (await res.json()) as Wallet;
     },
     onSuccess: async () => {

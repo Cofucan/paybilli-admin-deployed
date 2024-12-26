@@ -1,7 +1,7 @@
 // PasswordModal.tsx
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import Modal from './modal';
+import Modal from './Modal';
 
 
 interface PasswordModalProps {

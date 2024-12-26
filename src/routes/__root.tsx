@@ -1,8 +1,15 @@
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
-import { AuthContextProps } from "../context/AuthContext.tsx";
+import LoadingSpinner from "../components/loading/LoadingSpinner.tsx";
+import { AuthContextProps, useAuth } from "../context/AuthContext.tsx";
 
 interface RouterContext {
   auth: AuthContextProps;
 }
 
-export const Route = createRootRouteWithContext<RouterContext>()({ component: () => <Outlet /> });
+const RouteComponent: React.FC = () => {
+  const { user } = useAuth()
+  if (user.isLoading) return <LoadingSpinner size={"10"} />
+  return <Outlet />;
+};
+
+export const Route = createRootRouteWithContext<RouterContext>()({ component: RouteComponent });

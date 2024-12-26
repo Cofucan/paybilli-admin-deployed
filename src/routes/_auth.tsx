@@ -1,21 +1,19 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { createFileRoute, Navigate, Outlet, useLocation } from "@tanstack/react-router";
 import Header from "../components/header/Header.tsx";
 import Sidebar from "../components/sidebar/Sidebar.tsx";
+import { useAuth } from "../context/AuthContext.tsx";
 
 export const Route = createFileRoute("/_auth")({
   component: RouteComponent,
-  beforeLoad: ({ context, location }) => {
-    if (!context.auth.authToken) {
-      // eslint-disable-next-line @typescript-eslint/only-throw-error
-      throw redirect({
-        to: "/account/login",
-        search: { redirect: location.href },
-      });
-    }
-  },
 });
 
 function RouteComponent() {
+  const { user } = useAuth()
+  const location = useLocation()
+  
+  if (user.isError) {
+    return <Navigate to="/account/login" search={{ redirect: location.hash }} />
+  }
   return (
     <div className='layout grid h-screen grid-cols-[auto_1fr] overflow-y-hidden'>
       {/* TODO: Fix Bug Here*/}
