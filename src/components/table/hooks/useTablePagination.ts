@@ -9,6 +9,7 @@ export interface TablePaginationConfig {
 }
 
 export interface TablePaginationState {
+  initialPage: number;
   totalItems: number;
   totalPages: number;
   itemsPerPage: number;
@@ -46,22 +47,23 @@ function useTablePagination(config: TablePaginationConfig): TablePaginationHook 
     setItemsPerPage(config.itemsPerPage ?? 10);
   }, [config.itemsPerPage]);
   useEffect(() => {
-    setTotalPages(config.totalPages ? config.totalPages + initialPage : -1);
+    setTotalPages(config.totalPages ? config.totalPages + initialPage - 1 : -1);
   }, [config.totalPages, initialPage]);
   useEffect(() => {
     setCurrentPage(config.currentPage ?? initialPage);
   }, [config.currentPage, initialPage]);
 
   useEffect(() => {
-    if (totalPages === -1 && totalItems !== -1) {
+    if (!config.totalPages && config.totalItems) {
       setTotalPages(Math.ceil(totalItems / itemsPerPage) - 1 + initialPage);
     }
-  }, [totalPages, itemsPerPage, totalItems, initialPage]);
+  }, [totalPages, itemsPerPage, totalItems, initialPage, config.totalPages, config.totalItems]);
   useEffect(() => {
-    if (totalItems === -1 && totalPages !== -1) {
+    // if (totalItems === -1 && totalPages !== -1) {
+    if (config.totalPages && !config.totalItems) {
       setTotalItems(totalPages * itemsPerPage);
     }
-  }, [totalItems, totalPages, itemsPerPage]);
+  }, [totalItems, totalPages, itemsPerPage, config.totalPages, config.totalItems]);
 
   const setPageIndex = (index: number) => {
     setCurrentPage(Math.max(1, Math.min(index, totalPages)));
@@ -78,17 +80,15 @@ function useTablePagination(config: TablePaginationConfig): TablePaginationHook 
   const hasNext = () => currentPage < totalPages;
   const hasPrev = () => currentPage > initialPage;
 
-  const first = () => { setPageIndex(initialPage); };
-  const last = () => { setPageIndex(totalPages); };
-
-  // console.log(hasNext(), {
-  //   currentPage,
-  //   itemsPerPage,
-  //   totalItems,
-  //   totalPages,
-  // });
+  const first = () => {
+    setPageIndex(initialPage);
+  };
+  const last = () => {
+    setPageIndex(totalPages);
+  };
 
   return {
+    initialPage,
     currentPage,
     itemsPerPage,
     totalItems,

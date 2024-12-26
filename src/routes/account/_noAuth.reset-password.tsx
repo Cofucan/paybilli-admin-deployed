@@ -19,9 +19,7 @@ function RouteComponent() {
 
   return (
     <>
-      {page === 1 && (
-        <ResetVerificationEmail navigate={nextPage} setEmail={setEmail} />
-      )}
+      {page === 1 && <ResetVerificationEmail navigate={nextPage} setEmail={setEmail} />}
       {page === 2 && <ResetOtpCode navigate={nextPage} email={email} />}
       {page === 3 && <ResetNewLogin navigate={nextPage} />}
       {page === 4 && <ResetVerificationSuccess />}

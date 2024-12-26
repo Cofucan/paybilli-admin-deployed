@@ -1,4 +1,4 @@
-import { customFetch, sleep } from "../../utils/constants.ts";
+import { customFetch, generateUUID, sleep } from "../../utils/constants.ts";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { UsersStatisticResponse, UsersTableResponse } from "./usersTypes.ts";
 
@@ -9,23 +9,17 @@ export interface FetchUsersTableProps {
   name?: string;
 }
 
-async function fetchUsers({
-                            page = 1,
-                            limit = 10,
-                            status = "",
-                            name = "",
-                          }: FetchUsersTableProps) {
+async function fetchUsers({ page = 1, limit = 10, status = "", name = "" }: FetchUsersTableProps) {
   const query = new URLSearchParams({
     page: page.toString(),
-    limit: limit.toString(),
-    ...(status && { status }),
-    ...(name && { name }),
+    pageSize: limit.toString(),
+    ...(status && { account_status: status }),
+    ...(name && { search: name }),
   });
 
-  const response = await fetch(
-    `http://localhost:3000/users?${query.toString()}`,
-  );
-  return (await response.json()) as UsersTableResponse;
+  const response = await customFetch.get(`app_admin/users/?${query.toString()}`);
+  const res = (await response.json()) as UsersTableResponse;
+  return res.results.map((x) => ({ ...x, id: generateUUID() }));
 }
 
 async function fetchUserStatistic() {
@@ -49,10 +43,10 @@ const useUsersQuery = (table: FetchUsersTableProps) => {
   });
 
   const tableMutationAction = useMutation({
-    mutationFn: async ({ id, status }: { id: string, status: string }) => {
+    mutationFn: async ({ id, status }: { id: string; status: string }) => {
       console.log({ id, status });
-      await sleep(2)
-      return {id, status}
+      await sleep(2);
+      return { id, status };
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["user"] });

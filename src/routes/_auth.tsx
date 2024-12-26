@@ -17,15 +17,15 @@ export const Route = createFileRoute("/_auth")({
 
 function RouteComponent() {
   return (
-    <div className="layout grid h-screen grid-cols-[auto_1fr] overflow-y-hidden">
+    <div className='layout grid h-screen grid-cols-[auto_1fr] overflow-y-hidden'>
       {/* TODO: Fix Bug Here*/}
-      <div className="navbar col-span-12">
+      <div className='navbar col-span-12'>
         <Header />
       </div>
-      <div className="main overflow-y-hidden">
+      <div className='main overflow-y-hidden'>
         <Sidebar />
       </div>
-      <div className="main bg-light-grey overflow-auto">
+      <div className='main overflow-auto bg-light-grey'>
         <Outlet />
       </div>
     </div>

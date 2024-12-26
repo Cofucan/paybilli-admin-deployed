@@ -8,7 +8,7 @@ export interface TableHeaderProps {
   placeholder?: string;
   title: string;
   onSearch?: (search: string) => void;
-  filterOptions: { header: string, onClick: () => void }[];
+  filterOptions: { header: string; onClick: () => void }[];
 }
 
 const TableHeader = (props: TableHeaderProps) => {
@@ -25,46 +25,76 @@ const TableHeader = (props: TableHeaderProps) => {
   }
 
   return (
-    <div className="space-y-5 mt-4 text-base">
-      <div className="bg-white grid grid-cols-3 border-b-2 border-gray-200 rounded-t-lg items-center px-3">
-        <div className="hidden lg:block"><h1 className="text-lg text-black font-medium">{props.title}</h1></div>
-        {props.onSearch || props.onFilter ?
-          <div className="flex gap-2 lg:gap-0 justify-between col-span-3 lg:col-span-2 items-center py-2">
-            {props.onSearch ?
-              <div className="flex xl:w-full max-w-xl items-center border border-gray-300 rounded-lg lg:p-2 lg:mx-4">
+    <div className='mt-4 space-y-5 text-base'>
+      <div className='grid grid-cols-3 items-center rounded-t-lg border-b-2 border-gray-200 bg-white px-3'>
+        <div className='hidden lg:block'>
+          <h1 className='text-lg font-medium text-black'>{props.title}</h1>
+        </div>
+        {props.onSearch || props.onFilter ? (
+          <div className='col-span-3 flex items-center justify-between gap-2 py-2 lg:col-span-2 lg:gap-0'>
+            {props.onSearch ? (
+              <div className='flex max-w-xl items-center rounded-lg border border-gray-300 lg:mx-4 lg:p-2 xl:w-full'>
                 <SearchIcon />
                 <input
-                  className="border-none focus:border-none focus:ring-0 outline-none w-full placeholder:text-xs placeholder:lg:text-lg smd:text-sm text-gray-700 placeholder-gray-950"
-                  type="text" placeholder={`${props.placeholder ?? props.title}`} onInput={handleSearch} />
-              </div> : <></>}
-            {props.onFilter ?
+                  className='w-full border-none text-gray-700 placeholder-gray-950 outline-none placeholder:text-xs focus:border-none focus:ring-0 smd:text-sm placeholder:lg:text-lg'
+                  type='text'
+                  placeholder={props.placeholder ?? props.title}
+                  onInput={handleSearch}
+                />
+              </div>
+            ) : (
+              <></>
+            )}
+            {props.onFilter ? (
               <div
-                className="flex items-center gap-2 border border-gray-300 rounded-lg px-6 py-3 lg:py-4"
-                onClick={props.onFilter}>
+                className='flex items-center gap-2 rounded-lg border border-gray-300 px-6 py-3 lg:py-4'
+                onClick={props.onFilter}
+              >
                 <FilterIcon />
-                <button className="text-gray-500 text-xs smd:text-sm">Filter</button>
-              </div> : <></>}
-          </div> : <></>}
+                <button className='text-xs text-gray-500 smd:text-sm'>Filter</button>
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
-      {props.filterOptions.length > 0 || props.onBulkSearch ? <div className={"space-y-6 px-6"}>
-          {props.filterOptions.length > 0 ? <ul
-            className="flex flex-col lg:flex-row justify-between items-center text-sm text-gray-500 mb-1 border gap-2 border-[#58bff2] lg:border-gray-200 rounded-xl py-2 px-4">
-            {props.filterOptions.map((option, index) => (
-              <li key={index}>
-                <button
-                  onClick={() => {
-                    handleClick(index, option);
-                  }}
-                  className={`px-5 py-3 border-none ${index === headerIndex ? "bg-[#93dbff] rounded-lg text-black bg-opacity-50" : "text-gray-500"}`}>{option.header} </button>
-              </li>))}
-          </ul> : <></>}
-          {props.onBulkSearch ? <button
-            className="mb-4 text-sm border-2 px-4 py-2 rounded-lg font-semibold transition-colors bg-white text-[#4cb8ed] border-[#58bff2] inline-block"
-            onClick={props.onBulkSearch}>Bulk
-            Action
-          </button> : <></>}
+      {props.filterOptions.length > 0 || props.onBulkSearch ? (
+        <div className={"space-y-6 px-6"}>
+          {props.filterOptions.length > 0 ? (
+            <ul className='mb-1 flex flex-col items-center justify-between gap-2 rounded-xl border border-[#58bff2] px-4 py-2 text-sm text-gray-500 lg:flex-row lg:border-gray-200'>
+              {props.filterOptions.map((option, index) => (
+                <li key={index}>
+                  <button
+                    onClick={() => {
+                      handleClick(index, option);
+                    }}
+                    className={`border-none px-5 py-3 ${index === headerIndex ? "rounded-lg bg-[#93dbff] bg-opacity-50 text-black" : "text-gray-500"}`}
+                  >
+                    {option.header}{" "}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <></>
+          )}
+          {props.onBulkSearch ? (
+            <button
+              className='mb-4 inline-block rounded-lg border-2 border-[#58bff2] bg-white px-4 py-2 text-sm font-semibold text-[#4cb8ed] transition-colors'
+              onClick={props.onBulkSearch}
+            >
+              Bulk Action
+            </button>
+          ) : (
+            <></>
+          )}
         </div>
-        : <></>}
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

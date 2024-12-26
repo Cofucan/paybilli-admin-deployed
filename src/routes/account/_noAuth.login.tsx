@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import Logo from "../../assets/logo.svg";
 import FormField from "../../components/form/FormField.tsx";
-import { useCustomForm } from "../../components/form/useCustomForm.ts";
+import useCustomForm from "../../components/form/useCustomForm.ts";
 import { useAuth } from "../../context/AuthContext.tsx";
 import { customFetch, sleep } from "../../utils/constants.ts";
 import { AuthResponse } from "../../utils/types.ts";
@@ -31,32 +31,30 @@ function RouteComponent() {
       json: data,
     });
     login((await response.json()) as AuthResponse);
-    await sleep(1)
+    await sleep(1);
     await navigate({ to: search.redirect ?? "/" });
   });
 
   return (
-    <div className="bg-light-grey">
-      <div className="mx-auto flex w-[95%] items-center justify-between lg:w-[85%]">
-        <div className="hidden lg:block lg:w-[40%]">
-          <img src={Logo} alt="logo" width={500} />
+    <div className='bg-light-grey'>
+      <div className='mx-auto flex w-[95%] items-center justify-between lg:w-[85%]'>
+        <div className='hidden lg:block lg:w-[40%]'>
+          <img src={Logo} alt='logo' width={500} />
         </div>
-        <div className="w-[96vw] lg:w-[45%]">
-          <div className="my-3 flex items-center justify-center">
-            <img src={Logo} width={100} alt="logo" />
+        <div className='w-[96vw] lg:w-[45%]'>
+          <div className='my-3 flex items-center justify-center'>
+            <img src={Logo} width={100} alt='logo' />
           </div>
-          <div className="mx-4 border border-light-grey-500 bg-white px-4 shadow">
-            <div className="py-5 text-center">
-              <h2 className="text-3xl font-semibold">Admin</h2>
-              <h3 className="pt-5 text-2xl font-normal text-gray-500">
-                Welcome Back
-              </h3>
+          <div className='mx-4 border border-light-grey-500 bg-white px-4 shadow'>
+            <div className='py-5 text-center'>
+              <h2 className='text-3xl font-semibold'>Admin</h2>
+              <h3 className='pt-5 text-2xl font-normal text-gray-500'>Welcome Back</h3>
             </div>
-            <form className="space-y-6 lg:space-y-8" onSubmit={onSubmit}>
+            <form className='space-y-6 lg:space-y-8' onSubmit={onSubmit}>
               <FormField intent={"login"}>
                 <span>Email</span>
                 <FormField.Input
-                  type="email"
+                  type='email'
                   placeholder={"Enter your email address"}
                   intent={"login"}
                   {...register(
@@ -85,21 +83,12 @@ function RouteComponent() {
                 />
                 <FormField.ErrorText error={errors.password} />
               </FormField>
-              <FormField.Button
-                intent={"login"}
-                isSubmitted={isSubmitting}
-                size={"6"}
-              >
+              <FormField.Button intent={"login"} isSubmitted={isSubmitting} size={"6"}>
                 Login
               </FormField.Button>
-              <div className="mx-auto mb-5 flex items-center justify-between lg:gap-5">
-                <p className="text-lg font-light text-gray-500">
-                  Forgot Password?
-                </p>
-                <Link
-                  to="/account/reset-password"
-                  className="text-lg font-light text-gray-500"
-                >
+              <div className='mx-auto mb-5 flex items-center justify-between lg:gap-5'>
+                <p className='text-lg font-light text-gray-500'>Forgot Password?</p>
+                <Link to='/account/reset-password' className='text-lg font-light text-gray-500'>
                   Click Here
                 </Link>
               </div>

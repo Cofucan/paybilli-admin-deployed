@@ -4,7 +4,8 @@ import { twMerge } from "tailwind-merge";
 import clsx, { ClassValue } from "clsx";
 
 export const queryClient = new QueryClient();
-export const customFetch = new CustomFetchClient("http://localhost:8000", {
+export const BASE_URL = "http://localhost:8000"
+export const customFetch = new CustomFetchClient(BASE_URL, {
   credentials: "include",
 });
 
@@ -21,5 +22,5 @@ export function generateUUID() {
 }
 
 export async function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }

@@ -1,7 +1,7 @@
-type HeaderMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
+type HeaderMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 type FetchRequest = {
-  json?: object
-} & RequestInit
+  json?: object;
+} & RequestInit;
 
 class CustomFetchClient {
   baseUrl: string;

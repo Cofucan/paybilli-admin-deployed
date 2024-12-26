@@ -1,8 +1,6 @@
 import { ReactNode, useEffect } from "react";
 import useFilter, { TableFilterHook } from "./useTableFilter";
-import useTablePagination, {
-  TablePaginationConfig,
-} from "./useTablePagination";
+import useTablePagination, { TablePaginationConfig } from "./useTablePagination";
 import useTableSort, { TableSortHook } from "./useTableSort";
 
 export interface TableColumn<T> {
@@ -17,7 +15,7 @@ export function createColumn<T, K extends keyof T & string>(
   options: {
     header: ReactNode;
     cell?: (rowData: T) => ReactNode;
-  }
+  },
 ) {
   const defaultCell = (data: T) => <>{data[key] as ReactNode}</>;
 
@@ -34,10 +32,7 @@ export type TableColumnId<
   Data,
 > = Columns[number]["id"];
 
-export interface TableProps<
-  Columns extends readonly TableColumn<Data>[],
-  Data,
-> {
+export interface TableProps<Columns extends readonly TableColumn<Data>[], Data> {
   columns: Columns;
   data?: Data[];
   pagination?: TablePaginationConfig;
@@ -54,10 +49,7 @@ export interface TableStructure {
   rows: TableCell[][];
 }
 
-export interface CustomTableHook<
-  Columns extends readonly TableColumn<Data>[],
-  Data,
-> {
+export interface CustomTableHook<Columns extends readonly TableColumn<Data>[], Data> {
   pagination: ReturnType<typeof useTablePagination>;
   filter: TableFilterHook<Columns, Data>;
   sort: TableSortHook<Columns, Data>;
@@ -74,11 +66,7 @@ export interface CustomTableHook<
 const useTable = <Columns extends readonly TableColumn<Data>[], Data>(
   props: TableProps<Columns, Data>,
 ): CustomTableHook<Columns, Data> => {
-  const {
-    data = [],
-    pagination: paginationOptions,
-    filter: externalFilter,
-  } = props;
+  const { data = [], pagination: paginationOptions, filter: externalFilter } = props;
 
   const pagination = useTablePagination(paginationOptions ?? {});
   const sort = useTableSort<Columns, Data>();

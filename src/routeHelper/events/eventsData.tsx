@@ -1,32 +1,42 @@
+import { UseNavigateResult } from "@tanstack/react-router";
+import { Dispatch, SetStateAction } from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
-import {
-  createColumn, TableColumn
-} from "../../components/table/hooks/useTable";
+import TableActionDropdown, {
+  TableActionDropdownProps,
+} from "../../components/dropdown/TableActionDropdown";
+import { createColumn, TableColumn } from "../../components/table/hooks/useTable";
+import { EventsGetStatsResponse } from "../../hooks/useEventQuery";
+import { BASE_URL } from "../../utils/constants";
+import { formatDate } from "../../utils/DateFormatter";
+import { Events } from "../../utils/types";
+import BetDetails from "./assets/BetDetails.svg";
+import CloseBet from "./assets/CloseBet.svg";
 import EventStarBlack from "./assets/EventBlack.svg";
 import EventStarGold from "./assets/EventStarGold.svg";
 import EventStarGreen from "./assets/EventStarGreen.svg";
 import EventStarRed from "./assets/EventStarRed.svg";
-import { EventsStatsResponse, EventsTableData } from "./eventsTypes";
+import Eye from "./assets/Eye.svg";
+
 const statusClasses = {
   open: {
-    dot: 'bg-green-600',
-    label: 'bg-green-100 text-green-600',
+    dot: "bg-green-600",
+    label: "bg-green-100 text-green-600",
   },
   closed: {
-    dot: 'bg-red-600',
-    label: 'bg-red-200 text-red-600',
+    dot: "bg-red-600",
+    label: "bg-red-200 text-red-600",
   },
   pending: {
-    dot: 'bg-yellow-600',
-    label: 'bg-yellow-100 text-yellow-600',
+    dot: "bg-yellow-600",
+    label: "bg-yellow-100 text-yellow-600",
   },
   waiting: {
-    dot: 'bg-blue-600',
-    label: 'bg-blue-100 text-blue-600',
+    dot: "bg-blue-600",
+    label: "bg-blue-100 text-blue-600",
   },
-}
+};
 
-export const eventsStats = (data?: EventsStatsResponse) => [
+export const eventsStats = (data?: EventsGetStatsResponse) => [
   { icon: EventStarBlack, count: data?.total_count, label: "Total Bets" },
   { icon: EventStarGreen, count: data?.open_count, label: "Open Bets" },
   {
@@ -41,67 +51,109 @@ export const eventsStats = (data?: EventsStatsResponse) => [
   },
 ];
 
+export interface EventsTableAction {
+  navigate: UseNavigateResult<string>;
+  handleCloseBetButton: ({ id }: { id: number }) => void | Promise<void>;
+}
 
-export const eventsColumn = () => [
-  createColumn("id", { header: "S/N" }),
-  createColumn("creator", {
-    header: "Creator", cell({ creator }) {
-      return (
-        <div className="flex items-center space-x-6">
+export const eventsTableAction = ({
+  navigate,
+  handleCloseBetButton,
+}: EventsTableAction): TableActionDropdownProps<{ id: number; userId: string }>["data"] => [
+    {
+      title: "View Bet Details",
+      icon: BetDetails,
+      onClick: ({ id }) => navigate({ to: "/events/$eventId", params: { eventId: id.toString() } }),
+    },
+    {
+      title: "Close Bet",
+      icon: CloseBet,
+      onClick: handleCloseBetButton,
+    },
+    {
+      title: "View User",
+      icon: Eye,
+      onClick: ({ userId }) => navigate({ to: "/users/$userId", params: { userId } }),
+    },
+  ];
+
+export interface EventsColumn extends EventsTableAction {
+  columnIndex: number | string;
+  setColumnIndex: Dispatch<SetStateAction<number | string>>;
+}
+
+export const eventsColumn = (props: EventsColumn) =>
+  [
+    createColumn("serial_no", { header: "S/N" }),
+    {
+      id: "creator",
+      header: "Creator",
+      cell: ({ creator }) => (
+        <div className='flex items-center space-x-6'>
           <img
-            src={creator.name}
+            src={BASE_URL + creator.profile_image}
             alt={creator.name + "'s Profile Picture"}
-            className="w-8 h-8 rounded-full"
+            className='h-8 w-8 rounded-full'
           />
           <div>
             {/* Access creator fields directly from record */}
-            <p className="font-medium">{creator.name || 'Unknown Creator'}</p>
-            <p className="text-xs text-gray-400">{creator.username || 'No Username'}</p>
+            <p className='font-medium'>{creator.name || "Unknown Creator"}</p>
+            <p className='text-xs text-gray-400'>{creator.username || "No Username"}</p>
           </div>
-        </div>)
-    },
-  }),
-  createColumn("bet_type", { header: "Bet Type" }),
-  createColumn("created_at", {
-    header: "Bet Date", cell({ created_at }) {
-      return new Date(created_at).toDateString()
-    },
-  }),
-  createColumn("due_date", { header: "Due Date" }),
-  createColumn("amount", { header: "Amount" }),
-  // TODO: Set the correct field
-  createColumn("event_type", { header: "Bet" }),
-  createColumn("status", {
-    header: 'Status', cell({ status }) {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-      const statusClass = statusClasses[status] || {
-        dot: 'bg-gray-600',
-        label: 'bg-gray-100 text-gray-600',
-      }
-      return (
-        <div className='flex items-center'>
-          <span className={`w-2 h-2 rounded-full mr-2 ${statusClass.dot}`} />
-          <span
-            className={`px-2 py-1 text-xs rounded-lg font-medium ${statusClass.label}`}
-          >
-            {status}
-          </span>
         </div>
-      )
+      ),
+      filterType: ({ creator }) => creator.name,
     },
-  }),
-  {
-    cell() {
-      return <>
-        <button
-          className='text-gray-400 hover:text-gray-600 text-xl'
-        >
-          <HiOutlineDotsVertical />
-        </button>
-      </>;
+    createColumn("event_type", { header: "Bet Type" }),
+    createColumn("created_at", {
+      header: "Bet Date",
+      cell: ({ created_at }) => formatDate(created_at),
+    }),
+    createColumn("due_date", { header: "Due Date", cell: ({ due_date }) => formatDate(due_date) }),
+    createColumn("amount", { header: "Amount" }),
+    createColumn("event_name", {header: "Event Name"}),
+    createColumn("status", {
+      header: "Status",
+      cell({ status }) {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        const statusClass = statusClasses[status] || {
+          dot: "bg-gray-600",
+          label: "bg-gray-100 text-gray-600",
+        };
+        return (
+          <div className='flex items-center'>
+            <span className={`mr-2 h-2 w-2 rounded-full ${statusClass.dot}`} />
+            <span className={`rounded-lg px-2 py-1 text-xs font-medium ${statusClass.label}`}>
+              {status}
+            </span>
+          </div>
+        );
+      },
+    }),
+    {
+      cell: ({ id, creator }) => (
+        <div className={"relative"}>
+          <button
+            onClick={() => {
+              props.setColumnIndex(id === props.columnIndex ? -1 : id);
+            }}
+            className='text-xl text-gray-400 hover:text-gray-600'
+          >
+            <HiOutlineDotsVertical />
+          </button>
+          {id === props.columnIndex ? (
+            <div className='absolute right-0 z-20'>
+              <TableActionDropdown
+                id={{ id, userId: creator.id.toString() }}
+                data={eventsTableAction(props)}
+              />
+              ,
+            </div>
+          ) : null}
+        </div>
+      ),
+      id: "action",
+      header: "Action",
+      filterType: () => null,
     },
-    id: "action",
-    header: "Action",
-    filterType: () => null
-  }
-] as const satisfies readonly TableColumn<EventsTableData>[]
+  ] as const satisfies readonly TableColumn<Events>[];

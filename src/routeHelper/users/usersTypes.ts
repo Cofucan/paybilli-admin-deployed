@@ -1,3 +1,5 @@
+import { User } from "../../utils/types";
+
 export interface UsersStatisticResponse {
   users: number;
   verified_users: number;
@@ -7,24 +9,6 @@ export interface UsersStatisticResponse {
 }
 
 export interface UsersTableResponse {
-  meta: {
-    totalItems: number;
-    totalPages: number;
-    currentPage: number;
-    itemsPerPage: number;
-  };
-  data: UsersTableData[];
-}
-
-// TODO: Change to User
-export interface UsersTableData {
-  id: number;
-  firstName: string;
-  lastName: string;
-  userName: string;
-  profilePicture: string;
-  email: string;
-  dateRegistered: string;
-  recentActivity: string;
-  status:  'verified' | 'unverified' | 'suspended' | 'deactivated';
+  count: number;
+  results: User[];
 }
