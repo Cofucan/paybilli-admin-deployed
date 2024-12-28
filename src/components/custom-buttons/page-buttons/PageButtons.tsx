@@ -10,8 +10,8 @@ interface PageButtonProps {
 }
 const PageButtons: FC<PageButtonProps> = (props) => {
   return (
-    <div className='my-8 mt-20 flex justify-end'>
-      <div className='mx-2 flex gap-5 lg:mx-0'>
+    <div className='my-8 mt-10 lg:mt-20 flex justify-center smd:justify-end'>
+      <div className='flex flex-col smd:flex-row gap-5'>
         <FormField.Button
           onClick={props.onExportData}
           intent={"admin"}

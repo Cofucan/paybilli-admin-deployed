@@ -61,7 +61,7 @@ export const useUserGetById = (id: string) => {
 export interface UserEditRequest {
   account_status: string;
   role: string;
-  id: string
+  id: string;
 }
 
 export const useUserEdit = () => {

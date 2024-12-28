@@ -96,7 +96,7 @@ function RouteComponent() {
     // Implement the filter functionality here
   }
   return (
-    <main className="mx-8 my-4">
+    <main className="mx-3 lg:mx-8 my-4">
       <StatisticList
         isLoading={statsQuery.isLoading}
         stats={eventsStats(statsQuery.data)}

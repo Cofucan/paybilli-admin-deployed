@@ -6,12 +6,12 @@ interface SubPageHeaderProps extends LinkProps {
 }
 const SubPageHeader: FC<SubPageHeaderProps> = ({ title, ...props }) => {
   return (
-    <div className='mb-10 space-x-4'>
+    <div className='my-10 lg:my-3 mx-4 space-x-4'>
       <Link className='inline-flex items-center gap-2' {...props}>
         <span className='sr-only'>Go Back</span>
         <FaArrowLeftLong className='text-2xl text-black hover:text-black' />
       </Link>
-      <h1 className='inline-block text-xl font-semibold leading-[28px] text-[#1D1D1D] smd:text-[34px]'>
+      <h1 className='inline-block text-xl font-semibold leading-[28px] text-[#1D1D1D] smd:text-[30px]'>
         {title}
       </h1>
     </div>

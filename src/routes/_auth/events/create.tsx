@@ -47,10 +47,10 @@ function RouteComponent() {
     await navigate({ to: '/events' })
   }
   return (
-    <main className="m-8 mr-64">
+    <main className="mx-auto lg:mx-0 w-full lg:w-[70%]">
       <SubPageHeader to="/events" title="Create New Event" />
       <form
-        className="mt-6 grid grid-cols-2 gap-6"
+        className="m-6 grid smd:grid-cols-2 gap-6"
         onSubmit={onSubmit}
         onReset={onReset}
       >
