@@ -102,7 +102,7 @@ function RouteComponent() {
   };
 
   return (
-    <main className='mx-8 my-4'>
+    <main className='mx-3 lg:mx-8 my-4'>
       <StatisticList
         title={"Users Statistic"}
         stats={usersStats(statisticQuery.data)}

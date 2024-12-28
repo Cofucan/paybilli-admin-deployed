@@ -14,7 +14,7 @@ const TableSection: FC<TableSectionProps> = (props) => {
   return (
     <section className='rounded-t-lg bg-white shadow'>
       <TableHeader {...props} />
-      <div className={"p-6 pt-0"}>
+      <div className={"p-6 pt-0 overflow-x-auto"}>
         <TableContent {...props} />
         <TablePagination {...props} />
       </div>

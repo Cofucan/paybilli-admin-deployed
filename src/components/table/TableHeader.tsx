@@ -62,16 +62,16 @@ const TableHeader = (props: TableHeaderProps) => {
         )}
       </div>
       {props.filterOptions.length > 0 || props.onBulkSearch ? (
-        <div className={"space-y-6 px-6"}>
+        <div className={"space-y-6 px-2 relative"}>
           {props.filterOptions.length > 0 ? (
-            <ul className='mb-1 flex flex-col items-center justify-between gap-2 rounded-xl border border-[#58bff2] px-4 py-2 text-sm text-gray-500 lg:flex-row lg:border-gray-200'>
+            <ul className='mb-1 grid grid-cols-3 lg:grid-cols-5 gap-2 rounded-xl border border-[#58bff2] px-1 py-2 text-sm text-gray-500 lg:flex-row lg:border-gray-200'>
               {props.filterOptions.map((option, index) => (
                 <li key={index}>
                   <button
                     onClick={() => {
                       handleClick(index, option);
                     }}
-                    className={`border-none px-5 py-3 ${index === headerIndex ? "rounded-lg bg-[#93dbff] bg-opacity-50 text-black" : "text-gray-500"}`}
+                    className={`border-none px-6 py-3 ${index === headerIndex ? "rounded-lg bg-[#93dbff] bg-opacity-50 text-black" : "text-gray-500"}`}
                   >
                     {option.header}{" "}
                   </button>
