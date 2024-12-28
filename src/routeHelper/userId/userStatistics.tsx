@@ -4,7 +4,6 @@ interface Stat {
   change: string;
 }
 
-
 const UserStatistics = () => {
   const stats: Stat[] = [
     {
@@ -40,16 +39,16 @@ const UserStatistics = () => {
   ];
 
   return (
-    <div className="me-12 mb-10">
-      <div className="mx-auto w-[93%] grid grid-cols-1 gap-6 bg-gray-100 md:grid-cols-2 lg:grid-cols-3">
+    <div className='mb-10 me-12'>
+      <div className='mx-auto grid w-[93%] grid-cols-1 gap-6 bg-gray-100 md:grid-cols-2 lg:grid-cols-3'>
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="rounded-lg bg-white px-6 py-5 text-left shadow-md shadow-[#dff2fc] transition-shadow duration-200 ease-in-out hover:shadow-lg"
+            className='rounded-lg bg-white px-6 py-5 text-left shadow-md shadow-[#dff2fc] transition-shadow duration-200 ease-in-out hover:shadow-lg'
           >
-            <h4 className="text-sm font-medium text-black">{stat.title}</h4>
-            <p className="text-2xl font-semibold">{stat.amount}</p>
-            <p className="text-sm text-gray-500">{stat.change}</p>
+            <h4 className='text-sm font-medium text-black'>{stat.title}</h4>
+            <p className='text-2xl font-semibold'>{stat.amount}</p>
+            <p className='text-sm text-gray-500'>{stat.change}</p>
           </div>
         ))}
       </div>

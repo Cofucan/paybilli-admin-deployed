@@ -62,7 +62,7 @@ export const usersStats = (data?: UsersStatisticResponse) => [
 
 interface UsersTableAction {
   navigate: UseNavigateResult<string>;
-  tableMutationAction:  UseMutationResult<User, Error, UserChangeStatusRequest>
+  tableMutationAction: UseMutationResult<User, Error, UserChangeStatusRequest>;
 }
 
 export const usersTableAction = ({ navigate, tableMutationAction }: UsersTableAction) => [
@@ -136,9 +136,7 @@ export const usersColumns = (props: UsersColumn) =>
     createColumn("email", { header: "Email Address" }),
     createColumn("date_joined", {
       header: "Date Registered",
-      cell: ({ date_joined }) => (
-        <>{formatDate(date_joined)}</>
-      ),
+      cell: ({ date_joined }) => <>{formatDate(date_joined)}</>,
     }),
     createColumn("recent_activity", {
       header: "Recent Activity",
@@ -149,7 +147,9 @@ export const usersColumns = (props: UsersColumn) =>
       cell: ({ account_status }) => (
         <div className='flex items-center'>
           <span className={`mr-2 h-2 w-2 rounded-full ${userStatusClasses[account_status].dot}`} />
-          <span className={`rounded-lg px-2 py-1 text-xs ${userStatusClasses[account_status].label}`}>
+          <span
+            className={`rounded-lg px-2 py-1 text-xs ${userStatusClasses[account_status].label}`}
+          >
             {account_status}
           </span>
         </div>

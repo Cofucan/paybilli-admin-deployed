@@ -19,7 +19,7 @@ export const useWalletGetStats = () => {
   return useQuery({
     queryKey: QUERY_KEY.getStats,
     queryFn: async () => {
-      const res = await customFetch.get(`app_admin/wallet/stats/`);
+      const res = await customFetch.get(`app_admin/wallets/stats/`);
       return (await res.json()) as WalletGetStatsResponse;
     },
   });
@@ -30,9 +30,10 @@ export const useWalletGetByName = (name: string, enabled: boolean) => {
     queryKey: QUERY_KEY.getByName(name),
     queryFn: async () => {
       const res = await customFetch.get(`app_admin/wallets/?user=${name}`);
-      const data = (await res.json())
+      const data = await res.json();
       return data as PaginationResponse<Wallet>;
-    }, enabled
+    },
+    enabled,
   });
 };
 
@@ -50,7 +51,7 @@ export const useWalletGetTable = (params: WalletGetTableRequest) => {
       if (params.search) search.append("search", params.search.toString());
       if (params.status) search.append("status", params.status.toString());
       if (params.page_size) search.append("page_size", params.page_size.toString());
-      const res = await customFetch.get(`app_admin/wallet/?${search.toString()}`);
+      const res = await customFetch.get(`app_admin/wallets/?${search.toString()}`);
       return (await res.json()) as PaginationResponse<Wallet>;
     },
   });

@@ -4,7 +4,6 @@ import Modal from "../../components/modal/Modal";
 import { AccountChangePasswordRequest } from "../../hooks/useAccount";
 import { SettingModalFormProps } from "./settingTypes";
 
-
 const SettingChangePasswordFormModal: FC<SettingModalFormProps<AccountChangePasswordRequest>> = ({
   form,
   isModalVisible,

@@ -12,15 +12,13 @@ export const useAccountGetUser = (enabled = () => true) => {
     queryKey: QUERY_KEY.get,
     retry: 0,
     staleTime: 0,
-    
+
     queryFn: async () => {
       const res = await customFetch.get(`account/user-details/`);
-      console.log(res.ok);
-      
-      if (!res.ok) throw new Error("")
+      if (!res.ok) throw new Error("");
       return (await res.json()) as User;
     },
-    enabled
+    enabled,
   });
 };
 export const useAccountEditUser = () => {
@@ -38,15 +36,30 @@ export const useAccountEditUser = () => {
 };
 
 export interface AccountChangePasswordRequest {
-  old_password: string
-  new_password: string
-  confirm_new_password: string
+  old_password: string;
+  new_password: string;
+  confirm_new_password: string;
 }
 export const useAccountChangePassword = () => {
   return useMutation({
     mutationFn: async (json: AccountChangePasswordRequest) => {
       const res = await customFetch.post(`account/change-password/`, { json });
       return (await res.json()) as User;
-    }
+    },
   });
-}
+};
+
+export const useAccountChangePicture = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (file: File) => {
+      const body = new FormData();
+      body.append("profile_image", file);
+      const res = await customFetch.put(`account/user-details/`, { body });
+      return (await res.json()) as User;
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: [ACCOUNT] });
+    },
+  });
+};

@@ -33,7 +33,7 @@ export const objectToFormData = (obj: Record<string, never>): FormData => {
   const formData: FormData = new FormData();
 
   // Recursive function to handle nested objects
-  const appendFormData = (data: Record<string, never>, path = ''): void => {
+  const appendFormData = (data: Record<string, never>, path = ""): void => {
     // @ts-expect-error It is recursive
     if ([null, undefined].includes(data)) {
       return;
@@ -46,7 +46,7 @@ export const objectToFormData = (obj: Record<string, never>): FormData => {
       });
     } else if (data instanceof File) {
       formData.append(path, data);
-    } else if (typeof data === 'object') {
+    } else if (typeof data === "object") {
       Object.entries(data).forEach(([key, value]: [string, Record<string, never>]) => {
         const newPath: string = path ? `${path}.${key}` : key;
         appendFormData(value, newPath);
@@ -59,4 +59,4 @@ export const objectToFormData = (obj: Record<string, never>): FormData => {
   appendFormData(obj);
 
   return formData;
-}
+};

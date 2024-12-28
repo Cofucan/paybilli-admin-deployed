@@ -5,11 +5,11 @@ import { SettingModalFormProps } from "./settingTypes";
 import { User } from "../../utils/types";
 
 const SettingEditProfileFormModal: FC<SettingModalFormProps<User>> = ({
-                                                                        form,
-                                                                        isModalVisible,
-                                                                        setIsModalVisible,
-                                                                        onSubmit,
-                                                                      }) => {
+  form,
+  isModalVisible,
+  setIsModalVisible,
+  onSubmit,
+}) => {
   const onEditProfile = form.handleSubmit(async (data) => {
     // TODO: Use Query Mutation
     setIsModalVisible(false);
@@ -29,19 +29,19 @@ const SettingEditProfileFormModal: FC<SettingModalFormProps<User>> = ({
     <Modal
       isVisible={isModalVisible}
       toggleVisibility={toggleModalVisible}
-      title={<h2 className="text-xl font-medium">Edit Profile</h2>}
+      title={<h2 className='text-xl font-medium'>Edit Profile</h2>}
       showClose={false}
     >
       <form
         onSubmit={onEditProfile}
         onReset={onEditProfileReset}
-        className="my-5 min-w-96 space-y-5"
+        className='my-5 min-w-96 space-y-5'
       >
         <FormField intent={"admin"}>
           <span>First Name</span>
           <FormField.Input
             intent={"admin"}
-            placeholder="Oke Chinedu"
+            placeholder='Oke Chinedu'
             {...form.register(
               "first_name",
               form.formErrorHelper("First Name", {
@@ -57,7 +57,7 @@ const SettingEditProfileFormModal: FC<SettingModalFormProps<User>> = ({
           <span>Last Name</span>
           <FormField.Input
             intent={"admin"}
-            placeholder="Oke Chinedu"
+            placeholder='Oke Chinedu'
             {...form.register(
               "last_name",
               form.formErrorHelper("Last Name", {
@@ -71,36 +71,42 @@ const SettingEditProfileFormModal: FC<SettingModalFormProps<User>> = ({
         </FormField>
         <FormField intent={"admin"}>
           <span>Username</span>
-          <FormField.Input intent={"admin"} placeholder="Oke chinozy" {...form.register(
-            "username",
-            form.formErrorHelper("Username", {
-              isRequired: true,
-              minLength: 3,
-            }),
-          )}
-                           aria-invalid={form.formState.errors.username ? "true" : "false"} />
-          <FormField.ErrorText
-            error={form.formState.errors.username}
-
+          <FormField.Input
+            intent={"admin"}
+            placeholder='Oke chinozy'
+            {...form.register(
+              "username",
+              form.formErrorHelper("Username", {
+                isRequired: true,
+                minLength: 3,
+              }),
+            )}
+            aria-invalid={form.formState.errors.username ? "true" : "false"}
           />
+          <FormField.ErrorText error={form.formState.errors.username} />
         </FormField>
         <FormField intent={"admin"}>
           <span>Phone number</span>
-          <FormField.Input intent={"admin"} type="number" placeholder="08032324356" {...form.register(
-            "phone_number",
-            form.formErrorHelper("Phone Number", {
-              isRequired: true,
-            }),
-          )}
-                           aria-invalid={form.formState.errors.phone_number ? "true" : "false"} />
+          <FormField.Input
+            intent={"admin"}
+            type='number'
+            placeholder='08032324356'
+            {...form.register(
+              "phone_number",
+              form.formErrorHelper("Phone Number", {
+                isRequired: true,
+              }),
+            )}
+            aria-invalid={form.formState.errors.phone_number ? "true" : "false"}
+          />
           <FormField.ErrorText error={form.formState.errors.phone_number} />
         </FormField>
-        <div className="flex items-center justify-between">
+        <div className='flex items-center justify-between'>
           <FormField.Button
             intent={"admin"}
             themeSize={"3"}
             themeColor={"rounded-grey"}
-            type="reset"
+            type='reset'
           >
             Cancel
           </FormField.Button>

@@ -1,11 +1,12 @@
 import { createFileRoute, Navigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useAuth } from "../../../context/AuthContext.tsx";
 import useCustomForm from "../../../components/form/useCustomForm.ts";
 import { User } from "../../../utils/types.ts";
 import {
   AccountChangePasswordRequest,
   useAccountChangePassword,
+  useAccountChangePicture,
   useAccountEditUser,
 } from "../../../hooks/useAccount.ts";
 import ProfileSection from "../../../routeHelper/Settings/ProfileSection.tsx";
@@ -21,14 +22,15 @@ function RouteComponent() {
   const [isModalPassword, setIsModalPassword] = useState<boolean>(false);
   const { user } = useAuth();
 
-  const editProfileForm = useCustomForm<User>({
-    defaultValues: user.data,
-  });
+  const editProfileForm = useCustomForm<User>({ defaultValues: user.data });
   const editProfileMutation = useAccountEditUser();
+
   const resetPasswordForm = useCustomForm<AccountChangePasswordRequest>();
   const resetPasswordMutation = useAccountChangePassword();
 
-  if (!user.data) return <Navigate to="/account/login" />;
+  const changePictureMutation = useAccountChangePicture();
+
+  if (!user.data) return <Navigate to='/account/login' />;
 
   const toggleModalPassword = () => {
     setIsModalPassword(!isModalPassword);
@@ -45,21 +47,23 @@ function RouteComponent() {
     resetPasswordMutation.mutate(data);
   }
 
-
-  function handleEditImage() {
-    // TODO: Handle Profile Image Change
+  async function handleEditImage(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    await changePictureMutation.mutateAsync(file);
   }
 
   return (
-    <div className="ml-14 mr-20">
-      <h1 className="py-10 text-[34px] font-semibold leading-[28px] text-[#1D1D1D] xl:py-5">
+    <div className='ml-14 mr-20'>
+      <h1 className='py-10 text-[34px] font-semibold leading-[28px] text-[#1D1D1D] xl:py-5'>
         Settings
       </h1>
       <ProfileSection
         user={user.data}
         onEditImage={handleEditImage}
         onEditPassword={toggleModalPassword}
-        onEditProfile={toggleModalVisible} />
+        onEditProfile={toggleModalVisible}
+      />
       <SettingChangePasswordFormModal
         form={resetPasswordForm}
         isModalVisible={isModalPassword}

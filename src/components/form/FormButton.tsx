@@ -7,7 +7,7 @@ export const buttonVariants = cva("", {
   variants: {
     themeColor: {
       "full-blue": "bg-[#4cb8ed] border border-gray-100 text-white",
-      "rounded-blue": "bg-white border-[#4cb8ed] text-[#4cb8ed]",
+      "rounded-blue": "border bg-white border-[#4cb8ed] text-[#4cb8ed]",
       "rounded-grey": "border-2 border-gray-200",
     },
     themeSize: {

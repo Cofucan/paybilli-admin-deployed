@@ -42,7 +42,7 @@ export const useEventsGetTable = (params: EventsGetTableRequest) => {
       if (params.page_size) search.append("page_size", params.page_size.toString());
       const res = await customFetch.get(`app_admin/events/?${search.toString()}`);
       const data = (await res.json()) as PaginationResponse<Events>;
-      return {...data, results: data.results.map((x, i) => ({...x, serial_no: i+1}))}
+      return { ...data, results: data.results.map((x, i) => ({ ...x, serial_no: i + 1 })) };
     },
   });
 };
@@ -78,3 +78,17 @@ export const useEventsCreate = () => {
   });
 };
 
+export const useEventsCloseByIdBet = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: number) => {
+      const res = await customFetch.post(`/app_admin/events/${id.toString()}/status/`, {
+        json: { status: "closed" },
+      });
+      return (await res.json()) as Events;
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: [EVENTS] });
+    },
+  });
+};

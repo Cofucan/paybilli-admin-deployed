@@ -4,7 +4,7 @@ import { inputVariants } from "./FormInput";
 import { VariantProps } from "class-variance-authority";
 
 type SelectProps = {
-  options: { title?: string, value: string }[];
+  options: { title?: string; value: string }[];
 } & VariantProps<typeof inputVariants> &
   ComponentPropsWithoutRef<"select">;
 
@@ -13,11 +13,7 @@ const FormSelect = forwardRef<HTMLSelectElement, SelectProps>(function CustomSel
   ref,
 ) {
   return (
-    <select
-      ref={ref}
-      {...props}
-      className={cn(inputVariants({ intent }), className)}
-    >
+    <select ref={ref} {...props} className={cn(inputVariants({ intent }), className)}>
       {options.map((x, i) => (
         <option value={x.value} key={i} disabled={!x.value}>
           {x.title}

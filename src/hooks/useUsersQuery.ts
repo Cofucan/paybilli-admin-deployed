@@ -61,7 +61,7 @@ export const useUserGetById = (id: string) => {
 export interface UserEditRequest {
   account_status: string;
   role: string;
-  id: string
+  id: string;
 }
 
 export const useUserEdit = () => {
@@ -69,6 +69,24 @@ export const useUserEdit = () => {
   return useMutation({
     mutationFn: async (json: UserEditRequest) => {
       const res = await customFetch.put(`/app_admin/users/${json.id}/`, { json });
+      return (await res.json()) as User;
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: [USER] });
+    },
+  });
+};
+export interface UserChangePictureRequest {
+  id: string;
+  file: File;
+}
+export const useUserChangePicture = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, file }: UserChangePictureRequest) => {
+      const body = new FormData();
+      body.append("profile_image", file);
+      const res = await customFetch.put(`/app_admin/users/${id}/`, { body });
       return (await res.json()) as User;
     },
     onSuccess: async () => {

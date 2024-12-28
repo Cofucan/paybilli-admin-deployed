@@ -13,8 +13,7 @@ import EventStarBlack from "./assets/EventBlack.svg";
 import EventStarGold from "./assets/EventStarGold.svg";
 import EventStarGreen from "./assets/EventStarGreen.svg";
 import EventStarRed from "./assets/EventStarRed.svg";
-import Info from './assets/Info Circle.svg';
-
+import Info from "./assets/Info Circle.svg";
 
 const statusClasses = {
   open: {
@@ -50,23 +49,21 @@ export const escrowStats = (data?: EventsGetStatsResponse) => [
   },
 ];
 
-
 export const escrowTableAction = ({
   navigate,
   handleCloseBetButton,
 }: EventsTableAction): TableActionDropdownProps<{ id: number; userId: string }>["data"] => [
-    {
-      title: "View Bet Details",
-      icon: BetDetails,
-      onClick: ({ id }) => navigate({ to: "/events/$eventId", params: { eventId: id.toString() } }),
-    },
-    {
-      title: "Close Bet",
-      icon: CloseBet,
-      onClick: handleCloseBetButton,
-    },
-  ];
-
+  {
+    title: "View Bet Details",
+    icon: BetDetails,
+    onClick: ({ id }) => navigate({ to: "/events/$eventId", params: { eventId: id.toString() } }),
+  },
+  {
+    title: "Close Bet",
+    icon: CloseBet,
+    onClick: handleCloseBetButton,
+  },
+];
 
 export const escrowColumn = (props: EventsColumn) =>
   [
@@ -74,9 +71,13 @@ export const escrowColumn = (props: EventsColumn) =>
     createColumn("id", { header: "Bet ID" }),
     createColumn("participants", {
       header: "Participants",
-      cell: ({ participants }) => <div className="text-gray-500 space-x-2">
-        <span className="sr-only">Participants Size</span>{participants.length}
-        <img src={Info} alt="" className="inline-block size-5" />   </div>
+      cell: ({ participants }) => (
+        <div className='space-x-2 text-gray-500'>
+          <span className='sr-only'>Participants Size</span>
+          {participants.length}
+          <img src={Info} alt='' className='inline-block size-5' />{" "}
+        </div>
+      ),
     }),
     createColumn("event_type", { header: "Bet Type" }),
     createColumn("created_at", {
@@ -85,7 +86,7 @@ export const escrowColumn = (props: EventsColumn) =>
     }),
     createColumn("due_date", { header: "Due Date", cell: ({ due_date }) => formatDate(due_date) }),
     createColumn("amount", { header: "Amount" }),
-    createColumn("event_name", {header: "Event Name"}),
+    createColumn("event_name", { header: "Event Name" }),
     createColumn("status", {
       header: "Status",
       cell({ status }) {

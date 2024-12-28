@@ -8,11 +8,11 @@ export const Route = createFileRoute("/_auth")({
 });
 
 function RouteComponent() {
-  const { user } = useAuth()
-  const location = useLocation()
-  
+  const { user } = useAuth();
+  const location = useLocation();
+
   if (user.isError) {
-    return <Navigate to="/account/login" search={{ redirect: location.hash }} />
+    return <Navigate to='/account/login' search={{ redirect: location.hash }} />;
   }
   return (
     <div className='layout grid h-screen grid-cols-[auto_1fr] overflow-y-hidden'>

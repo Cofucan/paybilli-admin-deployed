@@ -7,8 +7,8 @@ interface RouterContext {
 }
 
 const RouteComponent: React.FC = () => {
-  const { user } = useAuth()
-  if (user.isLoading) return <LoadingSpinner size={"10"} />
+  const { user } = useAuth();
+  if (user.isLoading) return <LoadingSpinner size={"10"} />;
   return <Outlet />;
 };
 

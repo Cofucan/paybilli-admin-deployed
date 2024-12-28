@@ -60,22 +60,22 @@ export const eventsTableAction = ({
   navigate,
   handleCloseBetButton,
 }: EventsTableAction): TableActionDropdownProps<{ id: number; userId: string }>["data"] => [
-    {
-      title: "View Bet Details",
-      icon: BetDetails,
-      onClick: ({ id }) => navigate({ to: "/events/$eventId", params: { eventId: id.toString() } }),
-    },
-    {
-      title: "Close Bet",
-      icon: CloseBet,
-      onClick: handleCloseBetButton,
-    },
-    {
-      title: "View User",
-      icon: Eye,
-      onClick: ({ userId }) => navigate({ to: "/users/$userId", params: { userId } }),
-    },
-  ];
+  {
+    title: "View Bet Details",
+    icon: BetDetails,
+    onClick: ({ id }) => navigate({ to: "/events/$eventId", params: { eventId: id.toString() } }),
+  },
+  {
+    title: "Close Bet",
+    icon: CloseBet,
+    onClick: handleCloseBetButton,
+  },
+  {
+    title: "View User",
+    icon: Eye,
+    onClick: ({ userId }) => navigate({ to: "/users/$userId", params: { userId } }),
+  },
+];
 
 export interface EventsColumn extends EventsTableAction {
   columnIndex: number | string;
@@ -111,7 +111,7 @@ export const eventsColumn = (props: EventsColumn) =>
     }),
     createColumn("due_date", { header: "Due Date", cell: ({ due_date }) => formatDate(due_date) }),
     createColumn("amount", { header: "Amount" }),
-    createColumn("event_name", {header: "Event Name"}),
+    createColumn("event_name", { header: "Event Name" }),
     createColumn("status", {
       header: "Status",
       cell({ status }) {

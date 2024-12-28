@@ -48,7 +48,7 @@ export type UserStatus = "verified" | "unverified" | "deactivated" | "suspended"
 
 export interface Events {
   id: number;
-  serial_no: number,
+  serial_no: number;
   creator: {
     id: number;
     username: string;

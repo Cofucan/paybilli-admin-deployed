@@ -1,10 +1,15 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import PageButtons from "../../components/custom-buttons/page-buttons/PageButtons";
+import ConfirmationModal from "../../components/modal/ConfirmationModal.tsx";
 import StatisticList from "../../components/statistic/StatisticList";
 import useTable from "../../components/table/hooks/useTable";
 import TableSection from "../../components/table/TableSection";
-import { useEscrowGetStats, useEscrowGetTable } from "../../hooks/useEscrowQuery";
+import {
+  useEscrowCloseByIdBet,
+  useEscrowGetStats,
+  useEscrowGetTable,
+} from "../../hooks/useEscrowQuery";
 import { EventsGetTableRequest } from "../../hooks/useEventQuery";
 import { escrowColumn } from "../../routeHelper/escrow/escrowData";
 import { eventsStats } from "../../routeHelper/events/eventsData";
@@ -14,17 +19,24 @@ export const Route = createFileRoute("/_auth/escrow")({
 });
 
 function RouteComponent() {
-  const [tableData, setTableData] = useState<EventsGetTableRequest>({})
-  const statsQuery = useEscrowGetStats()
-  const tableQuery = useEscrowGetTable(tableData)
-  const [columnIndex, setColumnIndex] = useState<string | number>(-1)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const [columnIndex, setColumnIndex] = useState<string | number>(-1);
+  const [tableData, setTableData] = useState<EventsGetTableRequest>({});
+  const [closeBetIndex, setCloseBetIndex] = useState<string | number>(-1);
+
+  const statsQuery = useEscrowGetStats();
+  const tableQuery = useEscrowGetTable(tableData);
+  const closeByIdQuery = useEscrowCloseByIdBet();
+
   const columns = escrowColumn({
     columnIndex,
     setColumnIndex,
     navigate,
-    handleCloseBetButton,
-  })
+    handleCloseBetButton: ({ id }: { id: number }) => {
+      setCloseBetIndex(id);
+    },
+  });
   const { structure, pagination, filter } = useTable({
     columns,
     data: tableQuery.data?.results,
@@ -33,85 +45,108 @@ function RouteComponent() {
       itemsPerPage: 20,
       totalItems: tableQuery.data?.count ?? -1,
     },
-  })
+  });
 
   const tableHeaderData = [
     {
-      header: 'All Bet',
+      header: "All Bet",
       onClick: () => {
-        filter.remove('status')
+        filter.remove("status");
       },
     },
     {
-      header: 'Open Bet',
+      header: "Open Bet",
       onClick: () => {
-        filter.set('status', 'open')
+        filter.set("status", "open");
       },
     },
     {
-      header: 'Pending Bet',
+      header: "Pending Bet",
       onClick: () => {
-        filter.set('status', 'pending')
+        filter.set("status", "pending");
       },
     },
     {
-      header: 'Closed Bet',
+      header: "Closed Bet",
       onClick: () => {
-        filter.set('status', 'closed')
+        filter.set("status", "closed");
       },
     },
     {
-      header: 'Waiting for Approval',
+      header: "Waiting for Approval",
       onClick: () => {
-        filter.set('status', 'waiting')
+        filter.set("status", "waiting");
       },
     },
-  ]
+  ];
 
   useEffect(() => {
     setTableData({
       page_size: pagination.itemsPerPage,
       page: pagination.currentPage,
-      status: filter.get('status'),
-      search: filter.get('event_name'),
-    })
+      status: filter.get("status"),
+      search: filter.get("event_name"),
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter.data, pagination.itemsPerPage, pagination.currentPage])
+  }, [filter.data, pagination.itemsPerPage, pagination.currentPage]);
 
   const handleSearch = (search: string) => {
-    filter.set('event_name', search)
-  }
+    filter.set("event_name", search);
+  };
 
   const handleExportData = () => {
     // Implement the export data functionality here
-  }
-
-  function handleCloseBetButton() {
-    // Implement the handle close bet button functionality here
-  }
+  };
 
   const handleFilter = () => {
     // Implement the filter functionality here
+  };
+  async function handleCloseBetButton(id: number) {
+    await closeByIdQuery.mutateAsync(id);
   }
 
   return (
-    <main className="mx-8 my-4">
+    <main className='mx-8 my-4'>
       <StatisticList
         isLoading={statsQuery.isLoading}
         stats={eventsStats(statsQuery.data)}
-        title={'Escrow Bets'}
+        title={"Escrow Bets"}
       />
-      <PageButtons
-        onExportData={handleExportData} addText={""} />
+      <PageButtons onExportData={handleExportData} addText={""} />
       <TableSection
-        title={'Latest Actions'}
+        title={"Latest Actions"}
         {...pagination}
         onSearch={handleSearch}
         filterOptions={tableHeaderData}
         structure={structure}
-        placeholder={'Search Bets'}
+        placeholder={"Search Bets"}
         onFilter={handleFilter}
       />
+      {(tableQuery.data?.results ?? [])
+        .filter((x) => x.id === closeBetIndex)
+        .map((x) => {
+          return (
+            <ConfirmationModal
+              key={x.id}
+              isVisible={true}
+              toggleVisibility={() => {
+                setCloseBetIndex(-1);
+              }}
+              data={x.id}
+              title={"Close Bet?"}
+              text={
+                <p className='mb-6 text-sm text-gray-500'>
+                  Are you certain you want to close this bet?
+                </p>
+              }
+              btn={{
+                title: "Close Bet",
+                className: "bg-red-600 text-white",
+                onClose: handleCloseBetButton,
+              }}
+            />
+          );
+        })}
     </main>
-  )
+  );
 }
