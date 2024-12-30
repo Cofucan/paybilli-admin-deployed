@@ -62,7 +62,7 @@ const TableHeader = (props: TableHeaderProps) => {
         )}
       </div>
       {props.filterOptions.length > 0 || props.onBulkSearch ? (
-        <div className={"space-y-6 px-2 relative"}>
+        <div className={"space-y-6 px-6 relative"}>
           {props.filterOptions.length > 0 ? (
             <ul className='mb-1 grid grid-cols-3 lg:grid-cols-5 gap-2 rounded-xl border border-[#58bff2] px-1 py-2 text-sm text-gray-500 lg:flex-row lg:border-gray-200'>
               {props.filterOptions.map((option, index) => (

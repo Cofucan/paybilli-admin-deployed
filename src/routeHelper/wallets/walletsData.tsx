@@ -1,11 +1,3 @@
-import BetDetails from "./assets/BetDetails.svg";
-import FreezeIcon from "./assets/Freeze.svg";
-import DeleteIcon from "./assets/Delete.svg";
-import verifyCheck from "./assets/Verified.svg";
-import TotalWallet from "./assets/TotalWallet.svg";
-import ActiveWallet from "./assets/ActiveWallet.svg";
-import FrozenWallet from "./assets/FrozenWallet.svg";
-import DeletedWallet from "./assets/DeletedWallet.svg";
 import { UseNavigateResult } from "@tanstack/react-router";
 import { Dispatch, SetStateAction } from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
@@ -13,26 +5,31 @@ import TableActionDropdown, {
   TableActionDropdownProps,
 } from "../../components/dropdown/TableActionDropdown";
 import { createColumn, TableColumn } from "../../components/table/hooks/useTable";
+import { WalletGetStatsResponse } from "../../hooks/useWalletQuery.ts";
 import { formatDate } from "../../utils/DateFormatter";
 import { Wallet } from "../../utils/types";
-import { WalletGetStatsResponse } from "../../hooks/useWalletQuery.ts";
+import ActiveWallet from "./assets/ActiveWallet.svg";
+import BetDetails from "./assets/BetDetails.svg";
+import DeleteIcon from "./assets/Delete.svg";
+import DeletedWallet from "./assets/DeletedWallet.svg";
+import FreezeIcon from "./assets/Freeze.svg";
+import FrozenWallet from "./assets/FrozenWallet.svg";
+import TotalWallet from "./assets/TotalWallet.svg";
+import verifyCheck from "./assets/Verified.svg";
+import { capitalizeFirstLetter } from "../../utils/constants.ts";
 
 const statusClasses = {
-  open: {
+  active: {
     dot: "bg-green-600",
     label: "bg-green-100 text-green-600",
   },
-  closed: {
+  inactive: {
     dot: "bg-red-600",
     label: "bg-red-200 text-red-600",
   },
-  pending: {
+  frozen: {
     dot: "bg-yellow-600",
     label: "bg-yellow-100 text-yellow-600",
-  },
-  waiting: {
-    dot: "bg-blue-600",
-    label: "bg-blue-100 text-blue-600",
   },
 };
 
@@ -56,69 +53,55 @@ export const walletsTableAction = (
   id: number;
   userId: string;
 }>["data"] => [
-  {
-    title: "View User",
-    icon: BetDetails,
-    onClick: ({ id }) =>
-      props.navigate({ to: "/users/$userId", params: { userId: id.toString() } }),
-  },
-  {
-    title: "Freeze Wallet",
-    icon: FreezeIcon,
-    onClick: props.handleFreezeButton,
-  },
-  {
-    title: "Activate Wallet",
-    icon: verifyCheck,
-    onClick: props.handleActivateButton,
-  },
-  {
-    title: "Delete Wallet",
-    icon: DeleteIcon,
-    onClick: props.handleDeleteButton,
-  },
-];
+    {
+      title: "View User",
+      icon: BetDetails,
+      onClick: ({ id }) =>
+        props.navigate({ to: "/users/$userId", params: { userId: id.toString() } }),
+    },
+    {
+      title: "Freeze Wallet",
+      icon: FreezeIcon,
+      onClick: props.handleFreezeButton,
+    },
+    {
+      title: "Activate Wallet",
+      icon: verifyCheck,
+      onClick: props.handleActivateButton,
+    },
+    {
+      title: "Delete Wallet",
+      icon: DeleteIcon,
+      onClick: props.handleDeleteButton,
+    },
+  ];
 
 interface WalletsColumn extends WalletsTableAction {
+  checkboxId: string
   columnIndex: number | string;
   setColumnIndex: Dispatch<SetStateAction<number | string>>;
 }
 
 export const walletsColumn = (props: WalletsColumn) =>
   [
-    createColumn("id", { header: "S/N" }),
     {
-      id: "creator",
-      header: "Creator",
-      cell: ({ creator }) => (
-        <div className='flex items-center space-x-6'>
-          <img
-            src={creator.name}
-            alt={creator.name + "'s Profile Picture"}
-            className='h-8 w-8 rounded-full'
-          />
-          <div>
-            {/* Access creator fields directly from record */}
-            <p className='font-medium'>{creator.name || "Unknown Creator"}</p>
-            <p className='text-xs text-gray-400'>{creator.username || "No Username"}</p>
-          </div>
-        </div>
+      id: "checkbox-data",
+      header: <></>,
+      cell: ({ id }) => (
+        <input type={"checkbox"} name={id.toString()} className={`${props.checkboxId} rounded`} />
       ),
-      filterType: ({ creator }) => creator.name,
-    },
-    createColumn("event_type", { header: "Bet Type" }),
-    createColumn("created_at", {
-      header: "Bet Date",
-      cell: ({ created_at }) => formatDate(created_at),
-    }),
-    createColumn("due_date", { header: "Due Date", cell: ({ due_date }) => formatDate(due_date) }),
-    createColumn("amount", { header: "Amount" }),
-    {
-      id: "bet",
-      header: "Bet",
-      cell: () => "-----------",
       filterType: () => null,
+    }, 
+    createColumn("wallet_id", { header: "Wallet ID" }),
+    {
+      id: "recent_activity",
+      header: <>Recent Activity	</>,
+      cell: () => <>Transaction </>,
+      filterType: () => null
     },
+    createColumn("currency", { header: "Wallet Type" }),
+    createColumn("balance", { header: "Balance", }),
+    createColumn("created_at", { header: "Due Date", cell: ({ created_at }) => formatDate(created_at) }),
     createColumn("status", {
       header: "Status",
       cell({ status }) {
@@ -131,14 +114,14 @@ export const walletsColumn = (props: WalletsColumn) =>
           <div className='flex items-center'>
             <span className={`mr-2 h-2 w-2 rounded-full ${statusClass.dot}`} />
             <span className={`rounded-lg px-2 py-1 text-xs font-medium ${statusClass.label}`}>
-              {status}
+              {capitalizeFirstLetter(status)}
             </span>
           </div>
         );
       },
     }),
     {
-      cell: ({ id, creator }) => (
+      cell: ({ id, owner }) => (
         <div className={"relative"}>
           <button
             onClick={() => {
@@ -151,8 +134,8 @@ export const walletsColumn = (props: WalletsColumn) =>
           {id === props.columnIndex ? (
             <div className='absolute right-0 z-20'>
               <TableActionDropdown
-                id={{ id, userId: creator.id.toString() }}
-                data={WalletsTableAction(props)}
+                id={{ id, userId: owner.id.toString() }}
+                data={walletsTableAction(props)}
               />
               ,
             </div>

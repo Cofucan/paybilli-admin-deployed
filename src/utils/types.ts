@@ -86,11 +86,19 @@ export type EventsStatus = "open" | "pending" | "closed" | "waiting";
 
 export interface Wallet {
   id: number;
-  status: string;
+  user: number;
+  status: WalletStatus;
+  transactions: never[];
+  owner: {
+    id: number;
+    username: string;
+    name: string;
+    profile_image_url: string;
+  };
   currency: string;
   balance: string;
+  wallet_id: string | null;
   created_at: string;
   last_top_up_at: null;
-  user: number;
 }
 export type WalletStatus = "active" | "inactive" | "frozen";
