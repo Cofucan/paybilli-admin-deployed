@@ -1,6 +1,5 @@
 import { ComponentPropsWithoutRef, FC, KeyboardEvent, useCallback, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { cn } from "../../utils/constants.ts";
 import FormInput from "../form/FormInput.tsx";
 
 export interface FormOtpProps {
@@ -90,7 +89,6 @@ const FormOtp: FC<FormOtpProps> = ({ length = 4, className, inputProps, name }) 
           }}
           aria-label={`OTP digit ${(index + 1).toString()}`}
           name={`${name}-${index.toString()}`}
-          className={cn()}
           {...inputProps}
         />
       ))}

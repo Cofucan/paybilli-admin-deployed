@@ -9,7 +9,7 @@ import FormField from "../../components/form/FormField.tsx";
 interface ResetNewLoginForm {
   email: string;
   password: string;
-  confirmPassword: string;
+  confirm_password: string;
 }
 
 const ResetNewLogin: FC<{ navigate: () => void }> = ({ navigate }) => {
@@ -20,13 +20,12 @@ const ResetNewLogin: FC<{ navigate: () => void }> = ({ navigate }) => {
     formErrorHelper,
     formState: { isSubmitting, errors },
   } = useCustomForm<ResetNewLoginForm>();
-  console.log(errors);
 
   const onSubmit = handleSubmit(async (data) => {
     const response = await customFetch.post("account/set-password/", {
       json: data,
     });
-    login((await response.json()) as AuthResponse);
+    await login((await response.json()) as AuthResponse, false);
     navigate();
   });
 
@@ -46,7 +45,7 @@ const ResetNewLogin: FC<{ navigate: () => void }> = ({ navigate }) => {
               <h2 className='text-3xl font-semibold'>Admin</h2>
               <h3 className='pt-2 text-2xl font-normal text-gray-500'>Welcome Back</h3>
             </div>
-            <form className='mx-auto flex flex-col gap-3' onSubmit={onSubmit}>
+            <form className='mx-auto flex flex-col gap-3 px-7' onSubmit={onSubmit}>
               <FormField intent={"login"}>
                 <span>Email</span>
                 <FormField.Input
@@ -87,13 +86,13 @@ const ResetNewLogin: FC<{ navigate: () => void }> = ({ navigate }) => {
                   type={"password"}
                   intent={"login"}
                   {...register(
-                    "confirmPassword",
+                    "confirm_password",
                     formErrorHelper("Confirm Password", {
                       validate: (value, formValues) => value === formValues.password,
                     }),
                   )}
                 />
-                <FormField.ErrorText error={errors.confirmPassword} />
+                <FormField.ErrorText error={errors.confirm_password} />
               </FormField>
               <div className='my-5'>
                 <FormField.Button size={"6"} isSubmitted={isSubmitting} intent={"login"}>

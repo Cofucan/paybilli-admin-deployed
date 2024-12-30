@@ -50,7 +50,7 @@ function RouteComponent() {
               <h2 className='text-3xl font-semibold'>Admin</h2>
               <h3 className='pt-5 text-2xl font-normal text-gray-500'>Welcome Back</h3>
             </div>
-            <form className='space-y-6 lg:space-y-8' onSubmit={onSubmit}>
+            <form className='space-y-6 lg:space-y-8 py-4' onSubmit={onSubmit}>
               <FormField intent={"login"}>
                 <span>Email</span>
                 <FormField.Input

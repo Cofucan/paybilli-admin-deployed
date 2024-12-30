@@ -6,7 +6,7 @@ import { AuthResponse, User } from "../utils/types.ts";
 
 export interface AuthContextProps {
   user: UseQueryResult<User>;
-  login: (authData: AuthResponse) => Promise<void>;
+  login: (authData: AuthResponse, update?: boolean) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -33,11 +33,13 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     return true;
   });
 
-  async function login(authData: AuthResponse) {
+  async function login(authData: AuthResponse, update = true ) {
     localStorage.setItem(STORAGE_AUTH, authData.token.access);
     setAuthentication(authData.token.access);
-    await queryClient.invalidateQueries({ queryKey: [ACCOUNT] });
-    await user.refetch();
+    if (update) {
+      await queryClient.invalidateQueries({ queryKey: [ACCOUNT] });
+      await user.refetch();
+    }
   }
 
   async function logout() {
