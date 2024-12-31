@@ -1,12 +1,12 @@
 import { FC, useState } from "react";
-import { User } from "../../utils/types";
+import { User } from "../../utils/types.ts";
 import Eye from "../userId/assets/Eye.svg";
 import EditPen from "../userId/assets/editPen.svg";
-import { BASE_URL, capitalizeFirstLetter } from "../../utils/constants";
-import { formatDate } from "../../utils/DateFormatter";
-import { userStatusClasses } from "../users/usersData";
+import { BASE_URL, capitalizeFirstLetter } from "../../utils/constants.ts";
+import { formatDate } from "../../utils/DateFormatter.ts";
+import { userStatusClasses } from "../users/usersData.tsx";
 import { Link } from "@tanstack/react-router";
-import UserProfileLoading from "./UserProfileLoading";
+import UserProfileLoading from "./UserProfileLoading.tsx";
 import SubPageHeader from "../../components/custom-buttons/SubPageHeader.tsx";
 import { useWalletGetByName } from "../../hooks/useWalletQuery.ts";
 import Modal from "../../components/modal/Modal.tsx";
